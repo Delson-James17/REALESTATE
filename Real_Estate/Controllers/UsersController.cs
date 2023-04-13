@@ -51,8 +51,6 @@ namespace Real_Estate.Controllers
                 PhoneNumber = users.PhoneNumber,
                 UrlImages = users.UrlImages,
                 Zoomlink = users.Zoomlink,
-                UserName = users.UserName,
-                Email = users.Email,
                 Roles = roles
 
             };
@@ -69,18 +67,23 @@ namespace Real_Estate.Controllers
             userProfile.Name = user.Name;
             userProfile.Age = user.Age;
             userProfile.Address = user.Address;
-            userProfile.Email = user.Email;
             userProfile.DOB = user.DOB;
             userProfile.Zoomlink = user.Zoomlink;
-            userProfile.UserName = user.UserName;
             userProfile.PhoneNumber = user.PhoneNumber;
-
-            int value = await _context.SaveChangesAsync();
-            return RedirectToAction("GetAllUsers");
+            var updateuserinfo = await _userManager.UpdateAsync(userProfile);
+            if (updateuserinfo.Succeeded)
+            {
+                return RedirectToAction("GetAllUsers");
+            }
+            else
+            {
+                foreach (var error in updateuserinfo.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+                return View();
+            }
         }
-       
         }
-    
-
     }
 

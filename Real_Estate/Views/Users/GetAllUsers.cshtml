@@ -45,7 +45,6 @@
     }
 </style>
 
-<body class="PropertyListBody">
     <h1 class="whiteText" style="text-align:center;">All Users</h1>
 
     <table>
@@ -82,9 +81,9 @@
 
 
                                         <td>
-                                            <button><a asp-controller="Users" asp-action="Details" asp-route-userId="@users.Id" class="whiteText">Details</a></button>
-                                            <button><a asp-controller="Users" asp-action="Update" asp-route-userId="@users.Id" class="whiteText">Update</a></button>
-                                            <button><a asp-controller="Users" asp-action="Delete" asp-route-userId="@users.Id" class="whiteText">Delete</a></button>
+                                        <button><a asp-controller="Users" asp-action="Details" asp-route-userId="@users.Id" class="black-text-button">Details</a></button>
+                                        <button><a asp-controller="Users" asp-action="Update" asp-route-userId="@users.Id" class="black-text-button">Edit</a></button>
+                                        <button><a asp-controller="Users" asp-action="Delete" asp-route-userId="@users.Id" class="black-text-button">Delete</a></button>
                                         </td>
                                     </tr>
                                 }
@@ -95,4 +94,3 @@
             </div>
         </div>
     </table>
-</body>

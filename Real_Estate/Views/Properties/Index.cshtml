@@ -43,8 +43,7 @@
         color: #ffff;
     }
 </style>
-    <body class="PropertyListBody">
-        <h1 class="whiteText" style="text-align:center;">Property</h1>
+<h1 class="whiteText" style="text-align:center;">Property</h1>
  <form class="searchbar" method="get" asp-action="Index">
         <div class="form-group1" style="display:flex;align-items: flex-end; ">
                 <input type="text" class="form-control" name="SearchString" value="@ViewData["CurrentFilter"]" />
@@ -52,7 +51,7 @@
             </div>
         </form>
 <p>
-        <button> <a class="whiteText" asp-action="Create">Create New</a></button>
+        <button> <a asp-action="Create" class="black-text-button">Create New</a></button>
 </p>
 
     <table>
@@ -98,9 +97,9 @@
                                         @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                                         {
                                             <td>
-                                                <button><a asp-action="Edit" asp-route-id="@item.Id" class="whiteText">Edit</a></button>
-                                                <button><a asp-action="Details" asp-route-id="@item.Id" class="whiteText">Details</a></button>
-                                                <button><a asp-action="Delete" asp-route-id="@item.Id" class="whiteText">Delete</a></button>
+                                                <button><a asp-action="Edit" asp-route-id="@item.Id" class="black-text-button">Edit</a></button>
+                                                <button><a asp-action="Details" asp-route-id="@item.Id" class="black-text-button">Details</a></button>
+                                                <button><a asp-action="Delete" asp-route-id="@item.Id" class="black-text-button">Delete</a></button>
                                             </td>
                                         }
                                     </tr>
@@ -112,4 +111,3 @@
             </div>
         </div>
     </table>
-</body>

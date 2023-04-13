@@ -24,15 +24,14 @@
     <!--Stylesheet-->
 
 </head>
-<body class="login-register-Body">
     <form class="forms" asp-controller="Account" asp-action="Register" method="post">
-        
-        <h3>Register Here</h3>
+
+    <h1 class="whiteText" style="text-align: center;">Register Here</h1>
 
     <div asp-validation-summary="All" class="text-danger"></div>
     <label class="form-label" for="form3Example1cg">Full name</label>
     <input asp-for="Name" id="form3Example1cg" class="form-control form-control-lg" placeholder="First Name, Middle Initial, Last Name"/>
-    <span asp-validation-for="Name"></span>
+    <span asp-validation-for="Name" class="form-validation"></span>
 
 
     <label class="form-label" for="form3Examplea6">Address</label>
@@ -41,7 +40,7 @@
 
     <label class="form-label" for="form3Examplea7">Age</label>
         <input asp-for="Age" id="form3Examplea7" class="form-control form-control-lg" placeholder="Enter Age" />
-    <span asp-validation-for="Age"></span>
+    <span asp-validation-for="Age" class="form-validation"></span>
 
 
     <label class="form-label" for="form3Examplea8">Phone Number</label>
@@ -50,31 +49,31 @@
 
     <label class="form-label" for="form3Examplea6">Date of Birth</label>
         <input asp-for="DOB" id="form3Examplea6" class="form-control form-control-lg" placeholder="MM/DD/YYYY" />
-    <span asp-validation-for="DOB"></span>
+    <span asp-validation-for="DOB" class="form-validation"></span>
 
 
     <label class="form-label" for="form3Examplea6">URL Image</label>
     <input asp-for="UrlImages" id="form3Examplea6" class="form-control form-control-lg" />
-    <span asp-validation-for="UrlImages"></span>
+    <span asp-validation-for="UrlImages" class="form-validation"></span>
     
     <label class="form-label" for="form3Examplea6">UserName</label>
         <input asp-for="UserName" id="form3Examplea6" class="form-control form-control-lg" placeholder="Enter Username" />
-    <span asp-validation-for="UserName"></span>
+    <span asp-validation-for="UserName" class="form-validation"></span>
 
 
     <label class="form-label" for="form3Example3cg">Email</label>
     <input asp-for="Email" id="form3Example3cg" class="form-control form-control-lg" placeholder="Ex. juandelacruz@gmail.com" />
-    <span asp-validation-for="Email"></span>
+    <span asp-validation-for="Email" class="form-validation"></span>
 
 
     <label class="form-label" for="form3Example4cg">Password</label>
         <input asp-for="Password" id="form3Example4cg" class="form-control form-control-lg" placeholder="Enter Password" />
-    <span asp-validation-for="Password"></span>
+    <span asp-validation-for="Password" class="form-validation"></span>
 
 
     <label class="form-label" for="form3Example4cdg">Confirm Password</label>
         <input asp-for="ConfirmPassword" id="form3Example4cdg" class="form-control form-control-lg" placeholder="Confirm Password" />
-   <span asp-validation-for="ConfirmPassword"></span>
+    <span asp-validation-for="ConfirmPassword" class="form-validation"></span>
 
         <label class="form-label" for="form3Example4cdg">Pick Roles</label>
    <select asp-for="RoleViewModelID" class="form-control">
@@ -87,7 +86,7 @@
                 }
             }   
    </select>
-        <span asp-validation-for="RoleViewModelID"></span>
+        <span asp-validation-for="RoleViewModelID" class="form-validation"></span>
 
 @*    <select asp-for="Role" id="form3Example3cg" class="form-select form-select-lg">
         <option disabled selected> Select Role</option>
@@ -96,14 +95,14 @@
     <span asp-validation-for="Role"></span>*@
 
     <div class="buttonDiv">
-    <button type="submit">Register</button>
-        </div>
+        <button type="submit">Register</button>
+        <p style="color:#ffff;">
+            Have already an account? 
+            <a asp-action="Login"><u style="color:#ffff;">Login here</u></a>
+        </p>
+    </div>
 
-    <p class="text-center text-muted mt-5 mb-0">
-        Have already an account? <a asp-action="Login"
-                                    class="fw-bold text-body"><u>Login here</u></a>
-    </p>
+
 
 
 </form>
-</body>

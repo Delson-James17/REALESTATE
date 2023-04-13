@@ -5,6 +5,7 @@
 *@
 @{
 }
+
 <head>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -44,12 +45,10 @@
     }
 </style>
 
-
-<body class="PropertyListBody">
     <h1 class="whiteText" style="text-align:center;">Roles</h1>
 
     <p>
-        <button> <a class="whiteText" asp-controller="Role" asp-action="Create">Create New Role</a></button>
+    <button> <a class="black-text-button" asp-controller="Role" asp-action="Create">Create New</a></button>
 
     </p>
 
@@ -77,9 +76,9 @@
                                             @Html.DisplayFor(modelItem => role.Name)
                                         </td>
                                         <td>
-                                            <button><a asp-controller="Role" asp-action="Update" asp-route-roleId="@role.Id" class="whiteText">Edit</a></button>
-                                            <button><a asp-controller="Role" asp-action="Details" asp-route-roleId="@role.Id" class="whiteText">Details</a></button>
-                                            <button><a asp-controller="Role" asp-action="Delete" asp-route-roleId="@role.Id" class="whiteText">Delete</a></button>
+                                        <button><a asp-controller="Role" asp-action="Update" asp-route-roleId="@role.Id" class="black-text-button">Edit</a></button>
+                                        <button><a asp-controller="Role" asp-action="Details" asp-route-roleId="@role.Id" class="black-text-button">Details</a></button>
+                                        <button><a asp-controller="Role" asp-action="Delete" asp-route-roleId="@role.Id" class="black-text-button">Delete</a></button>
                                         </td>
                                     </tr>
                                 }
@@ -90,4 +89,3 @@
             </div>
         </div>
     </table>
-</body>
