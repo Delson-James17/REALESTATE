@@ -15,6 +15,7 @@ namespace Real_Estate.Models
         public Double PriceifRent { get; set; }
         public List<Appointment>? Appointments { get; set; }
         //relationships
+        public string ApplicationUserId { get; set; }
         public ApplicationUser? ApplicationUser { get; set; }    
     }
 }

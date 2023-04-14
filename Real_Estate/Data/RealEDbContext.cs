@@ -24,7 +24,10 @@ namespace Real_Estate.Data
             var username = this._appConfig.GetConnectionString("UserName");
             var password = this._appConfig.GetConnectionString("Password");
 
-            string connectionString = $"Server={server};Database={db};User Id={username};Password={password};MultipleActiveResultSets=true";
+            //string connectionString = $"Server={server};Database={db};User Id={username};Password={password};MultipleActiveResultSets=true";
+
+            string connectionString = @"Server=(localdb)\MSSQLLocalDB;Database=RealEDb;Integrated Security=True;MultipleActiveResultSets=true;";
+
 
             optionsBuilder
                 .UseSqlServer(connectionString)
@@ -34,6 +37,12 @@ namespace Real_Estate.Data
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<ApplicationUser>()
+                .HasMany(u => u.Properties)
+                .WithOne(n => n.ApplicationUser)
+                .HasForeignKey(n => n.ApplicationUserId)
+                .HasPrincipalKey(u => u.Id);
+
             builder.RolesSeed();
             builder.UserSeed();
             builder.UserRoleSeed();

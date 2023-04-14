@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Real_Estate.Data;
 using Real_Estate.Models;
+using Real_Estate.ViewModels;
 
 namespace Real_Estate.Controllers
 {
@@ -94,20 +95,41 @@ namespace Real_Estate.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,Address,UrlImages,PriceifSale,PriceifRent,PropertytypesID,ownerID, MapLink")] EstateProperty property)
+        public async Task<IActionResult> Create(CreatePropertyViewModel property)
         {
-            string Id = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            ApplicationUser? user = await _context.ApplicationUsers.FindAsync(Id);
-            if(user != null)
-            {
-                property.ApplicationUser = user;
-            }
+
             if (ModelState.IsValid)
             {
-                _context.Add(property);
-                int value = await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                // Find id of currently logged in user
+                string Id = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+                // Find user in db using its id
+                ApplicationUser? user = await _context.ApplicationUsers.FindAsync(Id);
+
+                if (user != null)
+                {
+                    // Map from view model to model
+                    EstateProperty estateProperty = new EstateProperty()
+                    {
+                        Name = property.Name,
+                        Description = property.Description,
+                        Address = property.Address,
+                        UrlImages = property.UrlImages,
+                        PriceifSale = property.PriceifSale,
+                        PriceifRent = property.PriceifRent,
+                        ApplicationUserId = user.Id
+                    };
+
+                    // Create
+                    await this._context.EstateProperties.AddAsync(estateProperty);
+
+                    // Save
+                    await _context.SaveChangesAsync();
+
+                    return RedirectToAction(nameof(Index));
+                }
             }
+            
             return View(property);
         }
         [Authorize(Roles = "Admin, Owner")]
