@@ -30,9 +30,7 @@ if (!app.Environment.IsDevelopment())
 app.UseStaticFiles();
 app.Automigrate();
 app.UseRouting();
-app.UseAuthentication();;
-
-app.UseAuthorization();
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
