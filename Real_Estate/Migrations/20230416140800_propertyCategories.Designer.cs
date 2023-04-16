@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Real_Estate.Data;
 
@@ -11,9 +12,10 @@ using Real_Estate.Data;
 namespace Real_Estate.Migrations
 {
     [DbContext(typeof(RealEDbContext))]
-    partial class RealEDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230416140800_propertyCategories")]
+    partial class propertyCategories
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,21 +23,6 @@ namespace Real_Estate.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("EstatePropertyPropertyListViewModel", b =>
-                {
-                    b.Property<int>("PropertiesId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PropertyListViewsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("PropertiesId", "PropertyListViewsId");
-
-                    b.HasIndex("PropertyListViewsId");
-
-                    b.ToTable("EstatePropertyPropertyListViewModel");
-                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -67,21 +54,21 @@ namespace Real_Estate.Migrations
                         new
                         {
                             Id = "fb63abec-98f5-448e-8f56-302fafd16df4",
-                            ConcurrencyStamp = "f67413c4-0827-4fe5-b633-2a2a4674c933",
+                            ConcurrencyStamp = "b98be86f-f9ca-4826-bf8c-b3547217e915",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "5c965850-234a-4d90-9c24-024ebfac6f20",
-                            ConcurrencyStamp = "f93f5096-b64f-459f-80b4-f1fb98ed2ac9",
+                            ConcurrencyStamp = "f7c0b358-f5e5-421c-a79d-9f5ea0cf1ad3",
                             Name = "Client",
                             NormalizedName = "CLIENT"
                         },
                         new
                         {
                             Id = "51d0771e-de96-4882-a01e-8f0b9949e90c",
-                            ConcurrencyStamp = "9ddb5a31-a598-49ea-b471-f88a64c68e9d",
+                            ConcurrencyStamp = "b37c9c15-fd14-48bd-a376-51042f7e1ffe",
                             Name = "Owner",
                             NormalizedName = "OWNER"
                         });
@@ -200,21 +187,6 @@ namespace Real_Estate.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("PropertyCategoryPropertyListViewModel", b =>
-                {
-                    b.Property<int>("CategoriesId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PropertyListViewsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CategoriesId", "PropertyListViewsId");
-
-                    b.HasIndex("PropertyListViewsId");
-
-                    b.ToTable("PropertyCategoryPropertyListViewModel");
-                });
-
             modelBuilder.Entity("Real_Estate.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
@@ -307,17 +279,17 @@ namespace Real_Estate.Migrations
                             AccessFailedCount = 0,
                             Address = "Laguna",
                             Age = 23,
-                            ConcurrencyStamp = "d1a322c8-5207-40c2-acb4-a59a1f500801",
-                            DOB = new DateTime(2023, 4, 17, 0, 10, 17, 525, DateTimeKind.Local).AddTicks(3812),
+                            ConcurrencyStamp = "d1f3ffc8-a414-4789-8ee9-7bee06240139",
+                            DOB = new DateTime(2023, 4, 16, 22, 8, 0, 428, DateTimeKind.Local).AddTicks(7263),
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             Name = "Admin",
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAED99zuuRJb3Mkv5dIZlzT1v09iM5YkYDmcp8ovSefwFbyVOJR6fYZwbcOdVJGbUajg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGacIKcNrlK3KdYR2qxpV4w83wfj+Nh6FOXU28jr8x+8RlDpfIX8brwkw4AsO6NWag==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1668390d-ba73-46e1-a1b9-9b89f280876f",
+                            SecurityStamp = "b9ab82e8-d05a-4ae7-a5ff-98f88819bd17",
                             TwoFactorEnabled = false,
                             UrlImages = "https://www.clipartmax.com/png/middle/319-3191274_male-avatar-admin-profile.png",
                             UserName = "admin@gmail.com"
@@ -389,7 +361,7 @@ namespace Real_Estate.Migrations
                     b.Property<double>("PriceifSale")
                         .HasColumnType("float");
 
-                    b.Property<int?>("PropertyCategoryId")
+                    b.Property<int>("PropertyCategoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("UrlImages")
@@ -424,40 +396,6 @@ namespace Real_Estate.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PropertyCategories");
-                });
-
-            modelBuilder.Entity("Real_Estate.Models.PropertyListViewModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("EstateId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PropertyListViewModel");
-                });
-
-            modelBuilder.Entity("EstatePropertyPropertyListViewModel", b =>
-                {
-                    b.HasOne("Real_Estate.Models.EstateProperty", null)
-                        .WithMany()
-                        .HasForeignKey("PropertiesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Real_Estate.Models.PropertyListViewModel", null)
-                        .WithMany()
-                        .HasForeignKey("PropertyListViewsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -511,21 +449,6 @@ namespace Real_Estate.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("PropertyCategoryPropertyListViewModel", b =>
-                {
-                    b.HasOne("Real_Estate.Models.PropertyCategory", null)
-                        .WithMany()
-                        .HasForeignKey("CategoriesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Real_Estate.Models.PropertyListViewModel", null)
-                        .WithMany()
-                        .HasForeignKey("PropertyListViewsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Real_Estate.Models.Appointment", b =>
                 {
                     b.HasOne("Real_Estate.Models.EstateProperty", "Property")
@@ -545,7 +468,9 @@ namespace Real_Estate.Migrations
 
                     b.HasOne("Real_Estate.Models.PropertyCategory", "PropertyCategory")
                         .WithMany("EstateProperties")
-                        .HasForeignKey("PropertyCategoryId");
+                        .HasForeignKey("PropertyCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("ApplicationUser");
 

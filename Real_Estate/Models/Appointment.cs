@@ -8,6 +8,7 @@ namespace Real_Estate.Models
         [Key]
         [Required]
         public string Id { get; set; }
+     //   public string? TO { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]
@@ -17,7 +18,7 @@ namespace Real_Estate.Models
         [Required]
         public string? Address { get; set; }
       
-
+        //public string Password { get; set; }
         public int? PropertyId { get; set; }
         public EstateProperty? Property { get; set; }
        [DataType(DataType.DateTime)]

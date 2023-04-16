@@ -1,4 +1,7 @@
-﻿namespace Real_Estate.ViewModels
+﻿using Real_Estate.Migrations;
+using Real_Estate.Models;
+
+namespace Real_Estate.ViewModels
 {
     public class CreatePropertyViewModel
     {
@@ -8,5 +11,7 @@
         public string UrlImages { get; set; }
         public Double PriceifSale { get; set; }
         public Double PriceifRent { get; set; }
+        public int? PropertyCategoryId { get; set; }
+        public PropertyCategory? PropertyCategory { get; set; }
     }
 }

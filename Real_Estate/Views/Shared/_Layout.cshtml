@@ -22,45 +22,34 @@
                 </div>
                 <hr>
                 <li><a class="nav-link text-dark" asp-area="" asp-controller="Properties" asp-action="Properties">Home</a></li>
+                @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin")){
+                    <li><a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="AdminPannel">Admin ControlPannel</a></li>
+                }
+               
+
                 @if (_signInManager.IsSignedIn(User) && User.IsInRole("Owner"))
                 {
                     <li>
-                        <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">Property Creation </a>
-                        <ul>
                             <li> <a class="nav-link text-dark" asp-area="" asp-controller="Properties" asp-action="CreatePropOwner">Create Property</a></li>
-                            <li> <a class="nav-link text-dark" asp-area="" asp-controller="Properties" asp-action="Index">All Property</a></li>
 
-                        </ul>
                     </li>
                 }
-                @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
-                {
                     
                     <li>
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="GetAllUsers">Users </a>
-                    </li>
-                }
-                @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin") || User.IsInRole("Owner"))
-                {
-                    <li>
+                    @if (_signInManager.IsSignedIn(User) && User.IsInRole("Owner") || User.IsInRole("Client"))
+                            {
                         <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">Appointment </a>
+                            }
                         <ul>
-                            <li> <a class="nav-link text-dark" asp-area="" asp-controller="Appointments" asp-action="Create">Create Appointment</a></li>
+                            <li> <a class="nav-link text-dark" asp-area="" asp-controller="Appointments" asp-action="Appointment">Create Appointment</a></li>
+                            @if (_signInManager.IsSignedIn(User) && User.IsInRole("Owner"))
+                            {
                             <li> <a class="nav-link text-dark" asp-area="" asp-controller="Appointments" asp-action="Index">All Apointment</a></li>
+                              }
+                        </ul>
+                    </li>
+              
 
-                        </ul>
-                    </li>
-                }
-                @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
-                {
-                    <li>
-                        <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">Roles</a>
-                        <ul>
-                            <li> <a class="nav-link text-dark" asp-controller="Role" asp-action="Create">Create Role</a></li>
-                            <li> <a class="nav-link text-dark" asp-controller="Role" asp-action="GetAllRoles">All Roles </a></li>
-                        </ul>
-                    </li>
-                }
 
                 <span class="navbar-right-side" style="float:right;">
                     <ul>
@@ -181,6 +170,9 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+        
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

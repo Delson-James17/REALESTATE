@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Real_Estate.Data;
 using Real_Estate.Models;
 using Real_Estate.ViewModels;
@@ -111,6 +113,30 @@ namespace Real_Estate.Controllers
                 _context.Add(appointment);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
+            }
+            ViewData["PropertyId"] = new SelectList(_context.EstateProperties, "Id", "Name", appointment.PropertyId);
+            return View(appointment);
+        }
+
+        // GET: Appointments/Create
+        public IActionResult Createadm()
+        {
+            ViewData["PropertyId"] = new SelectList(_context.EstateProperties, "Id", "Name");
+            return View();
+        }
+
+        // POST: Appointments/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Createadm([Bind("Id,Name,Email,Phone,Address,PropertyId,DateofAppointment")] Appointment appointment)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(appointment);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(AppointmentList));
             }
             ViewData["PropertyId"] = new SelectList(_context.EstateProperties, "Id", "Name", appointment.PropertyId);
             return View(appointment);

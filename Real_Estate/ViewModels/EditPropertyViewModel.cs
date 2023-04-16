@@ -1,4 +1,5 @@
 ﻿using Microsoft.Build.Framework;
+using Real_Estate.Models;
 
 namespace Real_Estate.ViewModels
 {
@@ -11,5 +12,7 @@ namespace Real_Estate.ViewModels
         public string UrlImages { get; set; }
         public Double PriceifSale { get; set; }
         public Double PriceifRent { get; set; }
+        public int? PropertyCategoryId { get; set; }
+        public PropertyCategory? PropertyCategory { get; set; }
     }
 }

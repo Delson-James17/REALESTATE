@@ -19,12 +19,12 @@
                 <a asp-controller="Properties" asp-action="Properties"><img class="propertyImage" src="~/lib/img/pjli-real-estate-low-resolution-logo-color-on-transparent-background.png" width="100%" style="padding:10px;"></a>
             </div>
             <div class="list-group list-group-flush my-3">
-                <a class="list-group-item list-group-item-action bg-transparent second-text fw-bold " asp-controller="Properties" asp-action="Index">
+                <a class="list-group-item list-group-item-action bg-transparent second-text fw-bold " asp-controller="Admin" asp-action="RowCount">
                     <i class="fas fa-tachometer-alt me-2"></i>Dashboard
                 </a>
                
-                <a asp-area="" asp-controller="Properties" asp-action="Create" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                    <i class="fa fa-building me-2"></i>Create Property
+                <a asp-area="" asp-controller="Properties" asp-action="Index" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+                    <i class="fa fa-building me-2"></i>Property List
                 </a>
                 <a asp-area="" asp-controller="Appointments" asp-action="AppointmentList" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
                     <i class="fas fa-clipboard-list"></i> Appointments List
@@ -38,8 +38,8 @@
                 <a asp-area="" asp-controller="Account" asp-action="ProfileAdmin" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
                     <i class="fas fa-user me-2"></i>Profile
                 </a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                    <i class="fas fa-comment-dots me-2"></i>Chat
+                <a asp-area="" asp-controller="PropertyCategories" asp-action="Index" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+                    <i class="fas fa-comment-dots me-2"></i>Property Categories
                 </a>
                 <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
                     <i class="fas fa-map-marker-alt me-2"></i>Outlet

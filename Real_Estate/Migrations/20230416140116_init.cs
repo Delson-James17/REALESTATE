@@ -55,6 +55,20 @@ namespace Real_Estate.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "PropertyCategories",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PropertyCategories", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -172,6 +186,7 @@ namespace Real_Estate.Migrations
                     UrlImages = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PriceifSale = table.Column<double>(type: "float", nullable: false),
                     PriceifRent = table.Column<double>(type: "float", nullable: false),
+                    PropertyCategoryId = table.Column<int>(type: "int", nullable: false),
                     ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
@@ -181,6 +196,12 @@ namespace Real_Estate.Migrations
                         name: "FK_EstateProperties_AspNetUsers_ApplicationUserId",
                         column: x => x.ApplicationUserId,
                         principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_EstateProperties_PropertyCategories_PropertyCategoryId",
+                        column: x => x.PropertyCategoryId,
+                        principalTable: "PropertyCategories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -212,15 +233,15 @@ namespace Real_Estate.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "51d0771e-de96-4882-a01e-8f0b9949e90c", "8acb6fbd-7b3f-42a8-b878-65babc9d64c0", "Owner", "OWNER" },
-                    { "5c965850-234a-4d90-9c24-024ebfac6f20", "698ec47a-d4b7-4522-bce8-f0c80b0cdc82", "Client", "CLIENT" },
-                    { "fb63abec-98f5-448e-8f56-302fafd16df4", "222b4bc2-fd80-4486-9565-63938199735e", "Admin", "ADMIN" }
+                    { "51d0771e-de96-4882-a01e-8f0b9949e90c", "ae72ecc7-1443-4c89-ac98-265e6f48f1cf", "Owner", "OWNER" },
+                    { "5c965850-234a-4d90-9c24-024ebfac6f20", "25f16c6d-a0ab-491c-94fe-9d8d25a9b658", "Client", "CLIENT" },
+                    { "fb63abec-98f5-448e-8f56-302fafd16df4", "a9a55e61-b318-4ddc-8037-ad6247c7171b", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Address", "Age", "ConcurrencyStamp", "DOB", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UrlImages", "UserName", "Zoomlink" },
-                values: new object[] { "f0fbf9f0-eb17-4c87-9c76-9de5451f74ae", 0, "Laguna", 23, "84c7657c-f373-424e-bbb6-740bb7f14714", new DateTime(2023, 4, 16, 14, 49, 44, 87, DateTimeKind.Local).AddTicks(22), "admin@gmail.com", false, false, null, "Admin", "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAEAACcQAAAAEBG75ZETqE4+0eY0L9sOmrCFuJzWcPOoVWQqV0wyC0JLpum2yMMmnXnRNf668//5nQ==", null, false, "aa36c4a7-7690-40ab-b20f-811a867ea248", false, "https://www.clipartmax.com/png/middle/319-3191274_male-avatar-admin-profile.png", "admin@gmail.com", null });
+                values: new object[] { "f0fbf9f0-eb17-4c87-9c76-9de5451f74ae", 0, "Laguna", 23, "20be0226-6286-4f68-968d-e203fb4ab9f5", new DateTime(2023, 4, 16, 22, 1, 15, 823, DateTimeKind.Local).AddTicks(5993), "admin@gmail.com", false, false, null, "Admin", "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAEAACcQAAAAECZcdVhh6mtLuonKBEDenYSH6DMhHNa0GJ8+/Sb+nr8jlRuzo+ja76FSHkIOJdSG2A==", null, false, "abc5d634-9bd9-4b9a-8278-d5ff2c5093b7", false, "https://www.clipartmax.com/png/middle/319-3191274_male-avatar-admin-profile.png", "admin@gmail.com", null });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
@@ -275,6 +296,11 @@ namespace Real_Estate.Migrations
                 name: "IX_EstateProperties_ApplicationUserId",
                 table: "EstateProperties",
                 column: "ApplicationUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EstateProperties_PropertyCategoryId",
+                table: "EstateProperties",
+                column: "PropertyCategoryId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -305,6 +331,9 @@ namespace Real_Estate.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "PropertyCategories");
         }
     }
 }

@@ -12,7 +12,7 @@ using Real_Estate.Data;
 namespace Real_Estate.Migrations
 {
     [DbContext(typeof(RealEDbContext))]
-    [Migration("20230416064944_init")]
+    [Migration("20230416140116_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,21 +54,21 @@ namespace Real_Estate.Migrations
                         new
                         {
                             Id = "fb63abec-98f5-448e-8f56-302fafd16df4",
-                            ConcurrencyStamp = "222b4bc2-fd80-4486-9565-63938199735e",
+                            ConcurrencyStamp = "a9a55e61-b318-4ddc-8037-ad6247c7171b",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "5c965850-234a-4d90-9c24-024ebfac6f20",
-                            ConcurrencyStamp = "698ec47a-d4b7-4522-bce8-f0c80b0cdc82",
+                            ConcurrencyStamp = "25f16c6d-a0ab-491c-94fe-9d8d25a9b658",
                             Name = "Client",
                             NormalizedName = "CLIENT"
                         },
                         new
                         {
                             Id = "51d0771e-de96-4882-a01e-8f0b9949e90c",
-                            ConcurrencyStamp = "8acb6fbd-7b3f-42a8-b878-65babc9d64c0",
+                            ConcurrencyStamp = "ae72ecc7-1443-4c89-ac98-265e6f48f1cf",
                             Name = "Owner",
                             NormalizedName = "OWNER"
                         });
@@ -279,17 +279,17 @@ namespace Real_Estate.Migrations
                             AccessFailedCount = 0,
                             Address = "Laguna",
                             Age = 23,
-                            ConcurrencyStamp = "84c7657c-f373-424e-bbb6-740bb7f14714",
-                            DOB = new DateTime(2023, 4, 16, 14, 49, 44, 87, DateTimeKind.Local).AddTicks(22),
+                            ConcurrencyStamp = "20be0226-6286-4f68-968d-e203fb4ab9f5",
+                            DOB = new DateTime(2023, 4, 16, 22, 1, 15, 823, DateTimeKind.Local).AddTicks(5993),
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             Name = "Admin",
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBG75ZETqE4+0eY0L9sOmrCFuJzWcPOoVWQqV0wyC0JLpum2yMMmnXnRNf668//5nQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECZcdVhh6mtLuonKBEDenYSH6DMhHNa0GJ8+/Sb+nr8jlRuzo+ja76FSHkIOJdSG2A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "aa36c4a7-7690-40ab-b20f-811a867ea248",
+                            SecurityStamp = "abc5d634-9bd9-4b9a-8278-d5ff2c5093b7",
                             TwoFactorEnabled = false,
                             UrlImages = "https://www.clipartmax.com/png/middle/319-3191274_male-avatar-admin-profile.png",
                             UserName = "admin@gmail.com"
@@ -361,6 +361,9 @@ namespace Real_Estate.Migrations
                     b.Property<double>("PriceifSale")
                         .HasColumnType("float");
 
+                    b.Property<int>("PropertyCategoryId")
+                        .HasColumnType("int");
+
                     b.Property<string>("UrlImages")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -369,7 +372,30 @@ namespace Real_Estate.Migrations
 
                     b.HasIndex("ApplicationUserId");
 
+                    b.HasIndex("PropertyCategoryId");
+
                     b.ToTable("EstateProperties");
+                });
+
+            modelBuilder.Entity("Real_Estate.Models.PropertyCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PropertyCategories");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -440,7 +466,15 @@ namespace Real_Estate.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Real_Estate.Models.PropertyCategory", "PropertyCategory")
+                        .WithMany("EstateProperties")
+                        .HasForeignKey("PropertyCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("ApplicationUser");
+
+                    b.Navigation("PropertyCategory");
                 });
 
             modelBuilder.Entity("Real_Estate.Models.ApplicationUser", b =>
@@ -451,6 +485,11 @@ namespace Real_Estate.Migrations
             modelBuilder.Entity("Real_Estate.Models.EstateProperty", b =>
                 {
                     b.Navigation("Appointments");
+                });
+
+            modelBuilder.Entity("Real_Estate.Models.PropertyCategory", b =>
+                {
+                    b.Navigation("EstateProperties");
                 });
 #pragma warning restore 612, 618
         }

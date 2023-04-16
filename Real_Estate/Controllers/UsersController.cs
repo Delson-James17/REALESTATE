@@ -73,7 +73,7 @@ namespace Real_Estate.Controllers
             var updateuserinfo = await _userManager.UpdateAsync(userProfile);
             if (updateuserinfo.Succeeded)
             {
-                return RedirectToAction("GetAllUsers");
+                return RedirectToAction("Profile", "Account");
             }
             else
             {

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Real_Estate.Models;
+using System.Reflection.Emit;
 
 namespace Real_Estate.Data
 {
@@ -36,17 +37,23 @@ namespace Real_Estate.Data
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {
+         /*   builder.Entity<EstateProperty>()
+            .HasOne(p => p.PropertyCategory)
+            .WithMany(c => c.EstateProperties)
+            .HasForeignKey(p => p.PropertyCategoryId);*/
+
             builder.Entity<ApplicationUser>()
                 .HasMany(u => u.Properties)
                 .WithOne(n => n.ApplicationUser)
                 .HasForeignKey(n => n.ApplicationUserId)
                 .HasPrincipalKey(u => u.Id);
-
+            
             builder.RolesSeed();
             builder.UserSeed();
             builder.UserRoleSeed();
             base.OnModelCreating(builder);
         }
+        public DbSet<PropertyCategory> PropertyCategories { get; set; }
         public DbSet<EstateProperty> EstateProperties { get; set; }
         public DbSet<Appointment>Appointments { get; set; } 
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }

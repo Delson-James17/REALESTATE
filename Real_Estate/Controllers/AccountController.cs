@@ -125,6 +125,39 @@ namespace Real_Estate.Controllers
             }
             return View(userViewModel);
         }
+        [HttpGet]
+        public IActionResult ChangePassword()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.GetUserAsync(User);
+                if (user == null)
+                {
+                    return NotFound();
+                }
+
+                var changePasswordResult = await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+                if (!changePasswordResult.Succeeded)
+                {
+                    foreach (var error in changePasswordResult.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
+                    return View(model);
+                }
+
+                await _signInManager.RefreshSignInAsync(user);
+                return RedirectToAction("Login", "Account");
+            }
+
+            return View(model);
+        }
+
 
         [HttpGet]
         public async Task<IActionResult> Logout()
