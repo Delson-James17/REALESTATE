@@ -172,7 +172,7 @@ namespace Real_Estate.Migrations
                     UrlImages = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PriceifSale = table.Column<double>(type: "float", nullable: false),
                     PriceifRent = table.Column<double>(type: "float", nullable: false),
-                    ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -181,7 +181,8 @@ namespace Real_Estate.Migrations
                         name: "FK_EstateProperties_AspNetUsers_ApplicationUserId",
                         column: x => x.ApplicationUserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -211,15 +212,15 @@ namespace Real_Estate.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "51d0771e-de96-4882-a01e-8f0b9949e90c", "b69e9716-2662-43d9-8429-d6544938850b", "Owner", "OWNER" },
-                    { "5c965850-234a-4d90-9c24-024ebfac6f20", "ecf64c48-5fbd-4aa7-a722-1b8e36e2965d", "Client", "CLIENT" },
-                    { "fb63abec-98f5-448e-8f56-302fafd16df4", "5eed3d3a-7d86-4245-b2fc-2f54c8f31c64", "Admin", "ADMIN" }
+                    { "51d0771e-de96-4882-a01e-8f0b9949e90c", "8acb6fbd-7b3f-42a8-b878-65babc9d64c0", "Owner", "OWNER" },
+                    { "5c965850-234a-4d90-9c24-024ebfac6f20", "698ec47a-d4b7-4522-bce8-f0c80b0cdc82", "Client", "CLIENT" },
+                    { "fb63abec-98f5-448e-8f56-302fafd16df4", "222b4bc2-fd80-4486-9565-63938199735e", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Address", "Age", "ConcurrencyStamp", "DOB", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UrlImages", "UserName", "Zoomlink" },
-                values: new object[] { "f0fbf9f0-eb17-4c87-9c76-9de5451f74ae", 0, "Laguna", 23, "da618be5-f6ba-429e-bef0-bac923767c71", new DateTime(2023, 4, 12, 19, 28, 16, 467, DateTimeKind.Local).AddTicks(7863), "admin@gmail.com", false, false, null, "Admin", "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAEAACcQAAAAELwGcpARCXMSuvUXpXuL7o9IyJPf3+voXWPySKnEtofOL23/Qc24C7Rr7paBe+JRTA==", null, false, "78985e19-f521-445e-b210-5888c6887a6c", false, "https://www.clipartmax.com/png/middle/319-3191274_male-avatar-admin-profile.png", "admin@gmail.com", null });
+                values: new object[] { "f0fbf9f0-eb17-4c87-9c76-9de5451f74ae", 0, "Laguna", 23, "84c7657c-f373-424e-bbb6-740bb7f14714", new DateTime(2023, 4, 16, 14, 49, 44, 87, DateTimeKind.Local).AddTicks(22), "admin@gmail.com", false, false, null, "Admin", "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAEAACcQAAAAEBG75ZETqE4+0eY0L9sOmrCFuJzWcPOoVWQqV0wyC0JLpum2yMMmnXnRNf668//5nQ==", null, false, "aa36c4a7-7690-40ab-b20f-811a867ea248", false, "https://www.clipartmax.com/png/middle/319-3191274_male-avatar-admin-profile.png", "admin@gmail.com", null });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",

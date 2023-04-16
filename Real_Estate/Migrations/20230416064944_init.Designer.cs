@@ -12,7 +12,7 @@ using Real_Estate.Data;
 namespace Real_Estate.Migrations
 {
     [DbContext(typeof(RealEDbContext))]
-    [Migration("20230412112816_init")]
+    [Migration("20230416064944_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,21 +54,21 @@ namespace Real_Estate.Migrations
                         new
                         {
                             Id = "fb63abec-98f5-448e-8f56-302fafd16df4",
-                            ConcurrencyStamp = "5eed3d3a-7d86-4245-b2fc-2f54c8f31c64",
+                            ConcurrencyStamp = "222b4bc2-fd80-4486-9565-63938199735e",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "5c965850-234a-4d90-9c24-024ebfac6f20",
-                            ConcurrencyStamp = "ecf64c48-5fbd-4aa7-a722-1b8e36e2965d",
+                            ConcurrencyStamp = "698ec47a-d4b7-4522-bce8-f0c80b0cdc82",
                             Name = "Client",
                             NormalizedName = "CLIENT"
                         },
                         new
                         {
                             Id = "51d0771e-de96-4882-a01e-8f0b9949e90c",
-                            ConcurrencyStamp = "b69e9716-2662-43d9-8429-d6544938850b",
+                            ConcurrencyStamp = "8acb6fbd-7b3f-42a8-b878-65babc9d64c0",
                             Name = "Owner",
                             NormalizedName = "OWNER"
                         });
@@ -279,17 +279,17 @@ namespace Real_Estate.Migrations
                             AccessFailedCount = 0,
                             Address = "Laguna",
                             Age = 23,
-                            ConcurrencyStamp = "da618be5-f6ba-429e-bef0-bac923767c71",
-                            DOB = new DateTime(2023, 4, 12, 19, 28, 16, 467, DateTimeKind.Local).AddTicks(7863),
+                            ConcurrencyStamp = "84c7657c-f373-424e-bbb6-740bb7f14714",
+                            DOB = new DateTime(2023, 4, 16, 14, 49, 44, 87, DateTimeKind.Local).AddTicks(22),
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             Name = "Admin",
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAELwGcpARCXMSuvUXpXuL7o9IyJPf3+voXWPySKnEtofOL23/Qc24C7Rr7paBe+JRTA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBG75ZETqE4+0eY0L9sOmrCFuJzWcPOoVWQqV0wyC0JLpum2yMMmnXnRNf668//5nQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "78985e19-f521-445e-b210-5888c6887a6c",
+                            SecurityStamp = "aa36c4a7-7690-40ab-b20f-811a867ea248",
                             TwoFactorEnabled = false,
                             UrlImages = "https://www.clipartmax.com/png/middle/319-3191274_male-avatar-admin-profile.png",
                             UserName = "admin@gmail.com"
@@ -344,6 +344,7 @@ namespace Real_Estate.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ApplicationUserId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Description")
@@ -435,7 +436,9 @@ namespace Real_Estate.Migrations
                 {
                     b.HasOne("Real_Estate.Models.ApplicationUser", "ApplicationUser")
                         .WithMany("Properties")
-                        .HasForeignKey("ApplicationUserId");
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("ApplicationUser");
                 });

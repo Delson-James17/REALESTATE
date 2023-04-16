@@ -84,6 +84,53 @@ namespace Real_Estate.Controllers
                 return View();
             }
         }
+        [HttpGet]
+        public async Task<IActionResult> UpdateAdmin(string userId)
+        {
+            var users = _userManager.Users.FirstOrDefault(u => u.Id == userId);
+            var roles = await _userManager.GetRolesAsync(users);
+            EditUserViewModel userViewModel = new EditUserViewModel()
+            {
+                Name = users.Name,
+                Age = users.Age,
+                Address = users.Address,
+                DOB = (DateTime)users.DOB,
+                PhoneNumber = users.PhoneNumber,
+                UrlImages = users.UrlImages,
+                Zoomlink = users.Zoomlink,
+                Roles = roles
+
+            };
+            return View(userViewModel);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateAdmin(EditUserViewModel user)
+        {
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            ApplicationUser? userProfile = await _context.ApplicationUsers.FindAsync(userId);
+
+            userProfile.Name = user.Name;
+            userProfile.Age = user.Age;
+            userProfile.Address = user.Address;
+            userProfile.DOB = user.DOB;
+            userProfile.Zoomlink = user.Zoomlink;
+            userProfile.PhoneNumber = user.PhoneNumber;
+            var updateuserinfo = await _userManager.UpdateAsync(userProfile);
+            if (updateuserinfo.Succeeded)
+            {
+                return RedirectToAction("GetAllUsers");
+            }
+            else
+            {
+                foreach (var error in updateuserinfo.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+                return View();
+            }
+        }
+    }
     }
 

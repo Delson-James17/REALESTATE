@@ -28,7 +28,6 @@ namespace Real_Estate.Data
 
             string connectionString = @"Server=(localdb)\MSSQLLocalDB;Database=RealEDb;Integrated Security=True;MultipleActiveResultSets=true;";
 
-
             optionsBuilder
                 .UseSqlServer(connectionString)
                 .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);

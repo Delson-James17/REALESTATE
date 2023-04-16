@@ -4,6 +4,7 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 <head>
@@ -37,11 +38,11 @@
     }
 
     td {
-        color: #ffff;
+        color: #000;
     }
 
     th {
-        color: #ffff;
+        color: #000;
     }
 </style>
 
@@ -82,7 +83,7 @@
 
                                         <td>
                                         <button><a asp-controller="Users" asp-action="Details" asp-route-userId="@users.Id" class="black-text-button">Details</a></button>
-                                        <button><a asp-controller="Users" asp-action="Update" asp-route-userId="@users.Id" class="black-text-button">Edit</a></button>
+                                        <button><a asp-controller="Users" asp-action="UpdateAdmin" asp-route-userId="@users.Id" class="black-text-button">Edit</a></button>
                                         <button><a asp-controller="Users" asp-action="Delete" asp-route-userId="@users.Id" class="black-text-button">Delete</a></button>
                                         </td>
                                     </tr>

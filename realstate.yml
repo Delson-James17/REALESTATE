@@ -67,7 +67,7 @@ spec:
     spec:
       containers:
         - name: realestateapi
-          image: delsonjames/real-state-api:1.0
+          image: delsonjames/real-state-api:1.0.5
           imagePullPolicy: Always
           ports:
             - containerPort: 80
@@ -116,7 +116,7 @@ spec:
     spec:
       containers:
         - name: realestateweb
-          image: delsonjames/real-state-web:1.0
+          image: delsonjames/real-state-web:1.0.5
           imagePullPolicy: Always
           ports:
             - containerPort: 80

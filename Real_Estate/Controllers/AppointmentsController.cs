@@ -20,6 +20,26 @@ namespace Real_Estate.Controllers
         {
             _context = context;
         }
+        public async Task<IActionResult> AppointmentAdmin()
+        {
+            var properties = await this._context.EstateProperties.Select(p => new EstateProperty
+            {
+                Id = p.Id,
+                Name = p.Name
+                
+            }).ToListAsync();
+            var viewmodel = new AppointmentViewModel
+            {
+                Events = _context.Appointments.Select(x => new AppointmentViewModel.EventModel
+                {
+                    Title = x.Name,
+                    Start = x.DateofAppointment.ToString() ?? ""
+                }).ToList(),
+            };
+
+            ViewData["PropertyId"] = new SelectList(properties, "Id", "Name");
+            return View(viewmodel);
+        }
         public async Task<IActionResult> Appointment()
         {
           var properties = await this._context.EstateProperties.Select(p => new EstateProperty
@@ -39,7 +59,12 @@ namespace Real_Estate.Controllers
             ViewData["PropertyId"] = new SelectList(properties, "Id", "Name" );
             return View(viewmodel);
         }
-        
+        public async Task<IActionResult> AppointmentList()
+        {
+            var realEstateDbContext = _context.Appointments.Include(a => a.Property);
+            return View(await realEstateDbContext.ToListAsync());
+        }
+
 
         // GET: Appointments
         public async Task<IActionResult> Index()

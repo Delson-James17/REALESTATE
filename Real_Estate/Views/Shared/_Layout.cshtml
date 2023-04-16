@@ -18,16 +18,16 @@
         <nav>
             <ul>
                 <div class="logo">
-                    <img class="propertyImage" src="~/lib/img/pjli-real-estate-low-resolution-logo-color-on-transparent-background.png">
+                    <img class="propertyImage" src="~/lib/img/pjli-real-estate-low-resolution-logo-color-on-transparent-background.png" width="100px" style="padding:10px;">
                 </div>
                 <hr>
                 <li><a class="nav-link text-dark" asp-area="" asp-controller="Properties" asp-action="Properties">Home</a></li>
-                @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin") || User.IsInRole("Owner"))
+                @if (_signInManager.IsSignedIn(User) && User.IsInRole("Owner"))
                 {
                     <li>
                         <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">Property Creation </a>
                         <ul>
-                            <li> <a class="nav-link text-dark" asp-area="" asp-controller="Properties" asp-action="Create">Create Property</a></li>
+                            <li> <a class="nav-link text-dark" asp-area="" asp-controller="Properties" asp-action="CreatePropOwner">Create Property</a></li>
                             <li> <a class="nav-link text-dark" asp-area="" asp-controller="Properties" asp-action="Index">All Property</a></li>
 
                         </ul>

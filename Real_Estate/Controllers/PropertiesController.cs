@@ -83,21 +83,19 @@ namespace Real_Estate.Controllers
 
             return View(@property);
         }
-        [Authorize(Roles = "Admin, Owner")]
-        // GET: Properties/Create
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
-        [Authorize(Roles = "Admin, Owner")]
-        // POST: Properties/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
+        [HttpPost]
         public async Task<IActionResult> Create(CreatePropertyViewModel property)
         {
-
             if (ModelState.IsValid)
             {
                 // Find id of currently logged in user
@@ -132,10 +130,59 @@ namespace Real_Estate.Controllers
             
             return View(property);
         }
+
+
+        [HttpGet]
+        public IActionResult CreatePropOwner()
+        {
+            return View();
+        }
+
+
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public async Task<IActionResult> CreatePropOwner(CreatePropertyViewModel property)
+        {
+            if (ModelState.IsValid)
+            {
+                // Find id of currently logged in user
+                string Id = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+                // Find user in db using its id
+                ApplicationUser? user = await _context.ApplicationUsers.FindAsync(Id);
+
+                if (user != null)
+                {
+                    // Map from view model to model
+                    EstateProperty estateProperty = new EstateProperty()
+                    {
+                        Name = property.Name,
+                        Description = property.Description,
+                        Address = property.Address,
+                        UrlImages = property.UrlImages,
+                        PriceifSale = property.PriceifSale,
+                        PriceifRent = property.PriceifRent,
+                        ApplicationUserId = user.Id
+                    };
+
+                    // Create
+                    await this._context.EstateProperties.AddAsync(estateProperty);
+
+                    // Save
+                    await _context.SaveChangesAsync();
+
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+
+            return View(property);
+        }
+
         [Authorize(Roles = "Admin, Owner")]
         // GET: Properties/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+
             if (id == null || _context.EstateProperties == null)
             {
                 return NotFound();
@@ -149,19 +196,17 @@ namespace Real_Estate.Controllers
             return View(@property);
         }
 
-        // POST: Properties/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Address,UrlImages,PriceifSale,PriceifRent,PropertytypesID,ownerID,MapLink")] EstateProperty @property)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Address,UrlImages,PriceifSale,PriceifRent")] EditPropertyViewModel @property)
         {
             if (id != @property.Id)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 try
                 {
@@ -179,9 +224,8 @@ namespace Real_Estate.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
             }
-            return View(@property);
+            return RedirectToAction(nameof(Index));
         }
         [Authorize(Roles = "Admin, Owner")]
         // GET: Properties/Delete/5

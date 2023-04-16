@@ -1,8 +1,7 @@
-@model CreatePropertyViewModel
+﻿@model CreatePropertyViewModel
 
 @{
     ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 <head>
@@ -13,38 +12,38 @@
 </head>
 <div class="row">
     <div class="col-md-4">
-            <form class="forms" asp-action="Create">
-                <h1 class="whiteText" style="text-align:center;">Create Property</h1>
+        <form class="forms" asp-action="Create">
+            <h1 class="whiteText" style="text-align:center;">Create Property</h1>
             <div asp-validation-summary="ModelOnly" class="form-validation"></div>
 
-                 <label asp-for="Name" class="form-label">Name</label>
-                <input asp-for="Name" class="form-control" />
+            <label asp-for="Name" class="form-label">Name</label>
+            <input asp-for="Name" class="form-control" />
             <span asp-validation-for="Name" class="form-validation"></span>
 
             <div class="form-group">
-                    <label asp-for="Description" class="form-label">Description</label>
+                <label asp-for="Description" class="form-label">Description</label>
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="form-validation"></span>
             </div>
             <div class="form-group">
-                    <label asp-for="Address" class="form-label">Address</label>
+                <label asp-for="Address" class="form-label">Address</label>
                 <input asp-for="Address" class="form-control" />
                 <span asp-validation-for="Address" class="form-validation"></span>
             </div>
             <div class="form-group">
-                    <label asp-for="UrlImages" class="form-label">URL Image</label>
+                <label asp-for="UrlImages" class="form-label">URL Image</label>
                 <input asp-for="UrlImages" class="form-control" />
-                    <span asp-validation-for="UrlImages" class="form-validation"></span>
+                <span asp-validation-for="UrlImages" class="form-validation"></span>
             </div>
             <div class="form-group">
-                    <label asp-for="PriceifSale" class="form-label">Sale Price</label>
+                <label asp-for="PriceifSale" class="form-label">Sale Price</label>
                 <input asp-for="PriceifSale" class="form-control" />
-                    <span asp-validation-for="PriceifSale" class="form-validation"></span>
+                <span asp-validation-for="PriceifSale" class="form-validation"></span>
             </div>
             <div class="form-group">
-                    <label asp-for="PriceifRent" class="form-label">Rent Price</label>
+                <label asp-for="PriceifRent" class="form-label">Rent Price</label>
                 <input asp-for="PriceifRent" class="form-control" />
-                    <span asp-validation-for="PriceifRent" class="form-validation"></span>
+                <span asp-validation-for="PriceifRent" class="form-validation"></span>
             </div>
             <div class="buttonDiv">
 
@@ -60,5 +59,7 @@
 
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
