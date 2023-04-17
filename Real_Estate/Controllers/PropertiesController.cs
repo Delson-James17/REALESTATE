@@ -28,7 +28,7 @@ namespace Real_Estate.Controllers
 
         // GET: Properties
         [Authorize(Roles = "Admin, Owner")]
-        public async Task<IActionResult> Index(string SearchString)
+        public async Task<IActionResult> Index(string SearchString )
         {
             var properties = await this._context.PropertyCategories.Select(p => new PropertyCategory
             {

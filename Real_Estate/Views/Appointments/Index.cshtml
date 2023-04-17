@@ -45,6 +45,7 @@
     th {
         color: #ffff;
     }
+   
 </style>
 
 <form class="searchbar" method="get" asp-action="Index">
@@ -87,7 +88,7 @@
                                         <td>@Html.DisplayFor(modelItem => item.Address)</td>
                                         <td>@Html.DisplayFor(modelItem => item.DateofAppointment)</td>
                                         <td>
-                                        <button><a asp-action="Edit" asp-route-id="@item.Id" class="black-text-button">Edit</a></button>
+                                        <button><a asp-action="Edit" asp-route-id="@item.Id" class="black-text-button Edit">Edit</a></button>
                                         <button><a asp-action="Details" asp-route-id="@item.Id" class="black-text-button">Details</a></button>
                                         <button><a asp-action="Delete" asp-route-id="@item.Id" class="black-text-button">Delete</a></button>
                                         </td>

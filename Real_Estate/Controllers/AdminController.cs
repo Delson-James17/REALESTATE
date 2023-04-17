@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Real_Estate.Data;
+using Real_Estate.Models;
 using Real_Estate.ViewModels;
 
 namespace Real_Estate.Controllers
@@ -18,13 +19,27 @@ namespace Real_Estate.Controllers
         {
             return View();
         }
-        public IActionResult RowCount()
+        public async Task<IActionResult> RowCount()
         {
             var model = new RowCountViewModel
             {
                 PropertyCount = _context.EstateProperties.Count(),
                 AppointmentCount = _context.Appointments.Count(),
                 UserCount = _context.ApplicationUsers.Count()
+            };
+            List<EstateProperty> properties = await _context.EstateProperties.ToListAsync();
+            AdminDashboardViewModel adminDashboardViewModel = new AdminDashboardViewModel()
+            {
+                EstateProperties = properties,
+                RowCount = model
+            };
+            return View(adminDashboardViewModel);
+        }
+        public IActionResult NotificationBell()
+        {
+            var model = new RowCountViewModel
+            {
+                AppointmentCount = _context.Appointments.Count(),
             };
 
             return View(model);

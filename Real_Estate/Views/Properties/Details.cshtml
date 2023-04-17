@@ -42,14 +42,16 @@
                                 <p>₱ @Html.DisplayFor(model => model.PriceifRent)</p>
                             </div>
                         </div>
-
-                        <div class="col-md-6">
-                            <div class="media">
-                                <div class="detailsbuttonDiv">
+                           @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin") || User.IsInRole("Client"))
+                        {
+                            <div class="col-md-6">
+                                <div class="media">
+                                    <div class="detailsbuttonDiv">
                                         <button class="detailsButton"> <a class="details-button-text" asp-controller="Appointments" asp-action="Appointment" style="text-decoration: none;">Set Appointment</a></button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        }
                         <div class="col-md-6">
                             <div class="media">
                                 <div class="detailsbuttonDiv">
@@ -57,14 +59,17 @@
                                 </div>
                             </div>
                             </div>
-                             <div class="col-md-6">
-                            <div class="media">
-                                <div class="detailsbuttonDiv">
-                                    <button class="detailsButton"> <a class="details-button-text" asp-action="ZoomLink" asp-route-id="@Model.ApplicationUser.Id" style="text-decoration: none;">ZoomLink</a></button>
+                               @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin") || User.IsInRole("Client"))
+                        {
+                            <div class="col-md-6">
+                                <div class="media">
+                                    <div class="detailsbuttonDiv">
+                                        <button class="detailsButton"> <a class="details-button-text" asp-action="ZoomLink" asp-route-id="@Model.ApplicationUser.Id" style="text-decoration: none;">ZoomLink</a></button>
+                                    </div>
                                 </div>
                             </div>
-                            </div>
-                            @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin") || User.IsInRole("Owner"))
+                        }
+                        @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin") || User.IsInRole("Owner"))
                                 {
                                     
                                     <div class="col-md-6">

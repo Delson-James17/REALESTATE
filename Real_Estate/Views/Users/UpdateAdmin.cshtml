@@ -56,11 +56,14 @@
                     <input asp-for="UrlImages" class="form-control" />
                     <span asp-validation-for="UrlImages" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label asp-for="Zoomlink" class="whiteText">Zoom Link</label>
-                    <input asp-for="Zoomlink" class="form-control" />
-                    <span asp-validation-for="Zoomlink" class="text-danger"></span>
-                </div>
+            @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin") || User.IsInRole("Owner"))
+            {
+                    <div class="form-group">
+                        <label asp-for="Zoomlink" class="whiteText">Zoom Link</label>
+                        <input asp-for="Zoomlink" class="form-control" />
+                        <span asp-validation-for="Zoomlink" class="text-danger"></span>
+                    </div>
+            }
                 <div class="buttonDiv">
                     <button input type="submit" value="Save" class="blackText">Save</button>
                     <div>

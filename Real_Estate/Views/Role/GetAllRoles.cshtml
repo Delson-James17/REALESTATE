@@ -76,9 +76,9 @@
                                             @Html.DisplayFor(modelItem => role.Name)
                                         </td>
                                         <td>
-                                        <button><a asp-controller="Role" asp-action="Update" asp-route-roleId="@role.Id" class="black-text-button">Edit</a></button>
-                                        <button><a asp-controller="Role" asp-action="Details" asp-route-roleId="@role.Id" class="black-text-button">Details</a></button>
-                                        <button><a asp-controller="Role" asp-action="Delete" asp-route-roleId="@role.Id" class="black-text-button">Delete</a></button>
+                                        <button><a asp-controller="Role" asp-action="Update" asp-route-roleId="@role.Id" class="black-text-button"><i class="fas fa-edit"></i></a></button>
+                                            <button><a asp-controller="Role" asp-action="Details" asp-route-roleId="@role.Id" class="black-text-button"><i class="far fa-file-alt"></i></a></button>
+                                            <button><a asp-controller="Role" asp-action="Delete" asp-route-roleId="@role.Id" class="black-text-button"><i class="fas fa-trash-alt"></i></a></button>
                                         </td>
                                     </tr>
                                 }

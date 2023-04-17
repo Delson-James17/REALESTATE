@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Mail;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -63,6 +64,7 @@ namespace Real_Estate.Controllers
         }
         public async Task<IActionResult> AppointmentList()
         {
+
             var realEstateDbContext = _context.Appointments.Include(a => a.Property);
             return View(await realEstateDbContext.ToListAsync());
         }
