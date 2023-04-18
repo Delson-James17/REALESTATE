@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Edit";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
 }
 <head>
     <!-- Design by foolishdeveloper.com -->
@@ -49,7 +49,7 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="SaleOrRentModelId" class="control-label"></label>
-                    <select asp-for="SaleOrRentModelId" class="form-control" asp-items="ViewBag.PropertyCategoryId">
+                    <select asp-for="SaleOrRentModelId" class="form-control" asp-items="ViewBag.SaleOrRentModelId">
                         <option value="">Select an option</option>
                     </select>
                     <span asp-validation-for="SaleOrRentModelId" class="text-danger"></span>

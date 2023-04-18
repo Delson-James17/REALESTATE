@@ -78,19 +78,29 @@ namespace Real_Estate.Controllers
             if (User.IsInRole("Owner"))
             {
                 var user = await _userManager.GetUserAsync(User);
-                var ownerAppointments = await _userManager.Users.Where(a => a.Id == user.Id).Include(a => a.Appointments).FirstOrDefaultAsync();
-                /*var appointments = await _context.Appointments
-                    .Where(a => a.OwnerId == user.Id)
-                    .Include(a => a.Property)
-                    .ToListAsync();
-                */
-                return View(ownerAppointments);
+                var ownerAppointments = await _userManager.Users
+                    .Where(a => a.Id == user.Id)
+                    .Include(a => a.Appointments)
+                    .FirstOrDefaultAsync();
+
+                var viewModel = new AppointmentUserViewModel
+                {
+                    User = ownerAppointments,
+                    Appointments = ownerAppointments.Appointments.ToList()
+                };
+
+                return View(viewModel);
             }
 
-            var appointment = await _context.Appointments.ToListAsync();
-            return View(appointment);
+            var appointments = await _context.Appointments.ToListAsync();
+            var allViewModel = new AppointmentUserViewModel
+            {
+                Appointments = appointments
+            };
 
+            return View(allViewModel);
         }
+
 
         // GET: Appointments/Details/5
         public async Task<IActionResult> Details(int id)

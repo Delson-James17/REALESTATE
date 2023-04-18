@@ -13,6 +13,16 @@
 
 </head>
 
+<style>
+    .badge{
+        border: 1px solid #000;
+        background:skyblue;
+        color:#000;
+        font-size:20px;
+        font-weight:bold;
+    }
+</style>
+
 <h1 class="whiteText" style="text-align:center;">Property Details</h1>
 
 
@@ -26,26 +36,25 @@
             </div>
             <div class="col-lg-6">
                 <div class="about-text go-to">
+                    <div class="col-md-6">
+                        <div class="badge">
+                            <p>@Html.DisplayFor(model => model.SaleOrRentModel.Name)</p>
+                        </div>
+                    </div>
                     <h3 class="dark-color">@Html.DisplayFor(model => model.Name)</h3>
                     <h6 class="theme-color lead">Address: @Html.DisplayFor(model => model.Address)</h6>
                     <p> @Html.DisplayFor(model => model.Description)</p>
                     <div class="row about-list">
                         <div class="col-md-6">
                             <div class="media">
-                                <label>Sale Price:</label>
+                                <label>Price:</label>
                                 <p>₱ @Html.DisplayFor(model => model.Price)</p>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="media">
-                                <label>Rent Price:</label>
-                                <p>₱ @Html.DisplayFor(model => model.OwnerName)</p>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="media">
-                                <label>Sale or Rent:</label>
-                                <p>@Html.DisplayFor(model => model.SaleOrRentModel.Name)</p>
+                                <label>Owner:</label>
+                                <p> @Html.DisplayFor(model => model.OwnerName)</p>
                             </div>
                         </div>
                            @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin") || User.IsInRole("Client"))
