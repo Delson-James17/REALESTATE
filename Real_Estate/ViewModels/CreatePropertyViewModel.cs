@@ -1,4 +1,4 @@
-﻿using Real_Estate.Migrations;
+﻿
 using Real_Estate.Models;
 
 namespace Real_Estate.ViewModels

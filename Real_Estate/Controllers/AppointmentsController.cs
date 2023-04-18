@@ -79,7 +79,7 @@ namespace Real_Estate.Controllers
         }
 
         // GET: Appointments/Details/5
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> Details(int id)
         {
             if (id == null || _context.Appointments == null)
             {
@@ -146,7 +146,7 @@ namespace Real_Estate.Controllers
         }
 
         // GET: Appointments/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(int id)
         {
             if (id == null || _context.Appointments == null)
             {
@@ -167,7 +167,7 @@ namespace Real_Estate.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,Name,Email,Phone,Address,PropertyId,DateofAppointment")] Appointment appointment)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Email,Phone,Address,PropertyId,DateofAppointment")] Appointment appointment)
         {
             if (id != appointment.Id)
             {
@@ -199,7 +199,7 @@ namespace Real_Estate.Controllers
         }
 
         // GET: Appointments/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(int id)
         {
             if (id == null || _context.Appointments == null)
             {
@@ -220,7 +220,7 @@ namespace Real_Estate.Controllers
         // POST: Appointments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Appointments == null)
             {
@@ -236,7 +236,7 @@ namespace Real_Estate.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool AppointmentExists(string id)
+        private bool AppointmentExists(int id)
         {
           return (_context.Appointments?.Any(e => e.Id == id)).GetValueOrDefault();
         }

@@ -67,21 +67,21 @@ namespace Real_Estate.Migrations
                         new
                         {
                             Id = "fb63abec-98f5-448e-8f56-302fafd16df4",
-                            ConcurrencyStamp = "f67413c4-0827-4fe5-b633-2a2a4674c933",
+                            ConcurrencyStamp = "de3b1e4a-dbac-48fb-b1ac-b1dde775c1ea",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "5c965850-234a-4d90-9c24-024ebfac6f20",
-                            ConcurrencyStamp = "f93f5096-b64f-459f-80b4-f1fb98ed2ac9",
+                            ConcurrencyStamp = "b94f786e-3911-4bf1-893c-95c959c81af0",
                             Name = "Client",
                             NormalizedName = "CLIENT"
                         },
                         new
                         {
                             Id = "51d0771e-de96-4882-a01e-8f0b9949e90c",
-                            ConcurrencyStamp = "9ddb5a31-a598-49ea-b471-f88a64c68e9d",
+                            ConcurrencyStamp = "2431a8bf-f082-4828-af2a-9c2121dc4e0a",
                             Name = "Owner",
                             NormalizedName = "OWNER"
                         });
@@ -307,17 +307,17 @@ namespace Real_Estate.Migrations
                             AccessFailedCount = 0,
                             Address = "Laguna",
                             Age = 23,
-                            ConcurrencyStamp = "d1a322c8-5207-40c2-acb4-a59a1f500801",
-                            DOB = new DateTime(2023, 4, 17, 0, 10, 17, 525, DateTimeKind.Local).AddTicks(3812),
+                            ConcurrencyStamp = "ce643f95-ed6a-4c92-9ba2-7e6baf9c168d",
+                            DOB = new DateTime(2023, 4, 18, 10, 26, 29, 251, DateTimeKind.Local).AddTicks(9349),
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             Name = "Admin",
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAED99zuuRJb3Mkv5dIZlzT1v09iM5YkYDmcp8ovSefwFbyVOJR6fYZwbcOdVJGbUajg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPvkf8FbPzv9cyKKk455DRV4tv54N6TFQesC8hR3tINJXMeV+wh6/RPQRcvvnScP0Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1668390d-ba73-46e1-a1b9-9b89f280876f",
+                            SecurityStamp = "6db7a3e7-cc16-4ea3-a37a-e524e25bfc83",
                             TwoFactorEnabled = false,
                             UrlImages = "https://www.clipartmax.com/png/middle/319-3191274_male-avatar-admin-profile.png",
                             UserName = "admin@gmail.com"
@@ -326,8 +326,11 @@ namespace Real_Estate.Migrations
 
             modelBuilder.Entity("Real_Estate.Models.Appointment", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -434,10 +437,10 @@ namespace Real_Estate.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("CategoryId")
+                    b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<int>("EstateId")
+                    b.Property<int?>("EstateId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
