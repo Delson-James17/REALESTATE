@@ -31,7 +31,12 @@ namespace Real_Estate.Controllers
         {
             return View();
         }
-        
+        public async Task<IActionResult> ListOfOwners()
+        {
+            List<ApplicationUser> user = (List<ApplicationUser>)await _userManager.GetUsersInRoleAsync("Owner");
+            return View(user);
+        }
+
         [HttpGet]
         public async Task<IActionResult> Register()
         {

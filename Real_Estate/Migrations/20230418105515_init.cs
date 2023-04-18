@@ -83,6 +83,19 @@ namespace Real_Estate.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "SaleorRentModel",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SaleorRentModel", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -189,37 +202,6 @@ namespace Real_Estate.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "EstateProperties",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UrlImages = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PriceifSale = table.Column<double>(type: "float", nullable: false),
-                    PriceifRent = table.Column<double>(type: "float", nullable: false),
-                    PropertyCategoryId = table.Column<int>(type: "int", nullable: true),
-                    ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_EstateProperties", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_EstateProperties_AspNetUsers_ApplicationUserId",
-                        column: x => x.ApplicationUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_EstateProperties_PropertyCategories_PropertyCategoryId",
-                        column: x => x.PropertyCategoryId,
-                        principalTable: "PropertyCategories",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "PropertyCategoryPropertyListViewModel",
                 columns: table => new
                 {
@@ -244,6 +226,43 @@ namespace Real_Estate.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "EstateProperties",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UrlImages = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SaleOrRentModelId = table.Column<int>(type: "int", nullable: true),
+                    Price = table.Column<double>(type: "float", nullable: false),
+                    OwnerName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PropertyCategoryId = table.Column<int>(type: "int", nullable: true),
+                    ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EstateProperties", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_EstateProperties_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_EstateProperties_PropertyCategories_PropertyCategoryId",
+                        column: x => x.PropertyCategoryId,
+                        principalTable: "PropertyCategories",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_EstateProperties_SaleorRentModel_SaleOrRentModelId",
+                        column: x => x.SaleOrRentModelId,
+                        principalTable: "SaleorRentModel",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Appointments",
                 columns: table => new
                 {
@@ -253,12 +272,19 @@ namespace Real_Estate.Migrations
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OwnerId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     PropertyId = table.Column<int>(type: "int", nullable: true),
                     DateofAppointment = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Appointments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Appointments_AspNetUsers_OwnerId",
+                        column: x => x.OwnerId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Appointments_EstateProperties_PropertyId",
                         column: x => x.PropertyId,
@@ -295,20 +321,25 @@ namespace Real_Estate.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "51d0771e-de96-4882-a01e-8f0b9949e90c", "2431a8bf-f082-4828-af2a-9c2121dc4e0a", "Owner", "OWNER" },
-                    { "5c965850-234a-4d90-9c24-024ebfac6f20", "b94f786e-3911-4bf1-893c-95c959c81af0", "Client", "CLIENT" },
-                    { "fb63abec-98f5-448e-8f56-302fafd16df4", "de3b1e4a-dbac-48fb-b1ac-b1dde775c1ea", "Admin", "ADMIN" }
+                    { "51d0771e-de96-4882-a01e-8f0b9949e90c", "772388e3-68bf-4fba-9f00-63fea96c9b81", "Owner", "OWNER" },
+                    { "5c965850-234a-4d90-9c24-024ebfac6f20", "85580f7a-a2f6-4850-a6a0-8c2248683180", "Client", "CLIENT" },
+                    { "fb63abec-98f5-448e-8f56-302fafd16df4", "95e2829a-5e14-46d5-bc6e-25303116c3a3", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Address", "Age", "ConcurrencyStamp", "DOB", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UrlImages", "UserName", "Zoomlink" },
-                values: new object[] { "f0fbf9f0-eb17-4c87-9c76-9de5451f74ae", 0, "Laguna", 23, "ce643f95-ed6a-4c92-9ba2-7e6baf9c168d", new DateTime(2023, 4, 18, 10, 26, 29, 251, DateTimeKind.Local).AddTicks(9349), "admin@gmail.com", false, false, null, "Admin", "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAEAACcQAAAAEPvkf8FbPzv9cyKKk455DRV4tv54N6TFQesC8hR3tINJXMeV+wh6/RPQRcvvnScP0Q==", null, false, "6db7a3e7-cc16-4ea3-a37a-e524e25bfc83", false, "https://www.clipartmax.com/png/middle/319-3191274_male-avatar-admin-profile.png", "admin@gmail.com", null });
+                values: new object[] { "f0fbf9f0-eb17-4c87-9c76-9de5451f74ae", 0, "Laguna", 23, "8288b719-8a62-43ef-8037-cfbf11d23d97", new DateTime(2023, 4, 18, 18, 55, 15, 734, DateTimeKind.Local).AddTicks(5757), "admin@gmail.com", false, false, null, "Admin", "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAEAACcQAAAAEMXNfCxoobqIXPT3JpRFpvFJzBiF6/XtZQFGdcYaRebpTC9Wso5UWWQ3GbVJuzEALQ==", null, false, "62d9daee-c87e-4357-9873-483d755def6a", false, "https://www.clipartmax.com/png/middle/319-3191274_male-avatar-admin-profile.png", "admin@gmail.com", null });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
                 values: new object[] { "fb63abec-98f5-448e-8f56-302fafd16df4", "f0fbf9f0-eb17-4c87-9c76-9de5451f74ae" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Appointments_OwnerId",
+                table: "Appointments",
+                column: "OwnerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Appointments_PropertyId",
@@ -365,6 +396,11 @@ namespace Real_Estate.Migrations
                 column: "PropertyCategoryId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_EstateProperties_SaleOrRentModelId",
+                table: "EstateProperties",
+                column: "SaleOrRentModelId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_EstatePropertyPropertyListViewModel_PropertyListViewsId",
                 table: "EstatePropertyPropertyListViewModel",
                 column: "PropertyListViewsId");
@@ -415,6 +451,9 @@ namespace Real_Estate.Migrations
 
             migrationBuilder.DropTable(
                 name: "PropertyCategories");
+
+            migrationBuilder.DropTable(
+                name: "SaleorRentModel");
         }
     }
 }

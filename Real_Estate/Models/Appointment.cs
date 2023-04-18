@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace Real_Estate.Models
@@ -22,7 +23,11 @@ namespace Real_Estate.Models
         [Required]
         [DisplayName("Address")]
         public string? Address { get; set; }
-      
+        [ValidateNever]
+       public string OwnerId { get; set; } // new column
+       [ValidateNever]
+      public virtual ApplicationUser Owner { get; set; }
+
         //public string Password { get; set; }
         public int? PropertyId { get; set; }
         public EstateProperty? Property { get; set; }

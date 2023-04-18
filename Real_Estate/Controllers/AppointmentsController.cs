@@ -18,10 +18,11 @@ namespace Real_Estate.Controllers
     public class AppointmentsController : Controller
     {
         private readonly RealEDbContext _context;
-
-        public AppointmentsController(RealEDbContext context)
+        private readonly UserManager<ApplicationUser> _userManager;
+        public AppointmentsController(RealEDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+           _userManager = userManager;
         }
         public async Task<IActionResult> AppointmentAdmin()
         {
@@ -71,11 +72,24 @@ namespace Real_Estate.Controllers
 
 
         // GET: Appointments
-        
+
         public async Task<IActionResult> Index()
-        {//filter Id of owner login
-            var realEstateDbContext = _context.Appointments.Include(a => a.Property);
-            return View(await realEstateDbContext.ToListAsync());
+        {
+            if (User.IsInRole("Owner"))
+            {
+                var user = await _userManager.GetUserAsync(User);
+                var ownerAppointments = await _userManager.Users.Where(a => a.Id == user.Id).Include(a => a.Appointments).FirstOrDefaultAsync();
+                /*var appointments = await _context.Appointments
+                    .Where(a => a.OwnerId == user.Id)
+                    .Include(a => a.Property)
+                    .ToListAsync();
+                */
+                return View(ownerAppointments);
+            }
+
+            var appointment = await _context.Appointments.ToListAsync();
+            return View(appointment);
+
         }
 
         // GET: Appointments/Details/5
@@ -98,6 +112,7 @@ namespace Real_Estate.Controllers
         }
 
         // GET: Appointments/Create
+        [HttpGet]
         public IActionResult Create()
         {
             ViewData["PropertyId"] = new SelectList(_context.EstateProperties, "Id", "Name");
@@ -113,17 +128,21 @@ namespace Real_Estate.Controllers
         {
             if (ModelState.IsValid)
             {
+                EstateProperty estateProperty = await _context.EstateProperties
+                    .Where(a => a.Id == appointment.PropertyId).FirstOrDefaultAsync();
+                appointment.OwnerId = estateProperty.ApplicationUserId;
                 _context.Add(appointment);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             ViewData["PropertyId"] = new SelectList(_context.EstateProperties, "Id", "Name", appointment.PropertyId);
-            return View(appointment);
+            return View("Create", appointment);
         }
 
         // GET: Appointments/Create
         public IActionResult Createadm()
         {
+           
             ViewData["PropertyId"] = new SelectList(_context.EstateProperties, "Id", "Name");
             return View();
         }
@@ -158,7 +177,7 @@ namespace Real_Estate.Controllers
             {
                 return NotFound();
             }
-            ViewData["PropertyId"] = new SelectList(_context.EstateProperties, "Id", "Id", appointment.PropertyId);
+            ViewData["PropertyId"] = new SelectList(_context.EstateProperties, "Id", "Name", appointment.PropertyId);
             return View(appointment);
         }
 

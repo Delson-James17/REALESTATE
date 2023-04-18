@@ -67,21 +67,21 @@ namespace Real_Estate.Migrations
                         new
                         {
                             Id = "fb63abec-98f5-448e-8f56-302fafd16df4",
-                            ConcurrencyStamp = "38d76719-4a4f-47a9-ae9c-515479bd8e65",
+                            ConcurrencyStamp = "95e2829a-5e14-46d5-bc6e-25303116c3a3",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "5c965850-234a-4d90-9c24-024ebfac6f20",
-                            ConcurrencyStamp = "a0976bcc-c875-4c58-8324-08a35ab6d826",
+                            ConcurrencyStamp = "85580f7a-a2f6-4850-a6a0-8c2248683180",
                             Name = "Client",
                             NormalizedName = "CLIENT"
                         },
                         new
                         {
                             Id = "51d0771e-de96-4882-a01e-8f0b9949e90c",
-                            ConcurrencyStamp = "b5a1744a-268b-4b6f-9f11-773328d04047",
+                            ConcurrencyStamp = "772388e3-68bf-4fba-9f00-63fea96c9b81",
                             Name = "Owner",
                             NormalizedName = "OWNER"
                         });
@@ -307,17 +307,17 @@ namespace Real_Estate.Migrations
                             AccessFailedCount = 0,
                             Address = "Laguna",
                             Age = 23,
-                            ConcurrencyStamp = "44207df7-f6ce-42a4-842c-d89efc38edfc",
-                            DOB = new DateTime(2023, 4, 18, 12, 34, 59, 433, DateTimeKind.Local).AddTicks(4295),
+                            ConcurrencyStamp = "8288b719-8a62-43ef-8037-cfbf11d23d97",
+                            DOB = new DateTime(2023, 4, 18, 18, 55, 15, 734, DateTimeKind.Local).AddTicks(5757),
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             Name = "Admin",
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJHSf6A/lavE4j3PjdovL61PGAgEaCW7SkZ4fh18cGuWUTZGS/Cpin7YAKZvnS6jXg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMXNfCxoobqIXPT3JpRFpvFJzBiF6/XtZQFGdcYaRebpTC9Wso5UWWQ3GbVJuzEALQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a74f885f-cbaf-43c4-b854-0c96cbeed4ca",
+                            SecurityStamp = "62d9daee-c87e-4357-9873-483d755def6a",
                             TwoFactorEnabled = false,
                             UrlImages = "https://www.clipartmax.com/png/middle/319-3191274_male-avatar-admin-profile.png",
                             UserName = "admin@gmail.com"
@@ -348,6 +348,10 @@ namespace Real_Estate.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("OwnerId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Phone")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -356,6 +360,8 @@ namespace Real_Estate.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("OwnerId");
 
                     b.HasIndex("PropertyId");
 
@@ -553,9 +559,17 @@ namespace Real_Estate.Migrations
 
             modelBuilder.Entity("Real_Estate.Models.Appointment", b =>
                 {
+                    b.HasOne("Real_Estate.Models.ApplicationUser", "Owner")
+                        .WithMany("Appointments")
+                        .HasForeignKey("OwnerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Real_Estate.Models.EstateProperty", "Property")
                         .WithMany("Appointments")
                         .HasForeignKey("PropertyId");
+
+                    b.Navigation("Owner");
 
                     b.Navigation("Property");
                 });
@@ -585,6 +599,8 @@ namespace Real_Estate.Migrations
 
             modelBuilder.Entity("Real_Estate.Models.ApplicationUser", b =>
                 {
+                    b.Navigation("Appointments");
+
                     b.Navigation("Properties");
                 });
 

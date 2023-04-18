@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Identity;
-@model IEnumerable<Real_Estate.Models.Appointment>
+@model ApplicationUser
 
 @{
     ViewData["Title"] = "Index";
@@ -68,18 +68,18 @@
                         <table class="table table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    <th>@Html.DisplayNameFor(model => model.Name)</th>
-                                    <th>@Html.DisplayNameFor(model => model.Email)</th>
-                                    <th>@Html.DisplayNameFor(model => model.Phone)</th>
-                                    <th>@Html.DisplayNameFor(model => model.Address)</th>
-                                    <th>@Html.DisplayNameFor(model => model.DateofAppointment)</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Address</th>
+                                <th>DateofAppointment</th>
                                     <th>Actions</th>
 
 
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (var item in Model)
+                                @foreach (var item in Model.Appointments)
                                 {
                                     <tr>
                                         <td>@Html.DisplayFor(modelItem => item.Name)</td>

@@ -20,7 +20,7 @@ namespace Real_Estate.Models
         public string UrlImages { get; set; }
         [DisplayName("Zoom Link")]
         public string? Zoomlink { get; set; }
-    
+        public List<Appointment> Appointments { get; set; }
         public List<EstateProperty> Properties { get; set; }
     }
 }
