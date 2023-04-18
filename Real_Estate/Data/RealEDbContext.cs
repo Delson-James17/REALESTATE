@@ -57,6 +57,7 @@ namespace Real_Estate.Data
         public DbSet<EstateProperty> EstateProperties { get; set; }
         public DbSet<Appointment>Appointments { get; set; } 
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<Real_Estate.Models.SaleorRentModel>? SaleorRentModel { get; set; }
     }
 
 }

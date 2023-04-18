@@ -20,12 +20,13 @@ namespace Real_Estate.Models
         [DisplayName("Property Image")]
 
         public string UrlImages { get; set; }
-        [DisplayName("Sale Price")]
+        public int? SaleOrRentModelId { get; set; }
+        public SaleorRentModel? SaleOrRentModel { get; set; }
+        [DisplayName("Price")]
 
-        public Double PriceifSale { get; set; }
-        [DisplayName("Rent Price")]
-
-        public Double PriceifRent { get; set; }
+        public Double Price { get; set; }
+        [DisplayName("Owner")]
+        public string? OwnerName { get; set; }
         public List<Appointment>? Appointments { get; set; }
         public List<PropertyListViewModel>? PropertyListViews { get; set; }
         [DisplayName("Select Category")]

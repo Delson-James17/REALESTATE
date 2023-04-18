@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Real_Estate.Data;
 
@@ -11,9 +12,10 @@ using Real_Estate.Data;
 namespace Real_Estate.Migrations
 {
     [DbContext(typeof(RealEDbContext))]
-    partial class RealEDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230418043459_SaleorRent1")]
+    partial class SaleorRent1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

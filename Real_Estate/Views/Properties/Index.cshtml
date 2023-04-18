@@ -67,8 +67,9 @@
                                     <th data-priority="1">@Html.DisplayNameFor(model => model.Description)s</th>
                                     <th data-priority="2">@Html.DisplayNameFor(model => model.Address)</th>
                                     <th data-priority="3">@Html.DisplayNameFor(model => model.UrlImages)</th>
-                                    <th data-priority="4">@Html.DisplayNameFor(model => model.PriceifSale)</th>
-                                    <th data-priority="5">@Html.DisplayNameFor(model => model.PriceifRent)</th>
+                                    <th data-priority="4">@Html.DisplayNameFor(model => model.Price)</th>
+                                    <th data-priority="5">@Html.DisplayNameFor(model => model.SaleOrRentModel)</th>
+                                    <th data-priority="5">@Html.DisplayNameFor(model => model.OwnerName)</th>
                                     
                                 </tr>
                             </thead>
@@ -89,12 +90,15 @@
                                             #
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.PriceifSale)
+                                            @Html.DisplayFor(modelItem => item.Price)
                                         </td>
 
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.PriceifRent)
+                                            @Html.DisplayFor(modelItem => item.SaleOrRentModel.Name)
                                         </td>
+                                       <td>
+                                           @Html.DisplayFor(modelItem => item.OwnerName)
+                                         </td>
 
                                         @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                                         {

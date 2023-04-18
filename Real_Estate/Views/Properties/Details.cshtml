@@ -33,13 +33,19 @@
                         <div class="col-md-6">
                             <div class="media">
                                 <label>Sale Price:</label>
-                                <p>₱ @Html.DisplayFor(model => model.PriceifSale)</p>
+                                <p>₱ @Html.DisplayFor(model => model.Price)</p>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="media">
                                 <label>Rent Price:</label>
-                                <p>₱ @Html.DisplayFor(model => model.PriceifRent)</p>
+                                <p>₱ @Html.DisplayFor(model => model.OwnerName)</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="media">
+                                <label>Sale or Rent:</label>
+                                <p>@Html.DisplayFor(model => model.SaleOrRentModel.Name)</p>
                             </div>
                         </div>
                            @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin") || User.IsInRole("Client"))

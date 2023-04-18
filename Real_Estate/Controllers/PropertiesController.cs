@@ -44,6 +44,7 @@ namespace Real_Estate.Controllers
                 property = property.Where(b => b.Name.Contains(SearchString) || b.Address.Contains(SearchString) || b.PropertyCategory.Name.Contains(SearchString));
             }
             ViewData["PropertyCategoryId"] = new SelectList(properties, "Id", "Name");
+            ViewData["SaleOrRentModelId"] = new SelectList(properties, "Id", "Name");
             return View(await property.AsNoTracking().ToListAsync());
         }
 
@@ -53,28 +54,75 @@ namespace Real_Estate.Controllers
             ViewBag.User = user;
             return View();
         }
-       
-        public async Task<IActionResult> Properties(string SearchString)
+        public async Task<IActionResult> Properties(string SearchString, int? SaleOrRentModelId, int? PropertyCategoryId)
         {
-            var properties = await this._context.PropertyCategories.Select(p => new PropertyCategory
-            {
-                Id = p.Id,
-                Name = p.Name
-
-            }).ToListAsync();
-            // var realEstateDbContext = _context.Properties.Include(p => p.Propertytypes).Include(p => p.owner);
-            //return View(await realEstateDbContext.ToListAsync());
+            // Retrieve all property categories and sale or rent models
+            var propertyCategories = await this._context.PropertyCategories.ToListAsync();
+            var saleOrRentModels = await this._context.SaleorRentModel.ToListAsync();
 
             ViewData["CurrentFilter"] = SearchString;
-            var property = from b in _context.EstateProperties
-                           select b;
+
+            // Retrieve all estate properties
+            var estateProperties = from p in _context.EstateProperties
+                                   select p;
+
+            // Apply search filters if specified
             if (!String.IsNullOrEmpty(SearchString))
             {
-                property = property.Where(b => b.Name.Contains(SearchString)|| b.Address.Contains(SearchString)|| b.PropertyCategory.Name.Contains(SearchString));
+                estateProperties = estateProperties.Where(p =>
+                    p.Name.Contains(SearchString) ||
+                    p.Address.Contains(SearchString) ||
+                    p.PropertyCategory.Name.Contains(SearchString) ||
+                    p.SaleOrRentModel.Name.Contains(SearchString));
             }
-            ViewData["PropertyCategoryId"] = new SelectList(properties, "Id", "Name");
-            return View(await property.AsNoTracking().ToListAsync());
+
+            if (SaleOrRentModelId.HasValue)
+            {
+                estateProperties = estateProperties.Where(p => p.SaleOrRentModelId == SaleOrRentModelId.Value);
+            }
+
+            if (PropertyCategoryId.HasValue)
+            {
+                estateProperties = estateProperties.Where(p => p.PropertyCategoryId == PropertyCategoryId.Value);
+            }
+
+            // Create dropdown list for sale or rent model
+            ViewData["SaleOrRentModelId"] = new SelectList(saleOrRentModels, "Id", "Name", SaleOrRentModelId);
+
+            // Create dropdown list for property category
+            ViewData["PropertyCategoryId"] = new SelectList(propertyCategories, "Id", "Name", PropertyCategoryId);
+
+            return View(await estateProperties.AsNoTracking().ToListAsync());
         }
+
+        /* public async Task<IActionResult> Properties(string SearchString)
+         {
+             var properties = await this._context.PropertyCategories.Select(p => new PropertyCategory
+             {
+                 Id = p.Id,
+                 Name = p.Name
+
+             }).ToListAsync();
+             var salerent = await this._context.SaleorRentModel.Select(p => new SaleorRentModel
+             {
+                 Id = p.Id,
+                 Name = p.Name
+
+             }).ToListAsync();
+             // var realEstateDbContext = _context.Properties.Include(p => p.Propertytypes).Include(p => p.owner);
+             //return View(await realEstateDbContext.ToListAsync());
+
+             ViewData["CurrentFilter"] = SearchString;
+             var property = from b in _context.EstateProperties
+                            select b;
+             if (!String.IsNullOrEmpty(SearchString))
+             {
+                 property = property.Where(b => b.Name.Contains(SearchString)|| b.Address.Contains(SearchString)|| b.PropertyCategory.Name.Contains(SearchString)|| b.SaleOrRentModel.Name.Contains(SearchString));
+             }
+             ViewData["SaleOrRentModelId"] = new SelectList(salerent, "Id", "Name");
+             ViewData["PropertyCategoryId"] = new SelectList(properties, "Id", "Name");
+             return View(await property.AsNoTracking().ToListAsync());
+         }*/
         [Authorize(Roles = "Admin, Client, Owner")]
 
         // GET: Properties/Details/5
@@ -88,6 +136,7 @@ namespace Real_Estate.Controllers
             var @property = await _context.EstateProperties
                 .Include(a => a.ApplicationUser)
                 .Include(a => a.PropertyCategory)
+                .Include(a => a.SaleOrRentModel)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (@property == null)
             {
@@ -101,6 +150,7 @@ namespace Real_Estate.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            ViewData["SaleOrRentModelId"] = new SelectList(_context.SaleorRentModel, "Id", "Name");
             ViewData["PropertyCategoryId"] = new SelectList(_context.PropertyCategories, "Id", "Name");
             return View();
         }
@@ -127,8 +177,9 @@ namespace Real_Estate.Controllers
                         Description = property.Description,
                         Address = property.Address,
                         UrlImages = property.UrlImages,
-                        PriceifSale = property.PriceifSale,
-                        PriceifRent = property.PriceifRent,
+                        Price = property.Price,
+                        SaleOrRentModelId = property.SaleOrRentModelId,
+                        OwnerName = property.OwnerName,
                         PropertyCategoryId = property.PropertyCategoryId,
                         ApplicationUserId = user.Id
                     };
@@ -142,6 +193,7 @@ namespace Real_Estate.Controllers
                     return RedirectToAction(nameof(Index));
                 }
             }
+            ViewData["SaleOrRentModelId"] = new SelectList(_context.SaleorRentModel, "Id", "Name",property.SaleOrRentModelId);
             ViewData["PropertyCategoryId"] = new SelectList(_context.PropertyCategories, "Id", "Name",property.PropertyCategoryId);
             return View(property);
         }
@@ -150,6 +202,7 @@ namespace Real_Estate.Controllers
         [HttpGet]
         public IActionResult CreatePropOwner()
         {
+            ViewData["SaleOrRentModelId"] = new SelectList(_context.SaleorRentModel, "Id", "Name");
             ViewData["PropertyCategoryId"] = new SelectList(_context.PropertyCategories, "Id", "Name");
             return View();
         }
@@ -176,8 +229,9 @@ namespace Real_Estate.Controllers
                         Description = property.Description,
                         Address = property.Address,
                         UrlImages = property.UrlImages,
-                        PriceifSale = property.PriceifSale,
-                        PriceifRent = property.PriceifRent,
+                        Price = property.Price,
+                        SaleOrRentModelId = property.SaleOrRentModelId,
+                        OwnerName = property.OwnerName,
                         PropertyCategoryId = property.PropertyCategoryId,
                         ApplicationUserId = user.Id
                     };
@@ -191,6 +245,7 @@ namespace Real_Estate.Controllers
                     return RedirectToAction(nameof(Properties));
                 }
             }
+            ViewData["SaleOrRentModelId"] = new SelectList(_context.SaleorRentModel, "Id", "Name", property.SaleOrRentModelId);
             ViewData["PropertyCategoryId"] = new SelectList(_context.PropertyCategories, "Id", "Name", property.PropertyCategoryId);
             return View(property);
         }
@@ -217,10 +272,12 @@ namespace Real_Estate.Controllers
                 Description = @property.Description,
                 Address = @property.Address,
                 UrlImages = @property.UrlImages,
-                PriceifSale = @property.PriceifSale,
-                PriceifRent = @property.PriceifRent,
-                PropertyCategoryId = @property.PropertyCategoryId,
+                Price = @property.Price,
+                SaleOrRentModelId = @property.SaleOrRentModelId,
+                OwnerName = @property.OwnerName,
+                PropertyCategoryId = @property.PropertyCategoryId
             };
+            ViewData["SaleOrRentModelId"] = new SelectList(_context.SaleorRentModel, "Id", "Name", property.SaleOrRentModelId);
             ViewData["PropertyCategoryId"] = new SelectList(_context.PropertyCategories, "Id", "Name", property.PropertyCategoryId);
 
             return View(propertyViewModel);
@@ -252,14 +309,16 @@ namespace Real_Estate.Controllers
                 estateProperty.Description = property.Description;
                 estateProperty.Address = property.Address;
                 estateProperty.UrlImages = property.UrlImages;
-                estateProperty.PriceifSale = property.PriceifSale;
-                estateProperty.PriceifRent = property.PriceifRent;
+                estateProperty.Price = property.Price;
+                estateProperty.SaleOrRentModelId = property.SaleOrRentModelId;
+                estateProperty.OwnerName = property.OwnerName;
                 estateProperty.PropertyCategoryId = property.PropertyCategoryId;
                 // Save the changes to the database
                 await _context.SaveChangesAsync();
 
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["SaleOrRentModelId"] = new SelectList(_context.SaleorRentModel, "Id", "Name", property.SaleOrRentModelId);
             ViewData["PropertyCategoryId"] = new SelectList(_context.PropertyCategories, "Id", "Name", property.PropertyCategoryId);
             return View(property);
         }
@@ -276,6 +335,7 @@ namespace Real_Estate.Controllers
 
             var @property = await _context.EstateProperties
                 .Include(a => a.PropertyCategory)
+                .Include(a => a.SaleOrRentModel)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (@property == null)
             {
