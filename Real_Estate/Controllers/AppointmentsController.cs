@@ -71,8 +71,9 @@ namespace Real_Estate.Controllers
 
 
         // GET: Appointments
+        
         public async Task<IActionResult> Index()
-        {
+        {//filter Id of owner login
             var realEstateDbContext = _context.Appointments.Include(a => a.Property);
             return View(await realEstateDbContext.ToListAsync());
         }

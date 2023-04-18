@@ -7,7 +7,7 @@ namespace Real_Estate.Models
     {
         [Key]
         [Required]
-        public string Id { get; set; }
+        public string Id { get; set; } // filter id
      //   public string? TO { get; set; }
         [Required]
         [DisplayName("Full Name")]

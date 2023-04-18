@@ -24,8 +24,6 @@ namespace Real_Estate.Controllers
         {
             _context = context;
         }
-
-
         // GET: Properties
         [Authorize(Roles = "Admin, Owner")]
         public async Task<IActionResult> Index(string SearchString )

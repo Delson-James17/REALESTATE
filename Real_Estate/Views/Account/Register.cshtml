@@ -77,11 +77,12 @@
 
         <label class="form-label" for="form3Example4cdg">Pick Roles</label>
    <select asp-for="RoleViewModelID" class="form-control">
+       <option value="">Select an option</option>
             @if(Roles != null)
             {
                 foreach (var item in Roles)
                 {
-                    <option value="">Select an option</option>
+                    
                     <option value="@item.Id">@item.Name</option>
                 }
             }   
