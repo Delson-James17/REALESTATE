@@ -28,6 +28,7 @@ namespace Real_Estate.Models
        [ValidateNever]
       public virtual ApplicationUser Owner { get; set; }
 
+
         //public string Password { get; set; }
         public int? PropertyId { get; set; }
         public EstateProperty? Property { get; set; }

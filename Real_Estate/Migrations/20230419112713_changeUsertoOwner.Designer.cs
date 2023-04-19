@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Real_Estate.Data;
 
@@ -11,9 +12,10 @@ using Real_Estate.Data;
 namespace Real_Estate.Migrations
 {
     [DbContext(typeof(RealEDbContext))]
-    partial class RealEDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230419112713_changeUsertoOwner")]
+    partial class changeUsertoOwner
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -67,21 +69,21 @@ namespace Real_Estate.Migrations
                         new
                         {
                             Id = "fb63abec-98f5-448e-8f56-302fafd16df4",
-                            ConcurrencyStamp = "e1a0ed66-1d54-4a34-a565-a488b5bc8dc7",
+                            ConcurrencyStamp = "9bc504f9-5059-49aa-96c1-860fafff2a6f",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "5c965850-234a-4d90-9c24-024ebfac6f20",
-                            ConcurrencyStamp = "2dc0d888-febf-4624-98aa-828e90657596",
+                            ConcurrencyStamp = "e85059fc-10aa-4012-9c56-57ae179439aa",
                             Name = "Client",
                             NormalizedName = "CLIENT"
                         },
                         new
                         {
                             Id = "51d0771e-de96-4882-a01e-8f0b9949e90c",
-                            ConcurrencyStamp = "48b6a811-50d2-4b35-9e47-72ebb66dfa24",
+                            ConcurrencyStamp = "b35ad27f-61a7-41d2-bffb-67c3c5e54fb9",
                             Name = "Owner",
                             NormalizedName = "OWNER"
                         });
@@ -307,17 +309,17 @@ namespace Real_Estate.Migrations
                             AccessFailedCount = 0,
                             Address = "Laguna",
                             Age = 23,
-                            ConcurrencyStamp = "227053a7-4a8b-4ec2-83a3-fbcfd598457f",
-                            DOB = new DateTime(2023, 4, 19, 19, 31, 29, 739, DateTimeKind.Local).AddTicks(9251),
+                            ConcurrencyStamp = "55b0dbdc-4de7-44b0-a722-f78efaebed06",
+                            DOB = new DateTime(2023, 4, 19, 19, 27, 12, 730, DateTimeKind.Local).AddTicks(9087),
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             Name = "Admin",
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBqt5b5snJpeHj3GFQ+ZZ/0HEkjt5ns9xRnAjd+P5CGc4zoC3itOKN+5vLS+S66NGA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECAYO6EqtEAzsjta//mce7gqgX/pnNTh1mMy30gJx8MEdDm0xgXYo/JPSq46PGLAAQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e50d8ee7-d7d1-418b-9a1b-31ca40476551",
+                            SecurityStamp = "8d4718e3-c554-443d-bcec-aaef1b99a0a4",
                             TwoFactorEnabled = false,
                             UrlImages = "https://www.clipartmax.com/png/middle/319-3191274_male-avatar-admin-profile.png",
                             UserName = "admin@gmail.com"
