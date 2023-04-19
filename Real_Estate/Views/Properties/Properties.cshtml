@@ -26,13 +26,24 @@
     .form-select {
         width: fit-content;
     }
+
+    .banner {
+/*        outline: solid 2px white;*/
+        background-color: #F4A424;
+        width: 100%;
+        height: 475px;
+        position: absolute;
+        left: 0%;
+    }
 </style>
-<body class="propertyBody">
+<body>
+@*    <div class="banner"></div>*@
     <div class="propertyHeader">
         <div class="container-property-header">
             <img class="propertyImage" src="/lib/img/propertyImage.png">
             <h1 class="centered">Find a place you can call Home</h1>
         </div>
+    </div>
         <form class="searchbar d-flex justify-content-sm-between align-items-end"  method="get" asp-action="Properties">
             <div class="row">
                 <div class="col-md-4">
@@ -72,7 +83,14 @@
                                             Address: @Html.DisplayFor(modelItem => item.Address)
                                         </p>
                                         <p>
-                                            Description: @Html.DisplayFor(modelItem => item.Description)
+                                        @{
+                                            string x = item.Description;
+                                            if (x != null && x.Length > 200){
+                                                x = x.Substring(0, 30);
+                                            }
+                                        }
+                                        @Html.Raw(x)...
+                                       
                                         </p>
                                         <div class="row about-list">
                                             <div class="col-md-6">

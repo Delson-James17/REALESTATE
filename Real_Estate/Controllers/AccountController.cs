@@ -31,6 +31,12 @@ namespace Real_Estate.Controllers
         {
             return View();
         }
+
+        public IActionResult UpdatePasswordSuccess()
+        {
+            return View();
+        }
+
         public async Task<IActionResult> ListOfOwners()
         {
             List<ApplicationUser> user = (List<ApplicationUser>)await _userManager.GetUsersInRoleAsync("Owner");
@@ -157,7 +163,8 @@ namespace Real_Estate.Controllers
                 }
 
                 await _signInManager.RefreshSignInAsync(user);
-                return RedirectToAction("Login", "Account");
+                //return RedirectToAction("Login", "Account");
+                return RedirectToAction("UpdatePasswordSuccess", "Account");
             }
 
             return View(model);

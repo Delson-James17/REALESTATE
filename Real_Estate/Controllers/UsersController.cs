@@ -19,6 +19,11 @@ namespace Real_Estate.Controllers
             _context = context;
         }
 
+        public IActionResult UpdatedSuccessfully()
+        {
+            return View();
+        }
+
         public async Task<IActionResult> GetAllUsers()
         {
             var users = await _userManager.Users.ToListAsync();
@@ -73,7 +78,8 @@ namespace Real_Estate.Controllers
             var updateuserinfo = await _userManager.UpdateAsync(userProfile);
             if (updateuserinfo.Succeeded)
             {
-                return RedirectToAction("Profile", "Account");
+                //return RedirectToAction("Profile", "Account");
+                return RedirectToAction("UpdatedSuccessfully", "Users");
             }
             else
             {
@@ -120,7 +126,9 @@ namespace Real_Estate.Controllers
             var updateuserinfo = await _userManager.UpdateAsync(userProfile);
             if (updateuserinfo.Succeeded)
             {
-                return RedirectToAction("GetAllUsers");
+               // return RedirectToAction("GetAllUsers");
+                return RedirectToAction("UpdatedSuccessfully", "Users");
+
             }
             else
             {

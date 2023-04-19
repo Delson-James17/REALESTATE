@@ -1,4 +1,5 @@
 @using Microsoft.AspNetCore.Identity;
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,19 +20,19 @@
         <nav>
             <ul>
                 <div class="logo">
-                    <img class="propertyImage" src="~/lib/img/pjli-real-estate-low-resolution-logo-color-on-transparent-background.png" width="100px" style="padding:10px;">
+                    <img class="propertyImage" src="~/lib/img/PJLI_LOGO.png" width="100px" style="padding:10px;">
                 </div>
                 <hr>
-                <li><a class="nav-link text-dark" asp-area="" asp-controller="Properties" asp-action="Properties">Home</a></li>
+                <li><a class="nav-link" style="color: #F4A424;" asp-area="" asp-controller="Properties" asp-action="Properties">Home</a></li>
                 @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin")){
-                    <li><a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="AdminPannel">Admin ControlPannel</a></li>
+                    <li><a class="nav-link" style="color: #F4A424;" asp-area="" asp-controller="Admin" asp-action="AdminPannel">Admin ControlPannel</a></li>
                 }
                
 
                 @if (_signInManager.IsSignedIn(User) && User.IsInRole("Owner"))
                 {
                     <li>
-                            <li> <a class="nav-link text-dark" asp-area="" asp-controller="Properties" asp-action="CreatePropOwner">Create Property</a></li>
+                    <li> <a class="nav-link" style="color: #F4A424;" asp-area="" asp-controller="Properties" asp-action="CreatePropOwner">Create Property</a></li>
 
                     </li>
                 }
@@ -39,13 +40,13 @@
                     <li>
                     @if (_signInManager.IsSignedIn(User) && User.IsInRole("Owner") || User.IsInRole("Client"))
                             {
-                        <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">Appointment </a>
+                        <a class="nav-link" style="color: #F4A424;" asp-area="" asp-controller="" asp-action="">Appointment </a>
                             }
                         <ul>
-                            <li> <a class="nav-link text-dark" asp-area="" asp-controller="Appointments" asp-action="Appointment">Create Appointment</a></li>
+                        <li> <a class="nav-link" style="color: #F4A424;" asp-area="" asp-controller="Appointments" asp-action="Appointment">Create Appointment</a></li>
                             @if (_signInManager.IsSignedIn(User) && User.IsInRole("Owner"))
                             {
-                            <li> <a class="nav-link text-dark" asp-area="" asp-controller="Appointments" asp-action="Index">All Apointment</a></li>
+                            <li> <a class="nav-link" style="color: #F4A424;" asp-area="" asp-controller="Appointments" asp-action="Index">All Apointment</a></li>
                               }
                         </ul>
                     </li>
@@ -57,19 +58,19 @@
                         @if (_signInManager.IsSignedIn(User))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Profile">@User.Identity.Name</a>
+                                <a class="nav-link" style="color: #F4A424;" asp-area="" asp-controller="Account" asp-action="Profile">@User.Identity.Name</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="LogOut">Log Out</a>
+                                <a class="nav-link" style="color: #F4A424;" asp-area="" asp-controller="Account" asp-action="LogOut">Log Out</a>
                             </li>
                         }
                         else
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                                <a class="nav-link" style="color: #F4A424;" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account"
+                                <a class="nav-link" style="color: #F4A424;" asp-area="" asp-controller="Account"
                                asp-action="Register">Register</a>
                             </li>
                         }

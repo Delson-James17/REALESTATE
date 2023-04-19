@@ -91,13 +91,13 @@
                         <hr />
                         @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin") || User.IsInRole("Owner"))
                         {
-                            <hr>
+
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Contact Number:</h6>
+                                    <h6 class="mb-0">Zoom Link:</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    @Model.PhoneNumber
+                                    @Model.Zoomlink
                                 </div>
                             </div>
 
@@ -111,7 +111,7 @@
                     </div>
                     <div class="cols"> 
                         <button class="detailsButton"><a class="details-button-text" asp-controller="Users" asp-action="Update" asp-route-userId="@Model.Id" style="text-decoration: none;">Edit</a></button>
-                        <button class="detailsButton"><a class="details-button-text" asp-controller="Account" asp-action="ChangePassword"  style="text-decoration: none;">ChangePassword</a></button>
+                        <button class="detailsButton"><a class="details-button-text" asp-controller="Account" asp-action="ChangePassword"  style="text-decoration: none;">Change Password</a></button>
                      </div>
                 </div>
             </div>

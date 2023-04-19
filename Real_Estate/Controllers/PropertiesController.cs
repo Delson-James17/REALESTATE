@@ -24,6 +24,7 @@ namespace Real_Estate.Controllers
         {
             _context = context;
         }
+
         // GET: Properties
         [Authorize(Roles = "Admin, Owner")]
         public async Task<IActionResult> Index(string SearchString )
@@ -317,6 +318,7 @@ namespace Real_Estate.Controllers
                 await _context.SaveChangesAsync();
 
                 return RedirectToAction(nameof(Index));
+                //return RedirectToAction("UpdatedSuccessfully", "Properties");
             }
             ViewData["SaleOrRentModelId"] = new SelectList(_context.SaleorRentModel, "Id", "Name", property.SaleOrRentModelId);
             ViewData["PropertyCategoryId"] = new SelectList(_context.PropertyCategories, "Id", "Name", property.PropertyCategoryId);

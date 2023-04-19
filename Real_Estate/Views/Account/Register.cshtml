@@ -24,11 +24,11 @@
     <!--Stylesheet-->
 
 </head>
-    <form class="forms" asp-controller="Account" asp-action="Register" method="post">
+    <form class="forms" asp-controller="Account" asp-action="Register">
 
     <h1 class="whiteText" style="text-align: center;">Register Here</h1>
 
-    <div asp-validation-summary="All" class="text-danger"></div>
+@*    <div asp-validation-summary="All" class="text-danger"></div>*@
     <label class="form-label" for="form3Example1cg">Full name</label>
     <input asp-for="Name" id="form3Example1cg" class="form-control form-control-lg" placeholder="First Name, Middle Initial, Last Name"/>
     <span asp-validation-for="Name" class="form-validation"></span>
@@ -36,7 +36,7 @@
 
     <label class="form-label" for="form3Examplea6">Address</label>
     <input asp-for="Address" id="form3Examplea6" class="form-control form-control-lg" placeholder="Enter Address"/>
-
+    <span asp-validation-for="Address" class="form-validation"></span>
 
     <label class="form-label" for="form3Examplea7">Age</label>
         <input asp-for="Age" id="form3Examplea7" class="form-control form-control-lg" placeholder="Enter Age" />
@@ -45,7 +45,7 @@
 
     <label class="form-label" for="form3Examplea8">Phone Number</label>
         <input asp-for="PhoneNumber" id="form3Examplea8" class="form-control form-control-lg" placeholder="Enter Phone Number" />
-
+    <span asp-validation-for="PhoneNumber" class="form-validation"></span>
 
     <label class="form-label" for="form3Examplea6">Date of Birth</label>
         <input asp-for="DOB" id="form3Examplea6" class="form-control form-control-lg" placeholder="MM/DD/YYYY" />
