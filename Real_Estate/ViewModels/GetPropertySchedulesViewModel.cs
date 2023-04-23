@@ -2,17 +2,15 @@
 
 namespace Real_Estate.ViewModels
 {
-    public class AppointmentViewModel
+    public class GetPropertySchedulesViewModel
     {
-      public Appointment Appointment { get; set; }
-
+        List<OwnerSchedule> OwnerSchedules { get; set; }
         public List<EventModel> Events { get; set; }
         public class EventModel
         {
-            public string Title { get; set; }
             public string Start { get; set; }
-            
-            public bool AllDay { get; set; }= true;
+            public string End { get; set; }
+            public bool AllDay { get; set; } = true;
         }
     }
 }

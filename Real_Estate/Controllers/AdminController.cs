@@ -7,7 +7,7 @@ using Real_Estate.ViewModels;
 
 namespace Real_Estate.Controllers
 {
-    public class AdminController :Controller
+    public class AdminController : Controller
     {
         private readonly RealEDbContext _context;
 
@@ -24,7 +24,6 @@ namespace Real_Estate.Controllers
             var model = new RowCountViewModel
             {
                 PropertyCount = _context.EstateProperties.Count(),
-                AppointmentCount = _context.Appointments.Count(),
                 UserCount = _context.ApplicationUsers.Count()
             };
             List<EstateProperty> properties = await _context.EstateProperties.ToListAsync();
@@ -39,7 +38,7 @@ namespace Real_Estate.Controllers
         {
             var model = new RowCountViewModel
             {
-                AppointmentCount = _context.Appointments.Count(),
+
             };
 
             return View(model);

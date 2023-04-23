@@ -6,7 +6,7 @@ namespace Real_Estate.Controllers
 {
     public class RoleController : Controller
     {
-        public RoleManager<IdentityRole> _roleManager {  get;}
+        public RoleManager<IdentityRole> _roleManager { get; }
         public RoleController(RoleManager<IdentityRole> roleManager)
         {
             _roleManager = roleManager;
@@ -20,32 +20,32 @@ namespace Real_Estate.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(RoleViewModel roleViewModel)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var role = new IdentityRole
                 {
                     Name = roleViewModel.Name
                 };
                 var result = await _roleManager.CreateAsync(role);
-                if(result.Succeeded)
+                if (result.Succeeded)
                 {
                     return RedirectToAction("GetAllRoles");
                 }
-                foreach(var error in result.Errors)
+                foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
-         
+
             return View(roleViewModel);
         }
         [HttpGet]
-        public IActionResult GetAllRoles() 
+        public IActionResult GetAllRoles()
         {
             return View(_roleManager.Roles.ToList());
         }
         [HttpGet]
-        public async Task<IActionResult>Update(string roleId)
+        public async Task<IActionResult> Update(string roleId)
         {
             var oldProperty = await _roleManager.FindByIdAsync(roleId);
             return View(oldProperty);
@@ -56,13 +56,13 @@ namespace Real_Estate.Controllers
             var oldRole = await _roleManager.FindByIdAsync(role.Id.ToString());
             oldRole.Name = role.Name;
             var result = await _roleManager.UpdateAsync(oldRole);
-            if(result.Succeeded)
+            if (result.Succeeded)
             {
                 return RedirectToAction("GetAllRoles");
             }
             foreach (var error in result.Errors)
             {
-                ModelState.AddModelError(string.Empty,error.Description);
+                ModelState.AddModelError(string.Empty, error.Description);
             }
             return View();
         }
@@ -80,4 +80,3 @@ namespace Real_Estate.Controllers
         }
     }
 }
- 

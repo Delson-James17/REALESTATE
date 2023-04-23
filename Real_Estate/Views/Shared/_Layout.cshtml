@@ -43,10 +43,12 @@
                         <a class="nav-link" style="color: #F4A424;" asp-area="" asp-controller="" asp-action="">Appointment </a>
                             }
                         <ul>
-                        <li> <a class="nav-link" style="color: #F4A424;" asp-area="" asp-controller="Appointments" asp-action="Appointment">Create Appointment</a></li>
+                        
                             @if (_signInManager.IsSignedIn(User) && User.IsInRole("Owner"))
                             {
-                            <li> <a class="nav-link" style="color: #F4A424;" asp-area="" asp-controller="Appointments" asp-action="Index">All Apointment</a></li>
+                            <li> <a class="nav-link" style="color: #F4A424;" asp-area="" asp-controller="OwnerSchedule" asp-action="AddSchedule">Create Your Schedule</a></li>
+                            <li> <a class="nav-link" style="color: #F4A424;" asp-area="" asp-controller="OwnerSchedule" asp-action="OwnerScheduleList">Create Your Schedule</a></li>
+                            <li> <a class="nav-link" style="color: #F4A424;" asp-area="" asp-controller="Appointment" asp-action="Index">Your Appointments</a></li>
                               }
                         </ul>
                     </li>

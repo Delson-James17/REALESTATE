@@ -15,7 +15,7 @@ using Real_Estate.ViewModels;
 
 namespace Real_Estate.Controllers
 {
-   
+
     public class PropertiesController : Controller
     {
         private readonly RealEDbContext _context;
@@ -27,7 +27,7 @@ namespace Real_Estate.Controllers
 
         // GET: Properties
         [Authorize(Roles = "Admin, Owner")]
-        public async Task<IActionResult> Index(string SearchString )
+        public async Task<IActionResult> Index(string SearchString)
         {
             var properties = await this._context.PropertyCategories.Select(p => new PropertyCategory
             {
@@ -194,8 +194,8 @@ namespace Real_Estate.Controllers
                     return RedirectToAction(nameof(Index));
                 }
             }
-            ViewData["SaleOrRentModelId"] = new SelectList(_context.SaleorRentModel, "Id", "Name",property.SaleOrRentModelId);
-            ViewData["PropertyCategoryId"] = new SelectList(_context.PropertyCategories, "Id", "Name",property.PropertyCategoryId);
+            ViewData["SaleOrRentModelId"] = new SelectList(_context.SaleorRentModel, "Id", "Name", property.SaleOrRentModelId);
+            ViewData["PropertyCategoryId"] = new SelectList(_context.PropertyCategories, "Id", "Name", property.PropertyCategoryId);
             return View(property);
         }
 
@@ -361,7 +361,7 @@ namespace Real_Estate.Controllers
             {
                 _context.EstateProperties.Remove(@property);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
@@ -395,15 +395,15 @@ namespace Real_Estate.Controllers
                 Categories = categories,
                 Id = id.Value
             };
-           
+
             return View(properties);
         }
 
         private bool PropertyExists(int id)
         {
-          return (_context.EstateProperties?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.EstateProperties?.Any(e => e.Id == id)).GetValueOrDefault();
         }
-        
-        
+
+
     }
 }

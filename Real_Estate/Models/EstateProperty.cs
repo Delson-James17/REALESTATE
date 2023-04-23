@@ -27,7 +27,6 @@ namespace Real_Estate.Models
         public Double Price { get; set; }
         [DisplayName("Owner")]
         public string? OwnerName { get; set; }
-        public List<Appointment>? Appointments { get; set; }
         public List<PropertyListViewModel>? PropertyListViews { get; set; }
         [DisplayName("Select Category")]
 
@@ -35,6 +34,6 @@ namespace Real_Estate.Models
         public PropertyCategory? PropertyCategory { get; set; }
         //relationships
         public string ApplicationUserId { get; set; }
-        public ApplicationUser? ApplicationUser { get; set; }    
+        public ApplicationUser? ApplicationUser { get; set; }
     }
 }

@@ -1,10 +1,9 @@
-﻿@model List<ApplicationUser>
+﻿@model List<Appointment>
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    ViewData["Title"] = "Owner List";
-
+    ViewData["Title"] = "Appointment List";
 }
 <style>
     h2 {
@@ -38,7 +37,6 @@
         color: #fff;
     }
 </style>
-
 <table>
     <div class="container">
         <div class="row">
@@ -47,32 +45,28 @@
                     <table class="table table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th>Full Name</th>
-                                <th>Age</th>
-                                <th>Date of Birth</th>
-                                <th>Phone Number</th>
-                                <th>Address</th>
-                                <th>URL Image</th>
-                                <th>Email</th>
-                                <th>User Name</th>
-
+                                <th>Client Name</th>
+                                <th>Property Name</th>
+                                <th>Schedule</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var users in Model)
+                            @foreach (var item in Model)
                             {
                                 <tr>
-                                    <td>@users.Name</td>
-                                    <td>@users.Age</td>
-                                    <td>@users.DOB</td>
-                                    <td>@users.Address</td>
-                                    <td>@users.PhoneNumber</td>
-                                    <td>#</td>
-                                    <td>@users.Email</td>
-                                    <td>@users.UserName</td>
                                     <td>
-                                        <button><a asp-controller="Users" asp-action="Details" asp-route-userId="@users.Id" class="black-text-button"><i class="far fa-file-alt"></i></a></button>
+                                        @Html.DisplayFor(modelItem => item.Clients.Name)
                                     </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.EstateProperty.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.OwnerSchedules.startTime)
+                                        @Html.DisplayFor(modelItem => item.OwnerSchedules.endTime)
+                                    </td>
+                                    <a class="btn btn-danger" asp-controller="Appointment" title="DeleteSchedule" asp-action="Delete" asp-route-Id="@item.Id">
+                                        <i class="fas fa-user-times"></i>
+                                    </a>
                                 </tr>
                             }
                         </tbody>

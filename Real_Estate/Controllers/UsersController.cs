@@ -40,7 +40,7 @@ namespace Real_Estate.Controllers
             var userlist = await _userManager.DeleteAsync(user);
             return RedirectToAction(controllerName: "Users", actionName: "GetAllUsers"); // reload the getall page it self
         }
-       
+
 
         [HttpGet]
         public async Task<IActionResult> Update(string userId)
@@ -48,10 +48,10 @@ namespace Real_Estate.Controllers
             var users = _userManager.Users.FirstOrDefault(u => u.Id == userId);
             var roles = await _userManager.GetRolesAsync(users);
             EditUserViewModel userViewModel = new EditUserViewModel()
-            {  
-                Name= users.Name,
-                Age= users.Age,
-                Address= users.Address, 
+            {
+                Name = users.Name,
+                Age = users.Age,
+                Address = users.Address,
                 DOB = (DateTime)users.DOB,
                 PhoneNumber = users.PhoneNumber,
                 UrlImages = users.UrlImages,
@@ -61,7 +61,7 @@ namespace Real_Estate.Controllers
             };
             return View(userViewModel);
         }
-        
+
         [HttpPost]
         public async Task<IActionResult> Update(EditUserViewModel user)
         {
@@ -126,7 +126,7 @@ namespace Real_Estate.Controllers
             var updateuserinfo = await _userManager.UpdateAsync(userProfile);
             if (updateuserinfo.Succeeded)
             {
-               // return RedirectToAction("GetAllUsers");
+                // return RedirectToAction("GetAllUsers");
                 return RedirectToAction("UpdatedSuccessfully", "Users");
 
             }
@@ -140,5 +140,5 @@ namespace Real_Estate.Controllers
             }
         }
     }
-    }
+}
 

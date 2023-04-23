@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Real_Estate.Migrations
 {
-    public partial class init : Migration
+    public partial class initialmigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -202,6 +202,26 @@ namespace Real_Estate.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "OwnerSchedules",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    OwnerId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    startTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    endTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OwnerSchedules", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_OwnerSchedules_AspNetUsers_OwnerId",
+                        column: x => x.OwnerId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "PropertyCategoryPropertyListViewModel",
                 columns: table => new
                 {
@@ -268,28 +288,39 @@ namespace Real_Estate.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    OwnerId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    PropertyId = table.Column<int>(type: "int", nullable: true),
-                    DateofAppointment = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    ClientId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ClientsId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    OwnerId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OwnersId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    OwnerScheduleId = table.Column<int>(type: "int", nullable: false),
+                    EstatePropertyId = table.Column<int>(type: "int", nullable: false),
+                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Appointments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Appointments_AspNetUsers_OwnerId",
-                        column: x => x.OwnerId,
+                        name: "FK_Appointments_AspNetUsers_ClientsId",
+                        column: x => x.ClientsId,
                         principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Appointments_AspNetUsers_OwnersId",
+                        column: x => x.OwnersId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Appointments_EstateProperties_EstatePropertyId",
+                        column: x => x.EstatePropertyId,
+                        principalTable: "EstateProperties",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Appointments_EstateProperties_PropertyId",
-                        column: x => x.PropertyId,
-                        principalTable: "EstateProperties",
-                        principalColumn: "Id");
+                        name: "FK_Appointments_OwnerSchedules_OwnerScheduleId",
+                        column: x => x.OwnerScheduleId,
+                        principalTable: "OwnerSchedules",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -321,30 +352,79 @@ namespace Real_Estate.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "51d0771e-de96-4882-a01e-8f0b9949e90c", "772388e3-68bf-4fba-9f00-63fea96c9b81", "Owner", "OWNER" },
-                    { "5c965850-234a-4d90-9c24-024ebfac6f20", "85580f7a-a2f6-4850-a6a0-8c2248683180", "Client", "CLIENT" },
-                    { "fb63abec-98f5-448e-8f56-302fafd16df4", "95e2829a-5e14-46d5-bc6e-25303116c3a3", "Admin", "ADMIN" }
+                    { "51d0771e-de96-4882-a01e-8f0b9949e90c", "0d6f6847-205a-419d-a91d-069ae8f3b30c", "Owner", "OWNER" },
+                    { "5c965850-234a-4d90-9c24-024ebfac6f20", "3b83d67c-2ec1-48b3-9ff2-8e764806ce90", "Client", "CLIENT" },
+                    { "fb63abec-98f5-448e-8f56-302fafd16df4", "65897fc0-0d96-46a9-bf0c-db024ca9a483", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Address", "Age", "ConcurrencyStamp", "DOB", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UrlImages", "UserName", "Zoomlink" },
-                values: new object[] { "f0fbf9f0-eb17-4c87-9c76-9de5451f74ae", 0, "Laguna", 23, "8288b719-8a62-43ef-8037-cfbf11d23d97", new DateTime(2023, 4, 18, 18, 55, 15, 734, DateTimeKind.Local).AddTicks(5757), "admin@gmail.com", false, false, null, "Admin", "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAEAACcQAAAAEMXNfCxoobqIXPT3JpRFpvFJzBiF6/XtZQFGdcYaRebpTC9Wso5UWWQ3GbVJuzEALQ==", null, false, "62d9daee-c87e-4357-9873-483d755def6a", false, "https://www.clipartmax.com/png/middle/319-3191274_male-avatar-admin-profile.png", "admin@gmail.com", null });
+                values: new object[,]
+                {
+                    { "62550723-3df6-4886-80c0-5ff90804ec07", 0, "Laguna", 23, "33e2ca42-fc35-4a75-9eca-ce564a3283c9", new DateTime(2023, 4, 22, 15, 1, 38, 432, DateTimeKind.Local).AddTicks(2955), "owner@gmail.com", false, false, null, "Owner", "OWNER@GMAIL.COM", "OWNER@GMAIL.COM", "AQAAAAEAACcQAAAAELQDiuppVO4mXwq0fp4OIN/7BhJJvpcmel9jadKNRpH6OK2YGx9ss9cy+A06bbm5vA==", null, false, "da247a56-2606-4565-80a9-87daf9800cbf", false, "https://drive.google.com/file/d/1oq-h_ATob2rQrB7X3Y_hzXflGzMBKWE5/view?usp=share_link", "owner@gmail.com", "https://us05web.zoom.us/j/82148537267?pwd=NjlYUWQzeFF6K1AxZEZRaklxbnF6QT09" },
+                    { "b93130a7-a14b-46d0-b00d-f23536494dd2", 0, "Laguna", 23, "f5b8348d-1b2c-4e41-afe1-752013786f2e", new DateTime(2023, 4, 22, 15, 1, 38, 429, DateTimeKind.Local).AddTicks(8627), "client1@gmail.com", false, false, null, "Client One", "CLIENT1@GMAIL.COM", "CLIENT1@GMAIL.COM", "AQAAAAEAACcQAAAAEJGrrkFPIbQunbkXsZhhbqSGgAmTNE9uksb/0KqzYPViJY9yTUSsWC66zmRuBjiPvA==", null, false, "6aa3aef6-491c-4f64-ab5b-c5c03b8f8383", false, "https://drive.google.com/file/d/1psKFWk2mNDKwzGNAVhGYlH_ChmUF9mif/view?usp=share_link", "client1@gmail.com", null },
+                    { "e1e3dc24-4d24-4468-b2db-017de922c7a6", 0, "Laguna", 23, "f959c19f-2005-4977-8f36-f128a89ce274", new DateTime(2023, 4, 22, 15, 1, 38, 431, DateTimeKind.Local).AddTicks(687), "client2@gmail.com", false, false, null, "Client Two", "CLIENT2@GMAIL.COM", "CLIENT2@GMAIL.COM", "AQAAAAEAACcQAAAAEBY9a7E/zgrbC155GIOQQ2kLyKwfNr9tL8pZsthAkr+S6Ft19lrAzlhDh4UPQCElfw==", null, false, "c41bd907-a5aa-4baa-bf7a-993134941fcd", false, "https://drive.google.com/file/d/1oaJ0CvIKImPmQyRI3DObShIhDukFRQg4/view?usp=share_link", "client2@gmail.com", null },
+                    { "f0fbf9f0-eb17-4c87-9c76-9de5451f74ae", 0, "Laguna", 23, "1f2f931a-f661-4f41-ac63-d230ab8e25c5", new DateTime(2023, 4, 22, 15, 1, 38, 428, DateTimeKind.Local).AddTicks(6392), "admin@gmail.com", false, false, null, "Admin", "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAEAACcQAAAAEL8GONctr6y2LhpV7KwcV+CF0G7rqKfIvjuo5srgi6PlqK0jkG72xQbKK+pkOETO9g==", null, false, "737d0b4b-17eb-4b66-aa3f-bb3dd4cd09e8", false, "https://drive.google.com/file/d/1NDO0x8HSWPp7DJMrhhZlo8J62nTR7N0_/view?usp=share_link", "admin@gmail.com", null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "PropertyCategories",
+                columns: new[] { "Id", "Description", "Name" },
+                values: new object[,]
+                {
+                    { 1, "A House.", "House" },
+                    { 2, "A Condominium.", "Condominium" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "SaleorRentModel",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Sale" },
+                    { 2, "Rent" }
+                });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "fb63abec-98f5-448e-8f56-302fafd16df4", "f0fbf9f0-eb17-4c87-9c76-9de5451f74ae" });
+                values: new object[,]
+                {
+                    { "51d0771e-de96-4882-a01e-8f0b9949e90c", "62550723-3df6-4886-80c0-5ff90804ec07" },
+                    { "5c965850-234a-4d90-9c24-024ebfac6f20", "b93130a7-a14b-46d0-b00d-f23536494dd2" },
+                    { "5c965850-234a-4d90-9c24-024ebfac6f20", "e1e3dc24-4d24-4468-b2db-017de922c7a6" },
+                    { "fb63abec-98f5-448e-8f56-302fafd16df4", "f0fbf9f0-eb17-4c87-9c76-9de5451f74ae" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "EstateProperties",
+                columns: new[] { "Id", "Address", "ApplicationUserId", "Description", "Name", "OwnerName", "Price", "PropertyCategoryId", "SaleOrRentModelId", "UrlImages" },
+                values: new object[,]
+                {
+                    { 1, "GAMU - ROXAS HIGHWAY, DISTRICT II, GAMU", "62550723-3df6-4886-80c0-5ff90804ec07", "Gregoria Model (2-Storey Single Attached)\r\n\r\nUnit Price: Php 3,173,851.00\r\n\r\nNo. of Bedroom: 3\r\n\r\nNo. of Bathroom: 2\r\n\r\nLot Area: 110 sqm\r\n\r\nFloor Area: 72 sqm\r\n\r\n\r\n\r\nHEROES' LANE\r\n\r\nA mix-used horizontal development with a total of 668 units which is eyed to be the 1st EDGE Certified Green Project in Cagayan Valley and North Luzon.\r\n\r\n\r\n\r\nAmenities\r\n\r\nCommunity Function Hall\r\nReligious Chapel\r\nSolar Powered Units and Facilities\r\nBasketball and Tennis Courts\r\nHeroes Park\r\nChildren's Playground\r\nCommercial Lane\r\nGardens and Open Spaces\r\n\r\n\r\nLocation\r\n\r\nGamu - Roxas Highway, District 2, Gamu, Isabela, PH\r\n\r\n\r\n\r\nHLURB LTS No. CR # 021 / LTS # 038 / 039 / 040\r\n\r\nYear Built: 2022\r\n\r\nTurnover Date: 2024 - 2025\r\n\r\nTotal No. of Model Units: 7", "GREGORIA", "Owner", 3173851.0, 1, 1, "https://drive.google.com/file/d/1nDc-AJtVYm59dV8WQNpQQ3CgQ0lczCvC/" },
+                    { 2, "OUANO AVE. COR. F.E. ZUELLIG AVE. SUBANGDAKU, MANDAUE", "62550723-3df6-4886-80c0-5ff90804ec07", "Mantawi Residences proudly calls Ouano Avenue, Mandaue City, Cebu its home, a prime spot where everything you need is within reach. With a multitude of infrastructure and development plans in the pipeline, this location is set to transform into a progressive district where you can reap the benefits of living at the center of everything. Take charge of your future with Mantawi Residences’ units equipped with upgraded smart home devices* so you can easily manage your home life without worry.\r\n\r\n", "Mantawi Residences ", "Owner", 37200000.0, 2, 2, "https://i.pinimg.com/originals/61/2b/ff/612bff8412e03dc3c84ea5aabe743d51.jpg" }
+                });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Appointments_OwnerId",
+                name: "IX_Appointments_ClientsId",
                 table: "Appointments",
-                column: "OwnerId");
+                column: "ClientsId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Appointments_PropertyId",
+                name: "IX_Appointments_EstatePropertyId",
                 table: "Appointments",
-                column: "PropertyId");
+                column: "EstatePropertyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Appointments_OwnerScheduleId",
+                table: "Appointments",
+                column: "OwnerScheduleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Appointments_OwnersId",
+                table: "Appointments",
+                column: "OwnersId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -406,6 +486,11 @@ namespace Real_Estate.Migrations
                 column: "PropertyListViewsId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_OwnerSchedules_OwnerId",
+                table: "OwnerSchedules",
+                column: "OwnerId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_PropertyCategoryPropertyListViewModel_PropertyListViewsId",
                 table: "PropertyCategoryPropertyListViewModel",
                 column: "PropertyListViewsId");
@@ -436,6 +521,9 @@ namespace Real_Estate.Migrations
 
             migrationBuilder.DropTable(
                 name: "PropertyCategoryPropertyListViewModel");
+
+            migrationBuilder.DropTable(
+                name: "OwnerSchedules");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

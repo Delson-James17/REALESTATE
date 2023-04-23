@@ -22,9 +22,9 @@ namespace Real_Estate.Controllers
         // GET: SaleorRentModels
         public async Task<IActionResult> Index()
         {
-              return _context.SaleorRentModel != null ? 
-                          View(await _context.SaleorRentModel.ToListAsync()) :
-                          Problem("Entity set 'RealEDbContext.SaleorRentModel'  is null.");
+            return _context.SaleorRentModel != null ?
+                        View(await _context.SaleorRentModel.ToListAsync()) :
+                        Problem("Entity set 'RealEDbContext.SaleorRentModel'  is null.");
         }
 
         // GET: SaleorRentModels/Details/5
@@ -150,14 +150,14 @@ namespace Real_Estate.Controllers
             {
                 _context.SaleorRentModel.Remove(saleorRentModel);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool SaleorRentModelExists(int id)
         {
-          return (_context.SaleorRentModel?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.SaleorRentModel?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

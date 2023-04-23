@@ -5,7 +5,7 @@ using System.Reflection.Emit;
 
 namespace Real_Estate.Data
 {
-    public class RealEDbContext: IdentityDbContext<ApplicationUser>
+    public class RealEDbContext : IdentityDbContext<ApplicationUser>
     {
         private ILogger _logger { get; }
         private IConfiguration _appConfig { get; }
@@ -37,26 +37,30 @@ namespace Real_Estate.Data
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {
-         /*   builder.Entity<EstateProperty>()
-            .HasOne(p => p.PropertyCategory)
-            .WithMany(c => c.EstateProperties)
-            .HasForeignKey(p => p.PropertyCategoryId);*/
+            /*   builder.Entity<EstateProperty>()
+               .HasOne(p => p.PropertyCategory)
+               .WithMany(c => c.EstateProperties)
+               .HasForeignKey(p => p.PropertyCategoryId);*/
 
             builder.Entity<ApplicationUser>()
                 .HasMany(u => u.Properties)
                 .WithOne(n => n.ApplicationUser)
                 .HasForeignKey(n => n.ApplicationUserId)
                 .HasPrincipalKey(u => u.Id);
-            
+
             builder.RolesSeed();
+            builder.EstatePropertyCategorySeed();
+            builder.SaleOrRentSeed();
             builder.UserSeed();
+            builder.EstatePropertySeed();
             builder.UserRoleSeed();
             base.OnModelCreating(builder);
         }
         public DbSet<PropertyCategory> PropertyCategories { get; set; }
         public DbSet<EstateProperty> EstateProperties { get; set; }
-        public DbSet<Appointment>Appointments { get; set; } 
+        public DbSet<Appointment> Appointments { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<OwnerSchedule> OwnerSchedules { get; set; }
         public DbSet<Real_Estate.Models.SaleorRentModel>? SaleorRentModel { get; set; }
     }
 

@@ -67,21 +67,21 @@ namespace Real_Estate.Migrations
                         new
                         {
                             Id = "fb63abec-98f5-448e-8f56-302fafd16df4",
-                            ConcurrencyStamp = "e1a0ed66-1d54-4a34-a565-a488b5bc8dc7",
+                            ConcurrencyStamp = "65897fc0-0d96-46a9-bf0c-db024ca9a483",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "5c965850-234a-4d90-9c24-024ebfac6f20",
-                            ConcurrencyStamp = "2dc0d888-febf-4624-98aa-828e90657596",
+                            ConcurrencyStamp = "3b83d67c-2ec1-48b3-9ff2-8e764806ce90",
                             Name = "Client",
                             NormalizedName = "CLIENT"
                         },
                         new
                         {
                             Id = "51d0771e-de96-4882-a01e-8f0b9949e90c",
-                            ConcurrencyStamp = "48b6a811-50d2-4b35-9e47-72ebb66dfa24",
+                            ConcurrencyStamp = "0d6f6847-205a-419d-a91d-069ae8f3b30c",
                             Name = "Owner",
                             NormalizedName = "OWNER"
                         });
@@ -178,6 +178,21 @@ namespace Real_Estate.Migrations
                         {
                             UserId = "f0fbf9f0-eb17-4c87-9c76-9de5451f74ae",
                             RoleId = "fb63abec-98f5-448e-8f56-302fafd16df4"
+                        },
+                        new
+                        {
+                            UserId = "b93130a7-a14b-46d0-b00d-f23536494dd2",
+                            RoleId = "5c965850-234a-4d90-9c24-024ebfac6f20"
+                        },
+                        new
+                        {
+                            UserId = "e1e3dc24-4d24-4468-b2db-017de922c7a6",
+                            RoleId = "5c965850-234a-4d90-9c24-024ebfac6f20"
+                        },
+                        new
+                        {
+                            UserId = "62550723-3df6-4886-80c0-5ff90804ec07",
+                            RoleId = "51d0771e-de96-4882-a01e-8f0b9949e90c"
                         });
                 });
 
@@ -307,20 +322,84 @@ namespace Real_Estate.Migrations
                             AccessFailedCount = 0,
                             Address = "Laguna",
                             Age = 23,
-                            ConcurrencyStamp = "227053a7-4a8b-4ec2-83a3-fbcfd598457f",
-                            DOB = new DateTime(2023, 4, 19, 19, 31, 29, 739, DateTimeKind.Local).AddTicks(9251),
+                            ConcurrencyStamp = "1f2f931a-f661-4f41-ac63-d230ab8e25c5",
+                            DOB = new DateTime(2023, 4, 22, 15, 1, 38, 428, DateTimeKind.Local).AddTicks(6392),
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             Name = "Admin",
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBqt5b5snJpeHj3GFQ+ZZ/0HEkjt5ns9xRnAjd+P5CGc4zoC3itOKN+5vLS+S66NGA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEL8GONctr6y2LhpV7KwcV+CF0G7rqKfIvjuo5srgi6PlqK0jkG72xQbKK+pkOETO9g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e50d8ee7-d7d1-418b-9a1b-31ca40476551",
+                            SecurityStamp = "737d0b4b-17eb-4b66-aa3f-bb3dd4cd09e8",
                             TwoFactorEnabled = false,
-                            UrlImages = "https://www.clipartmax.com/png/middle/319-3191274_male-avatar-admin-profile.png",
+                            UrlImages = "https://drive.google.com/file/d/1NDO0x8HSWPp7DJMrhhZlo8J62nTR7N0_/view?usp=share_link",
                             UserName = "admin@gmail.com"
+                        },
+                        new
+                        {
+                            Id = "b93130a7-a14b-46d0-b00d-f23536494dd2",
+                            AccessFailedCount = 0,
+                            Address = "Laguna",
+                            Age = 23,
+                            ConcurrencyStamp = "f5b8348d-1b2c-4e41-afe1-752013786f2e",
+                            DOB = new DateTime(2023, 4, 22, 15, 1, 38, 429, DateTimeKind.Local).AddTicks(8627),
+                            Email = "client1@gmail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            Name = "Client One",
+                            NormalizedEmail = "CLIENT1@GMAIL.COM",
+                            NormalizedUserName = "CLIENT1@GMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJGrrkFPIbQunbkXsZhhbqSGgAmTNE9uksb/0KqzYPViJY9yTUSsWC66zmRuBjiPvA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "6aa3aef6-491c-4f64-ab5b-c5c03b8f8383",
+                            TwoFactorEnabled = false,
+                            UrlImages = "https://drive.google.com/file/d/1psKFWk2mNDKwzGNAVhGYlH_ChmUF9mif/view?usp=share_link",
+                            UserName = "client1@gmail.com"
+                        },
+                        new
+                        {
+                            Id = "e1e3dc24-4d24-4468-b2db-017de922c7a6",
+                            AccessFailedCount = 0,
+                            Address = "Laguna",
+                            Age = 23,
+                            ConcurrencyStamp = "f959c19f-2005-4977-8f36-f128a89ce274",
+                            DOB = new DateTime(2023, 4, 22, 15, 1, 38, 431, DateTimeKind.Local).AddTicks(687),
+                            Email = "client2@gmail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            Name = "Client Two",
+                            NormalizedEmail = "CLIENT2@GMAIL.COM",
+                            NormalizedUserName = "CLIENT2@GMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBY9a7E/zgrbC155GIOQQ2kLyKwfNr9tL8pZsthAkr+S6Ft19lrAzlhDh4UPQCElfw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "c41bd907-a5aa-4baa-bf7a-993134941fcd",
+                            TwoFactorEnabled = false,
+                            UrlImages = "https://drive.google.com/file/d/1oaJ0CvIKImPmQyRI3DObShIhDukFRQg4/view?usp=share_link",
+                            UserName = "client2@gmail.com"
+                        },
+                        new
+                        {
+                            Id = "62550723-3df6-4886-80c0-5ff90804ec07",
+                            AccessFailedCount = 0,
+                            Address = "Laguna",
+                            Age = 23,
+                            ConcurrencyStamp = "33e2ca42-fc35-4a75-9eca-ce564a3283c9",
+                            DOB = new DateTime(2023, 4, 22, 15, 1, 38, 432, DateTimeKind.Local).AddTicks(2955),
+                            Email = "owner@gmail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            Name = "Owner",
+                            NormalizedEmail = "OWNER@GMAIL.COM",
+                            NormalizedUserName = "OWNER@GMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAELQDiuppVO4mXwq0fp4OIN/7BhJJvpcmel9jadKNRpH6OK2YGx9ss9cy+A06bbm5vA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "da247a56-2606-4565-80a9-87daf9800cbf",
+                            TwoFactorEnabled = false,
+                            UrlImages = "https://drive.google.com/file/d/1oq-h_ATob2rQrB7X3Y_hzXflGzMBKWE5/view?usp=share_link",
+                            UserName = "owner@gmail.com",
+                            Zoomlink = "https://us05web.zoom.us/j/82148537267?pwd=NjlYUWQzeFF6K1AxZEZRaklxbnF6QT09"
                         });
                 });
 
@@ -332,38 +411,38 @@ namespace Real_Estate.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Address")
+                    b.Property<string>("ClientId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("DateofAppointment")
-                        .IsRequired()
+                    b.Property<string>("ClientsId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("CreationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("EstatePropertyId")
+                        .HasColumnType("int");
 
                     b.Property<string>("OwnerId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PropertyId")
+                    b.Property<int>("OwnerScheduleId")
                         .HasColumnType("int");
+
+                    b.Property<string>("OwnersId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OwnerId");
+                    b.HasIndex("ClientsId");
 
-                    b.HasIndex("PropertyId");
+                    b.HasIndex("EstatePropertyId");
+
+                    b.HasIndex("OwnerScheduleId");
+
+                    b.HasIndex("OwnersId");
 
                     b.ToTable("Appointments");
                 });
@@ -417,6 +496,60 @@ namespace Real_Estate.Migrations
                     b.HasIndex("SaleOrRentModelId");
 
                     b.ToTable("EstateProperties");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Address = "GAMU - ROXAS HIGHWAY, DISTRICT II, GAMU",
+                            ApplicationUserId = "62550723-3df6-4886-80c0-5ff90804ec07",
+                            Description = "Gregoria Model (2-Storey Single Attached)\r\n\r\nUnit Price: Php 3,173,851.00\r\n\r\nNo. of Bedroom: 3\r\n\r\nNo. of Bathroom: 2\r\n\r\nLot Area: 110 sqm\r\n\r\nFloor Area: 72 sqm\r\n\r\n\r\n\r\nHEROES' LANE\r\n\r\nA mix-used horizontal development with a total of 668 units which is eyed to be the 1st EDGE Certified Green Project in Cagayan Valley and North Luzon.\r\n\r\n\r\n\r\nAmenities\r\n\r\nCommunity Function Hall\r\nReligious Chapel\r\nSolar Powered Units and Facilities\r\nBasketball and Tennis Courts\r\nHeroes Park\r\nChildren's Playground\r\nCommercial Lane\r\nGardens and Open Spaces\r\n\r\n\r\nLocation\r\n\r\nGamu - Roxas Highway, District 2, Gamu, Isabela, PH\r\n\r\n\r\n\r\nHLURB LTS No. CR # 021 / LTS # 038 / 039 / 040\r\n\r\nYear Built: 2022\r\n\r\nTurnover Date: 2024 - 2025\r\n\r\nTotal No. of Model Units: 7",
+                            Name = "GREGORIA",
+                            OwnerName = "Owner",
+                            Price = 3173851.0,
+                            PropertyCategoryId = 1,
+                            SaleOrRentModelId = 1,
+                            UrlImages = "https://drive.google.com/file/d/1nDc-AJtVYm59dV8WQNpQQ3CgQ0lczCvC/"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Address = "OUANO AVE. COR. F.E. ZUELLIG AVE. SUBANGDAKU, MANDAUE",
+                            ApplicationUserId = "62550723-3df6-4886-80c0-5ff90804ec07",
+                            Description = "Mantawi Residences proudly calls Ouano Avenue, Mandaue City, Cebu its home, a prime spot where everything you need is within reach. With a multitude of infrastructure and development plans in the pipeline, this location is set to transform into a progressive district where you can reap the benefits of living at the center of everything. Take charge of your future with Mantawi Residences’ units equipped with upgraded smart home devices* so you can easily manage your home life without worry.\r\n\r\n",
+                            Name = "Mantawi Residences ",
+                            OwnerName = "Owner",
+                            Price = 37200000.0,
+                            PropertyCategoryId = 2,
+                            SaleOrRentModelId = 2,
+                            UrlImages = "https://i.pinimg.com/originals/61/2b/ff/612bff8412e03dc3c84ea5aabe743d51.jpg"
+                        });
+                });
+
+            modelBuilder.Entity("Real_Estate.Models.OwnerSchedule", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("OwnerId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("endTime")
+                        .IsRequired()
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("startTime")
+                        .IsRequired()
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OwnerId");
+
+                    b.ToTable("OwnerSchedules");
                 });
 
             modelBuilder.Entity("Real_Estate.Models.PropertyCategory", b =>
@@ -438,6 +571,20 @@ namespace Real_Estate.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PropertyCategories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "A House.",
+                            Name = "House"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "A Condominium.",
+                            Name = "Condominium"
+                        });
                 });
 
             modelBuilder.Entity("Real_Estate.Models.PropertyListViewModel", b =>
@@ -474,6 +621,18 @@ namespace Real_Estate.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("SaleorRentModel");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Sale"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Rent"
+                        });
                 });
 
             modelBuilder.Entity("EstatePropertyPropertyListViewModel", b =>
@@ -559,19 +718,33 @@ namespace Real_Estate.Migrations
 
             modelBuilder.Entity("Real_Estate.Models.Appointment", b =>
                 {
-                    b.HasOne("Real_Estate.Models.ApplicationUser", "Owner")
-                        .WithMany("Appointments")
-                        .HasForeignKey("OwnerId")
+                    b.HasOne("Real_Estate.Models.ApplicationUser", "Clients")
+                        .WithMany()
+                        .HasForeignKey("ClientsId");
+
+                    b.HasOne("Real_Estate.Models.EstateProperty", "EstateProperty")
+                        .WithMany()
+                        .HasForeignKey("EstatePropertyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Real_Estate.Models.EstateProperty", "Property")
-                        .WithMany("Appointments")
-                        .HasForeignKey("PropertyId");
+                    b.HasOne("Real_Estate.Models.OwnerSchedule", "OwnerSchedules")
+                        .WithMany()
+                        .HasForeignKey("OwnerScheduleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Owner");
+                    b.HasOne("Real_Estate.Models.ApplicationUser", "Owners")
+                        .WithMany()
+                        .HasForeignKey("OwnersId");
 
-                    b.Navigation("Property");
+                    b.Navigation("Clients");
+
+                    b.Navigation("EstateProperty");
+
+                    b.Navigation("OwnerSchedules");
+
+                    b.Navigation("Owners");
                 });
 
             modelBuilder.Entity("Real_Estate.Models.EstateProperty", b =>
@@ -597,16 +770,20 @@ namespace Real_Estate.Migrations
                     b.Navigation("SaleOrRentModel");
                 });
 
-            modelBuilder.Entity("Real_Estate.Models.ApplicationUser", b =>
+            modelBuilder.Entity("Real_Estate.Models.OwnerSchedule", b =>
                 {
-                    b.Navigation("Appointments");
+                    b.HasOne("Real_Estate.Models.ApplicationUser", "Owner")
+                        .WithMany("OwnerScedules")
+                        .HasForeignKey("OwnerId");
 
-                    b.Navigation("Properties");
+                    b.Navigation("Owner");
                 });
 
-            modelBuilder.Entity("Real_Estate.Models.EstateProperty", b =>
+            modelBuilder.Entity("Real_Estate.Models.ApplicationUser", b =>
                 {
-                    b.Navigation("Appointments");
+                    b.Navigation("OwnerScedules");
+
+                    b.Navigation("Properties");
                 });
 
             modelBuilder.Entity("Real_Estate.Models.PropertyCategory", b =>

@@ -22,9 +22,9 @@ namespace Real_Estate.Controllers
         // GET: PropertyCategories
         public async Task<IActionResult> Index()
         {
-              return _context.PropertyCategories != null ? 
-                          View(await _context.PropertyCategories.ToListAsync()) :
-                          Problem("Entity set 'RealEDbContext.PropertyCategories'  is null.");
+            return _context.PropertyCategories != null ?
+                        View(await _context.PropertyCategories.ToListAsync()) :
+                        Problem("Entity set 'RealEDbContext.PropertyCategories'  is null.");
         }
 
         // GET: PropertyCategories/Details/5
@@ -150,14 +150,14 @@ namespace Real_Estate.Controllers
             {
                 _context.PropertyCategories.Remove(propertyCategory);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool PropertyCategoryExists(int id)
         {
-          return (_context.PropertyCategories?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.PropertyCategories?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

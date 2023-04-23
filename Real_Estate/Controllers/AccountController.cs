@@ -19,7 +19,7 @@ namespace Real_Estate.Controllers
 
         RealEDbContext _context;
 
-       
+
         public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RoleManager<IdentityRole> roleManager, RealEDbContext context)
         {
             _userManager = userManager;
@@ -42,6 +42,11 @@ namespace Real_Estate.Controllers
             List<ApplicationUser> user = (List<ApplicationUser>)await _userManager.GetUsersInRoleAsync("Owner");
             return View(user);
         }
+        public async Task<IActionResult> ListOfClients()
+        {
+            List<ApplicationUser> user = (List<ApplicationUser>)await _userManager.GetUsersInRoleAsync("Client");
+            return View(user);
+        }
 
         [HttpGet]
         public async Task<IActionResult> Register()
@@ -56,7 +61,7 @@ namespace Real_Estate.Controllers
             {
                 roles.Remove(role!);
             }
-                
+
             ViewBag.Roles = roles;
             return View();
         }
@@ -80,7 +85,7 @@ namespace Real_Estate.Controllers
                         UrlImages = userViewModel.UrlImages,
                         UserName = userViewModel.Email,
                         Email = userViewModel.Email,
-           
+
                     };
                     var result = await _userManager.CreateAsync(userModel, userViewModel.Password);
                     if (result.Succeeded)
@@ -108,13 +113,13 @@ namespace Real_Estate.Controllers
                 }
                 return View(userViewModel);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return View();
             }
-           
+
         }
-        
+
         [HttpGet]
         public IActionResult Login()
         {
@@ -192,6 +197,6 @@ namespace Real_Estate.Controllers
 
     }
 }
-        
-  
-        
+
+
+
