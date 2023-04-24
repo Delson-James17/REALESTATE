@@ -1,22 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
 
 namespace RealEstate.API.DTO
 {
     public class AppointmentDto
     {
-        [Key]
-        [Required]
-        public string Id { get; set; }
-        public string Name { get; set; }
-        public string? Email { get; set; }
-        public string? Phone { get; set; }
-        public string? Address { get; set; }
-
-        /*
-        public int? PropertyId { get; set; }
-        public EstateProperty? Property { get; set; }*/
-        [DataType(DataType.DateTime)]
-        [Required]
-        public DateTime? DateofAppointment { get; set; }
+        public int Id { get; set; }
+        public string ClientId { get; set; }
+        public string OwnerId { get; set; }
+        public int OwnerScheduleId { get; set; }
+        public int EstatePropertyId { get; set; }
+        //authit trail
+        public DateTime? CreationDate { get; set; } = DateTime.Now;
     }
 }

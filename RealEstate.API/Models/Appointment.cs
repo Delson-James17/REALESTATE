@@ -1,36 +1,24 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace RealEstate.API.Models
 {
     public class Appointment
     {
-        [Key]
-        [Required]
-        public string Id { get; set; }
-        public string Name { get; set; }
-        public string? Email {get; set; }
-        public string? Phone { get; set; }
-        public string? Address { get; set; }
-      
-        /*
-        public int? PropertyId { get; set; }
-        public EstateProperty? Property { get; set; }*/
-       [DataType(DataType.DateTime)]
-        [Required]
-        public DateTime? DateofAppointment { get; set; }
-        public Appointment()
-        {
+        public int Id { get; set; }
+        public string ClientId { get; set; }
+        [ValidateNever]
+        public ApplicationUser? Clients { get; set; }
+        public string OwnerId { get; set; }
+        [ValidateNever]
+        public ApplicationUser? Owners { get; set; }
+        public int OwnerScheduleId { get; set; }
+        [ValidateNever]
+        public OwnerSchedule? OwnerSchedules { get; set; }
+        public int EstatePropertyId { get; set; }
 
-        }
-        public Appointment(string id, string name, string? email, string? phone, string? address, DateTime? dateofAppointment)
-        {
-            Id = id;
-            Name = name;
-            Email = email;
-            Phone = phone;
-            Address = address;
-            DateofAppointment = dateofAppointment;
-        }
+        [ValidateNever]
+        public EstateProperty? EstateProperty { get; set; }
+        //authit trail
+        public DateTime? CreationDate { get; set; } = DateTime.Now;
     }
 }

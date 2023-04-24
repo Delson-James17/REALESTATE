@@ -7,7 +7,7 @@ namespace RealEstate.API.Repository
     {
         Task<List<Appointment>> GetAllAppointment();
 
-        Task<Appointment?> GetAppointmentById(string Id);
+        Task<Appointment?> GetAppointmentById(int Id);
 
         Appointment AddAppointment(Appointment newappointment);
 

@@ -15,7 +15,7 @@ namespace RealEstate.API.Repository.Database
         public Appointment AddAppointment(Appointment newappointment)
         {
             _dbContext.AddAsync(newappointment);
-             _dbContext.SaveChangesAsync();
+            _dbContext.SaveChangesAsync();
 
             return newappointment;
         }
@@ -32,12 +32,12 @@ namespace RealEstate.API.Repository.Database
             return this._dbContext.SaveChangesAsync();
         }
 
-        public  Task<List<Appointment>> GetAllAppointment()
+        public Task<List<Appointment>> GetAllAppointment()
         {
-            return this. _dbContext.Appointments.ToListAsync();
+            return this._dbContext.Appointments.ToListAsync();
         }
 
-        public Task<Appointment> GetAppointmentById(string Id)
+        public Task<Appointment> GetAppointmentById(int Id)
         {
             var getappointment = this._dbContext.Appointments
                      .FirstOrDefaultAsync(m => m.Id == Id);

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using RealEstate.API.DTO;
 using RealEstate.API.Models;
 using RealEstate.API.Repository;
@@ -9,11 +10,12 @@ namespace RealEstate.API.Controllers
     [ApiController]
     public class EstatePropertiesController : ControllerBase
     {
-  
+        private readonly IUserRepository _userRepository;
         private readonly IPropertyRepository _propertyRepository;
-        public EstatePropertiesController(IPropertyRepository propertyRepository)
+        public EstatePropertiesController(IPropertyRepository propertyRepository, IUserRepository userRepository)
         {
             _propertyRepository = propertyRepository;
+            _userRepository = userRepository;
         }
         
 
@@ -37,21 +39,25 @@ namespace RealEstate.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateEstateProperty(EstatePropertyDto dto)
+        public async Task<IActionResult> CreateEstateProperty([FromBody] EstatePropertyDto dto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
+            var getcurrentUser = await _userRepository.GetCurrentUser();
             var newProperty = new EstateProperty
             {
                 Name = dto.Name,
                 Description = dto.Description,
                 Address = dto.Address,
                 UrlImages = dto.UrlImages,
-                PriceifRent = dto.PriceifRent,
-                PriceifSale = dto.PriceifSale
+                Price = dto.Price,
+                OwnerName = dto.OwnerName,
+                SaleOrRentModelId = dto.SaleOrRentModelId,
+                PropertyCategoryId = dto.PropertyCategoryId,
+                ApplicationUserId = getcurrentUser.Id
+                
             };
 
             var property = await _propertyRepository.AddProperty(newProperty);
@@ -96,8 +102,10 @@ namespace RealEstate.API.Controllers
                 Description = dto.Description,
                 Address = dto.Address,
                 UrlImages = dto.UrlImages,
-                PriceifRent = dto.PriceifRent,
-                PriceifSale = dto.PriceifSale
+                Price = dto.Price,
+                OwnerName = dto.OwnerName,
+                SaleOrRentModelId = dto.SaleOrRentModelId,
+                PropertyCategoryId = dto.PropertyCategoryId
             };
 
             var propertyToReturn = _propertyRepository.UpdateProperty(id, updatedProperty);

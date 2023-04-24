@@ -39,6 +39,7 @@ namespace RealEstate.API.Data
             base.OnModelCreating(builder);
         }
         public DbSet<EstateProperty> EstateProperties { get; set; }
+        public DbSet<OwnerSchedule> OwnerSchedules { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
     }

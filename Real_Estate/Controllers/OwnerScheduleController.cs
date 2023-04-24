@@ -59,15 +59,13 @@ namespace Real_Estate.Controllers
                 .Where(s => s.OwnerId == ownerId)
                 .ToList();
             sched.OwnerId = ownerId;
-          /*  if (ownerSchedules.Any(s => s.dayOfWeek == sched.dayOfWeek))
-            {
-                ModelState.AddModelError("dayOfWeek", "There is already a schedule for this day.");
-                return View(sched);
-            }*/
 
             if (sched.startTime.HasValue && sched.endTime.HasValue && sched.startTime.Value >= sched.endTime.Value)
             {
                 ModelState.AddModelError("startTime", "Start time must be before the end time.");
+            }
+            if (!ModelState.IsValid)
+            {
                 return View(sched);
             }
 

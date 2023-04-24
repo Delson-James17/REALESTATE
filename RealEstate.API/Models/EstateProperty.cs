@@ -1,5 +1,7 @@
-﻿
+﻿using RealEstate.API.Models;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RealEstate.API.Models
 {
@@ -7,26 +9,32 @@ namespace RealEstate.API.Models
     {
         [Key]
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public string Address { get; set; }
-        public string UrlImages { get; set; }
-        public Double PriceifSale { get; set; }
-        public Double PriceifRent { get; set; }
+        [DisplayName("Full Name")]
 
-        public EstateProperty()
-        {
-            
-        }
-        public EstateProperty(int id, string name, string description, string address, string urlImages, double priceifSale, double priceifRent)
-        {
-            Id = id;
-            Name = name;
-            Description = description;
-            Address = address;
-            UrlImages = urlImages;
-            PriceifSale = priceifSale;
-            PriceifRent = priceifRent;
-        }
+        public string Name { get; set; }
+        [DisplayName("Description")]
+
+        public string Description { get; set; }
+        [DisplayName("Address")]
+
+        public string Address { get; set; }
+        [DisplayName("Property Image")]
+
+        public string UrlImages { get; set; }
+        public int? SaleOrRentModelId { get; set; }
+        public SaleorRentModel? SaleOrRentModel { get; set; }
+        [DisplayName("Price")]
+
+        public Double Price { get; set; }
+        [DisplayName("Owner")]
+        public string? OwnerName { get; set; }
+        public List<PropertyListViewModel>? PropertyListViews { get; set; }
+        [DisplayName("Select Category")]
+
+        public int? PropertyCategoryId { get; set; }
+        public PropertyCategory? PropertyCategory { get; set; }
+        //relationships
+        public string ApplicationUserId { get; set; }
+        public ApplicationUser? ApplicationUser { get; set; }
     }
 }

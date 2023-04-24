@@ -12,8 +12,8 @@ using Real_Estate.Data;
 namespace Real_Estate.Migrations
 {
     [DbContext(typeof(RealEDbContext))]
-    [Migration("20230422070138_initialmigration")]
-    partial class initialmigration
+    [Migration("20230424064620_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -69,21 +69,21 @@ namespace Real_Estate.Migrations
                         new
                         {
                             Id = "fb63abec-98f5-448e-8f56-302fafd16df4",
-                            ConcurrencyStamp = "65897fc0-0d96-46a9-bf0c-db024ca9a483",
+                            ConcurrencyStamp = "337a6f8c-4aa4-413a-b8a7-7ea2bf180a01",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "5c965850-234a-4d90-9c24-024ebfac6f20",
-                            ConcurrencyStamp = "3b83d67c-2ec1-48b3-9ff2-8e764806ce90",
+                            ConcurrencyStamp = "dd2e4960-b8de-442f-8d86-fe56c53062a0",
                             Name = "Client",
                             NormalizedName = "CLIENT"
                         },
                         new
                         {
                             Id = "51d0771e-de96-4882-a01e-8f0b9949e90c",
-                            ConcurrencyStamp = "0d6f6847-205a-419d-a91d-069ae8f3b30c",
+                            ConcurrencyStamp = "3ece8711-c74c-4609-b868-6bcd4bff56ee",
                             Name = "Owner",
                             NormalizedName = "OWNER"
                         });
@@ -324,19 +324,19 @@ namespace Real_Estate.Migrations
                             AccessFailedCount = 0,
                             Address = "Laguna",
                             Age = 23,
-                            ConcurrencyStamp = "1f2f931a-f661-4f41-ac63-d230ab8e25c5",
-                            DOB = new DateTime(2023, 4, 22, 15, 1, 38, 428, DateTimeKind.Local).AddTicks(6392),
+                            ConcurrencyStamp = "89a2a415-bafc-4244-be05-df79570fb8d4",
+                            DOB = new DateTime(2023, 4, 24, 14, 46, 20, 471, DateTimeKind.Local).AddTicks(6653),
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             Name = "Admin",
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEL8GONctr6y2LhpV7KwcV+CF0G7rqKfIvjuo5srgi6PlqK0jkG72xQbKK+pkOETO9g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEB5sD3zxFx2DbTLeB9QLcgxJKv5VFJHt1EiTX8S1xZduJVvCOIDFKLnTKj1RsH4/3g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "737d0b4b-17eb-4b66-aa3f-bb3dd4cd09e8",
+                            SecurityStamp = "ecfb9ec7-74cc-467f-98d0-c582852e3bba",
                             TwoFactorEnabled = false,
-                            UrlImages = "https://drive.google.com/file/d/1NDO0x8HSWPp7DJMrhhZlo8J62nTR7N0_/view?usp=share_link",
+                            UrlImages = "https://live.staticflickr.com/65535/52837724066_4d882431b9_w.jpg",
                             UserName = "admin@gmail.com"
                         },
                         new
@@ -345,19 +345,19 @@ namespace Real_Estate.Migrations
                             AccessFailedCount = 0,
                             Address = "Laguna",
                             Age = 23,
-                            ConcurrencyStamp = "f5b8348d-1b2c-4e41-afe1-752013786f2e",
-                            DOB = new DateTime(2023, 4, 22, 15, 1, 38, 429, DateTimeKind.Local).AddTicks(8627),
+                            ConcurrencyStamp = "02d1f533-357d-43a4-88ea-b4ac75996d7d",
+                            DOB = new DateTime(2023, 4, 24, 14, 46, 20, 472, DateTimeKind.Local).AddTicks(8890),
                             Email = "client1@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             Name = "Client One",
                             NormalizedEmail = "CLIENT1@GMAIL.COM",
                             NormalizedUserName = "CLIENT1@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJGrrkFPIbQunbkXsZhhbqSGgAmTNE9uksb/0KqzYPViJY9yTUSsWC66zmRuBjiPvA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJ2N3jTtudUAGv61x2FydETigCz3aV3CGUtJygzAbgGUcHyy5UL0VhGg/bwQWbs6rQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "6aa3aef6-491c-4f64-ab5b-c5c03b8f8383",
+                            SecurityStamp = "747e9152-6f8b-4399-9261-834e7d9c5938",
                             TwoFactorEnabled = false,
-                            UrlImages = "https://drive.google.com/file/d/1psKFWk2mNDKwzGNAVhGYlH_ChmUF9mif/view?usp=share_link",
+                            UrlImages = "https://live.staticflickr.com/65535/52837907994_47a8b89ac4_n.jpg",
                             UserName = "client1@gmail.com"
                         },
                         new
@@ -366,19 +366,19 @@ namespace Real_Estate.Migrations
                             AccessFailedCount = 0,
                             Address = "Laguna",
                             Age = 23,
-                            ConcurrencyStamp = "f959c19f-2005-4977-8f36-f128a89ce274",
-                            DOB = new DateTime(2023, 4, 22, 15, 1, 38, 431, DateTimeKind.Local).AddTicks(687),
+                            ConcurrencyStamp = "1c6b7e5b-c76e-4e4c-b22f-d12898c55c0b",
+                            DOB = new DateTime(2023, 4, 24, 14, 46, 20, 474, DateTimeKind.Local).AddTicks(836),
                             Email = "client2@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             Name = "Client Two",
                             NormalizedEmail = "CLIENT2@GMAIL.COM",
                             NormalizedUserName = "CLIENT2@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBY9a7E/zgrbC155GIOQQ2kLyKwfNr9tL8pZsthAkr+S6Ft19lrAzlhDh4UPQCElfw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMqKgJ/PcaVBPxw5ce0qtiY35wH4r2DCW3fCyIZkn0+z8yWGp3GJxqfEcvbLJTogfw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c41bd907-a5aa-4baa-bf7a-993134941fcd",
+                            SecurityStamp = "1d62b15e-5fe1-4ed0-a40a-cf282b26b625",
                             TwoFactorEnabled = false,
-                            UrlImages = "https://drive.google.com/file/d/1oaJ0CvIKImPmQyRI3DObShIhDukFRQg4/view?usp=share_link",
+                            UrlImages = "https://live.staticflickr.com/65535/52837908254_3c81ba99c7_n.jpg",
                             UserName = "client2@gmail.com"
                         },
                         new
@@ -387,19 +387,19 @@ namespace Real_Estate.Migrations
                             AccessFailedCount = 0,
                             Address = "Laguna",
                             Age = 23,
-                            ConcurrencyStamp = "33e2ca42-fc35-4a75-9eca-ce564a3283c9",
-                            DOB = new DateTime(2023, 4, 22, 15, 1, 38, 432, DateTimeKind.Local).AddTicks(2955),
+                            ConcurrencyStamp = "cc09212a-80b4-4eef-832e-e372a42cd09f",
+                            DOB = new DateTime(2023, 4, 24, 14, 46, 20, 475, DateTimeKind.Local).AddTicks(2742),
                             Email = "owner@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             Name = "Owner",
                             NormalizedEmail = "OWNER@GMAIL.COM",
                             NormalizedUserName = "OWNER@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAELQDiuppVO4mXwq0fp4OIN/7BhJJvpcmel9jadKNRpH6OK2YGx9ss9cy+A06bbm5vA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECsOF13P61ACh7mSQ6JjPhjOOmRTeuQYUHKV5+OPkiEdl2VPJkS6VKeAZdG7RCxwOA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "da247a56-2606-4565-80a9-87daf9800cbf",
+                            SecurityStamp = "5e37edd3-9844-4aee-b196-10b21ff9da77",
                             TwoFactorEnabled = false,
-                            UrlImages = "https://drive.google.com/file/d/1oq-h_ATob2rQrB7X3Y_hzXflGzMBKWE5/view?usp=share_link",
+                            UrlImages = "https://live.staticflickr.com/65535/52837723986_d9afeb97e0_w.jpg",
                             UserName = "owner@gmail.com",
                             Zoomlink = "https://us05web.zoom.us/j/82148537267?pwd=NjlYUWQzeFF6K1AxZEZRaklxbnF6QT09"
                         });
@@ -511,7 +511,7 @@ namespace Real_Estate.Migrations
                             Price = 3173851.0,
                             PropertyCategoryId = 1,
                             SaleOrRentModelId = 1,
-                            UrlImages = "https://drive.google.com/file/d/1nDc-AJtVYm59dV8WQNpQQ3CgQ0lczCvC/"
+                            UrlImages = "https://live.staticflickr.com/65535/52838168898_681cda2416_z.jpg"
                         },
                         new
                         {
@@ -524,7 +524,7 @@ namespace Real_Estate.Migrations
                             Price = 37200000.0,
                             PropertyCategoryId = 2,
                             SaleOrRentModelId = 2,
-                            UrlImages = "https://i.pinimg.com/originals/61/2b/ff/612bff8412e03dc3c84ea5aabe743d51.jpg"
+                            UrlImages = "https://live.staticflickr.com/65535/52837908104_bac2f52f97_z.jpg"
                         });
                 });
 

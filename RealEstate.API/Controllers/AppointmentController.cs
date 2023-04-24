@@ -1,8 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using RealEstate.API.Data;
 using RealEstate.API.DTO;
 using RealEstate.API.Models;
 using RealEstate.API.Repository;
+using System.Security.Claims;
 
 namespace RealEstate.API.Controllers
 {
@@ -11,6 +15,7 @@ namespace RealEstate.API.Controllers
     public class AppointmentController : ControllerBase
     {
         private readonly IAppointmentRepository _appointmentRepository;
+        private readonly RealEDbContext _context;
 
         public AppointmentController(IAppointmentRepository appointmentRepository)
         {
@@ -23,8 +28,9 @@ namespace RealEstate.API.Controllers
             return Ok(await _appointmentRepository.GetAllAppointment());
         }
         [HttpGet("{id}")]
-        public async Task<ActionResult> GetAppointmentById(string id)
+        public async Task<ActionResult> GetAppointmentById( int id)
         {
+        
             var appointment = await _appointmentRepository.GetAppointmentById(id);
             if (appointment == null)
             {
@@ -33,26 +39,27 @@ namespace RealEstate.API.Controllers
             return Ok(appointment);
         }
         [HttpPost]
-        public  IActionResult CreateAppointment(AppointmentDto dto)
+        public IActionResult CreateAppointment(AppointmentDto dto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+            string clientId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            ApplicationUser? client = _context.ApplicationUsers.Find(clientId);
             var newAppointment = new Appointment
             {
                 Id = dto.Id,
-                Name = dto.Name,
-                Email = dto.Email,
-                Phone = dto.Phone,
-                Address = dto.Address,
-                DateofAppointment = dto.DateofAppointment
+                ClientId = dto.ClientId,
+                OwnerId = dto.OwnerId,
+                OwnerScheduleId = dto.OwnerScheduleId,
+                EstatePropertyId = dto.EstatePropertyId
             };
-            var appointment =  _appointmentRepository.AddAppointment(newAppointment);
+            var appointment = _appointmentRepository.AddAppointment(newAppointment);
             return Ok(appointment);
         }
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteProperty(string id)
+        public async Task<ActionResult> DeleteProperty(int id)
         {
             var appointment = await _appointmentRepository.GetAppointmentById(id);
 
@@ -67,7 +74,7 @@ namespace RealEstate.API.Controllers
         }
 
         [HttpPost("{id}")]
-        public IActionResult EditEstateProperty(string id, AppointmentDto dto)
+        public IActionResult EditEstateProperty(int id, AppointmentDto dto)
         {
             var appointment = _appointmentRepository.GetAppointmentById(id);
 
@@ -83,13 +90,12 @@ namespace RealEstate.API.Controllers
             var newAppointment = new Appointment
             {
                 Id = dto.Id,
-                Name = dto.Name,
-                Email = dto.Email,
-                Phone = dto.Phone,
-                Address = dto.Address,
-                DateofAppointment = dto.DateofAppointment
+                ClientId = dto.ClientId,
+                OwnerId = dto.OwnerId,
+                OwnerScheduleId = dto.OwnerScheduleId,
+                EstatePropertyId = dto.EstatePropertyId
             };
-            var appointmentToReturn =  _appointmentRepository.AddAppointment(newAppointment);
+            var appointmentToReturn = _appointmentRepository.AddAppointment(newAppointment);
             return Ok(appointmentToReturn);
 
         }

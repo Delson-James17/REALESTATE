@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Common;
 using Real_Estate.Data;
 using Real_Estate.Models;
 using Real_Estate.ViewModels;
@@ -27,12 +28,22 @@ namespace Real_Estate.Controllers
 
             // Find user in db using its id
             ApplicationUser? client = await _context.ApplicationUsers.FindAsync(clientId);
-
-            var appointment = await _context.Appointments
-                .Where(a => a.OwnerId == client.Id)
+            var userRoles = await _userManager.GetRolesAsync(client);
+            var appointmentQuery = _context.Appointments
                 .Include(ep => ep.EstateProperty)
                 .Include(os => os.OwnerSchedules)
-                .Join(_userManager.Users, a => a.ClientId, u => u.Id, (a, u) => new { a, u })
+                .AsQueryable();
+
+            if (userRoles.First() == "Owner")
+            {
+                appointmentQuery = appointmentQuery.Where(u => u.OwnerId == client.Id);
+            }
+            else
+            {
+                appointmentQuery = appointmentQuery.Where(u => u.ClientId == client.Id);
+            }
+
+            appointmentQuery = appointmentQuery.Join(_userManager.Users, a => a.ClientId, u => u.Id, (a, u) => new { a, u })
                 .Select(ap => new Appointment
                 {
                     Id = ap.a.Id,
@@ -40,38 +51,10 @@ namespace Real_Estate.Controllers
                     Clients = ap.u,
                     EstateProperty = ap.a.EstateProperty,
                     EstatePropertyId = ap.a.EstatePropertyId,
-                })
-                .ToListAsync();
+                });
 
-            return View(appointment);
-        }
-        [HttpPost]
-        public async Task<IActionResult> Delete(int id)
-        {
-            var appointment = await _context.Appointments.FindAsync(id);
-
-            if (appointment != null)
-            {
-                _context.Remove(appointment);
-                await _context.SaveChangesAsync();
-            }
-
-            return RedirectToAction(nameof(Index));
-        }
-        [HttpPost]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var appointment = await _context.Appointments.FindAsync(id);
-
-            if (appointment == null)
-            {
-                return NotFound();
-            }
-
-            _context.Appointments.Remove(appointment);
-            await _context.SaveChangesAsync();
-
-            return RedirectToAction(nameof(Index));
+            var appointmentList = await appointmentQuery.ToListAsync();   
+            return View(appointmentList);
         }
 
 

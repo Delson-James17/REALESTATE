@@ -20,8 +20,10 @@ builder.Services.AddDbContext<RealEDbContext>();
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<RealEDbContext>();
 builder.Services.AddScoped<IAccountRepository, AccountDbRepository>();
+builder.Services.AddScoped<IAppointmentRepository ,AppointmentDbRepository>();
 builder.Services.AddScoped<IPropertyRepository, PropertyDBRepository>();
-builder.Services.AddScoped<IAppointmentRepository,AppointmentDbRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddHttpContextAccessor();
 // configure the token decoding logic verify the token 
 // algorithm to decode the token
 var issuer = builder.Configuration["JWT:Issuer"];

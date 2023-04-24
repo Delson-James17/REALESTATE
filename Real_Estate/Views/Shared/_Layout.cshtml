@@ -38,7 +38,7 @@
                 }
                     
                     <li>
-                    @if (_signInManager.IsSignedIn(User) && User.IsInRole("Owner") || User.IsInRole("Client"))
+                    @if (_signInManager.IsSignedIn(User) && User.IsInRole("Owner"))
                             {
                         <a class="nav-link" style="color: #F4A424;" asp-area="" asp-controller="" asp-action="">Appointment </a>
                             }
@@ -47,7 +47,7 @@
                             @if (_signInManager.IsSignedIn(User) && User.IsInRole("Owner"))
                             {
                             <li> <a class="nav-link" style="color: #F4A424;" asp-area="" asp-controller="OwnerSchedule" asp-action="AddSchedule">Create Your Schedule</a></li>
-                            <li> <a class="nav-link" style="color: #F4A424;" asp-area="" asp-controller="OwnerSchedule" asp-action="OwnerScheduleList">Create Your Schedule</a></li>
+                            <li> <a class="nav-link" style="color: #F4A424;" asp-area="" asp-controller="OwnerSchedule" asp-action="OwnerScheduleList">Your Schedule</a></li>
                             <li> <a class="nav-link" style="color: #F4A424;" asp-area="" asp-controller="Appointment" asp-action="Index">Your Appointments</a></li>
                               }
                         </ul>
