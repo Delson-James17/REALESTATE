@@ -1,4 +1,10 @@
 @using Microsoft.AspNetCore.Identity;
+@using System.Security.Claims;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+@{
+    var user = HttpContextAccessor.HttpContext?.User;
+}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -38,18 +44,23 @@
                 }
                     
                     <li>
-                    @if (_signInManager.IsSignedIn(User) && User.IsInRole("Owner"))
-                            {
+                    @if (_signInManager.IsSignedIn(User) && User.IsInRole("Owner") || User.IsInRole("Client"))
+                    {
                         <a class="nav-link" style="color: #F4A424;" asp-area="" asp-controller="" asp-action="">Appointment </a>
-                            }
-                        <ul>
+                    }
+                    <ul>
                         
                             @if (_signInManager.IsSignedIn(User) && User.IsInRole("Owner"))
                             {
                             <li> <a class="nav-link" style="color: #F4A424;" asp-area="" asp-controller="OwnerSchedule" asp-action="AddSchedule">Create Your Schedule</a></li>
                             <li> <a class="nav-link" style="color: #F4A424;" asp-area="" asp-controller="OwnerSchedule" asp-action="OwnerScheduleList">Your Schedule</a></li>
-                            <li> <a class="nav-link" style="color: #F4A424;" asp-area="" asp-controller="Appointment" asp-action="Index">Your Appointments</a></li>
+                            
                               }
+                        @if (_signInManager.IsSignedIn(User) && User.IsInRole("Owner") || User.IsInRole("Client"))
+                        {
+                            <li> <a class="nav-link" style="color: #F4A424;" asp-area="" asp-controller="Appointment" asp-action="Index">Your Appointments</a></li>
+                        }
+                        
                         </ul>
                     </li>
               
@@ -59,12 +70,17 @@
                     <ul>
                         @if (_signInManager.IsSignedIn(User))
                         {
-                            <li class="nav-item">
-                                <a class="nav-link" style="color: #F4A424;" asp-area="" asp-controller="Account" asp-action="Profile">@User.Identity.Name</a>
-                            </li>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" style="color: #F4A424;" asp-area="" asp-controller="Account" asp-action="Profile">@user.FindFirst(ClaimTypes.Name)?.Value</a>
+                                </li>
+                            }
+                          
                             <li class="nav-item">
                                 <a class="nav-link" style="color: #F4A424;" asp-area="" asp-controller="Account" asp-action="LogOut">Log Out</a>
                             </li>
+
                         }
                         else
                         {

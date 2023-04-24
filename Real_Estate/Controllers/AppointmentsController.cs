@@ -22,6 +22,7 @@ namespace Real_Estate.Controllers
             _userManager = userManager;
             _context = context;
         }
+
         public async Task<IActionResult> Index()
         {
             string clientId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -132,7 +133,7 @@ namespace Real_Estate.Controllers
 
             await this._context.SaveChangesAsync();
 
-            return RedirectToAction("Index");
+            return RedirectToAction("AppointmentComplete");
         }
 
 

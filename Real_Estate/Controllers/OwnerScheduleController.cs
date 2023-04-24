@@ -25,6 +25,10 @@ namespace Real_Estate.Controllers
             _roleManager = roleManager;
             _dbContext = dbContext;
         }
+        public IActionResult AppointmentComplete()
+        {
+            return View();
+        }
         public IActionResult OwnerScheduleList()
         {
             if (User.IsInRole("Owner"))
@@ -71,7 +75,7 @@ namespace Real_Estate.Controllers
 
             _dbContext.OwnerSchedules.Add(sched);
             _dbContext.SaveChanges();
-            return RedirectToAction(nameof(AddSchedule));
+            return RedirectToAction(nameof(AppointmentComplete));
         }
         [HttpGet]
         public IActionResult UpdateSchedule(int id)

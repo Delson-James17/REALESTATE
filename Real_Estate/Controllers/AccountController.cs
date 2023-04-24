@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -8,6 +10,8 @@ using Real_Estate.Data;
 using Real_Estate.Models;
 using Real_Estate.ViewModels;
 using System.Collections.Generic;
+using System.Security.Claims;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Real_Estate.Controllers
 {
@@ -130,17 +134,61 @@ namespace Real_Estate.Controllers
         {
             if (ModelState.IsValid)
             {
-                // login activity -> cookie [Roles and Claims]
+                // Validate user's credentials and retrieve their full name
+                var fullName = await ValidateAndGetFullNameAsync(userViewModel.Email, userViewModel.Password);
+
+                // Authenticate user with provided credentials
                 var result = await _signInManager.PasswordSignInAsync(userViewModel.Email, userViewModel.Password, userViewModel.RememberMe, false);
-                //login cookie and transfter to the client 
+
                 if (result.Succeeded)
                 {
+                    // Redirect to the "Properties" action method of the "Properties" controller
                     return RedirectToAction("Properties", "Properties");
                 }
-                ModelState.AddModelError(string.Empty, "invalid login credentials");
+
+                // Authentication failed, add error message to ModelState
+                ModelState.AddModelError(string.Empty, "Invalid login credentials");
+
+                // Create a new ClaimsIdentity object with the authentication type and the full name claim
+                var identity = new ClaimsIdentity(
+                    new[]
+                    {
+                new Claim(ClaimTypes.Name, fullName),
+                new Claim(ClaimTypes.Role, "user")
+                    },
+                    CookieAuthenticationDefaults.AuthenticationScheme);
+
+                // Sign in the user with the new identity
+                await HttpContext.SignInAsync(
+                    CookieAuthenticationDefaults.AuthenticationScheme,
+                    new ClaimsPrincipal(identity),
+                    new AuthenticationProperties
+                    {
+                        IsPersistent = userViewModel.RememberMe
+                    });
             }
+
+            // Model state is invalid or authentication failed, return the LoginUserViewModel object to the view
             return View(userViewModel);
         }
+        private async Task<string> ValidateAndGetFullNameAsync(string email, string password)
+        {
+            var user = await _context.Users.SingleOrDefaultAsync(u => u.Email == email);
+
+            if (user != null)
+            {
+                var passwordValid = await _userManager.CheckPasswordAsync(user, password);
+
+                if (passwordValid)
+                {
+                    return $"{user.Name}";
+                }
+            }
+
+            return null;
+        }
+
+
         [HttpGet]
         public IActionResult ChangePassword()
         {
