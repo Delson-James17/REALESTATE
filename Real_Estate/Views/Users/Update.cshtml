@@ -19,9 +19,8 @@
 
 </head>
 
-    <div class="row">
-        <div class="col-md-4">
-            <form class="forms" asp-controller="Users" asp-action="Update" method="post">
+<div class="form-container">
+            <form asp-controller="Users" asp-action="Update" method="post">
                 <h1 class="whiteText" style="text-align:center;">Edit User</h1>
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="Id" />
@@ -71,6 +70,5 @@
                 </div>
 
             </form>
-        </div>
     </div>
 

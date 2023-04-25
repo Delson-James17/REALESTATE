@@ -5,10 +5,18 @@
 @{
     ViewData["Title"] = "Update Schedule";
 }
-<h2 class="text-center mb-4 text-white">@ViewData["Title"]</h2>
+<head>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+
+</head>
+
+
+@*<h2 class="text-center mb-4 text-white">@ViewData["Title"]</h2>*@
+<h1 class="whiteText" style="text-align: center;">Update Schedule</h1>
 <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionBasic">
-    <div class="accordion-body">
-        <div class="container-fluid">
+ <div class="form-container">
             <form asp-action="UpdateSchedule" method="post" asp-controller="OwnerSchedule">
                 <div class="row">
                     <div class="col-md-12">
@@ -27,26 +35,26 @@
                             <input type="text" asp-for="dayOfWeek" hidden class="form-control" />*@
                         </div>
                         <div class="form-group">
-                            <label asp-for="startTime" class="control-label">Select a start time</label>
+                            <label asp-for="startTime" class="form-label">Select a start time</label>
                             <input type="time" asp-for="startTime" class="form-control" />
-                            <span asp-validation-for="startTime" class="text-danger"></span>
+                            <span asp-validation-for="startTime" class="text-validation"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="endTime" class="control-label">Select end time</label>
+                        <label asp-for="endTime" class="form-label">Select end time</label>
                             <input type="time" asp-for="endTime" class="form-control" />
-                            <span asp-validation-for="endTime" class="text-danger"></span>
+                            <span asp-validation-for="endTime" class="text-validation"></span>
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary" />
-                </div>
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <button type="submit" value="Create">Save</button>
+                <a asp-action="OwnerScheduleList" class="whiteText" style="text-align: center;">Back to List</a>
+
+            </div>
             </form>
 
-            <div>
-                <a asp-action="OwnerScheduleList">Back to List</a>
-            </div>
+</div>
+</div>
 
 
-        </div>
-    </div>
+

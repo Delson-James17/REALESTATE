@@ -29,6 +29,12 @@ namespace Real_Estate.Controllers
         {
             return View();
         }
+
+        public IActionResult UpdateScheduleComplete()
+        {
+            return View();
+        }
+
         public IActionResult OwnerScheduleList()
         {
             if (User.IsInRole("Owner"))
@@ -103,7 +109,8 @@ namespace Real_Estate.Controllers
 
             _dbContext.SaveChanges();
 
-            return RedirectToAction(nameof(OwnerScheduleList));
+           // return RedirectToAction(nameof(OwnerScheduleList));
+            return RedirectToAction("UpdateScheduleComplete", "OwnerSchedule");
         }
         public IActionResult DeleteSchedule(int id)
         {

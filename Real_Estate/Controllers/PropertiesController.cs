@@ -25,6 +25,17 @@ namespace Real_Estate.Controllers
             _context = context;
         }
 
+        public IActionResult CreatePropertyComplete()
+        {
+            return View();
+        }
+
+        public IActionResult EditPropertyComplete()
+        {
+            return View();
+        }
+
+
         // GET: Properties
         [Authorize(Roles = "Admin, Owner")]
         public async Task<IActionResult> Index(string SearchString)
@@ -192,6 +203,7 @@ namespace Real_Estate.Controllers
                     await _context.SaveChangesAsync();
 
                     return RedirectToAction(nameof(Index));
+                    
                 }
             }
             ViewData["SaleOrRentModelId"] = new SelectList(_context.SaleorRentModel, "Id", "Name", property.SaleOrRentModelId);
@@ -243,7 +255,8 @@ namespace Real_Estate.Controllers
                     // Save
                     await _context.SaveChangesAsync();
 
-                    return RedirectToAction(nameof(Properties));
+                    //return RedirectToAction(nameof(Properties));
+                    return RedirectToAction("CreatePropertyComplete", "Properties");
                 }
             }
             ViewData["SaleOrRentModelId"] = new SelectList(_context.SaleorRentModel, "Id", "Name", property.SaleOrRentModelId);
@@ -317,8 +330,9 @@ namespace Real_Estate.Controllers
                 // Save the changes to the database
                 await _context.SaveChangesAsync();
 
-                return RedirectToAction(nameof(Index));
+                //return RedirectToAction(nameof(Index));
                 //return RedirectToAction("UpdatedSuccessfully", "Properties");
+                return RedirectToAction("EditPropertyComplete", "Properties");
             }
             ViewData["SaleOrRentModelId"] = new SelectList(_context.SaleorRentModel, "Id", "Name", property.SaleOrRentModelId);
             ViewData["PropertyCategoryId"] = new SelectList(_context.PropertyCategories, "Id", "Name", property.PropertyCategoryId);
