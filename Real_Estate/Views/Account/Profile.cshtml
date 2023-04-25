@@ -111,9 +111,13 @@
                         </div>*@
                     </div>
                     <div class="cols d-flex justify-content-around"> 
+                        <div style="width: 30%;">
                         <button class="detailsButton"><a class="details-button-text" asp-controller="Users" asp-action="Update" asp-route-userId="@Model.Id" style="text-decoration: none;">Edit</a></button>
+                        </div>
+                        <div style=" width: 30%;">
                         <button class="detailsButton"><a class="details-button-text" asp-controller="Account" asp-action="ChangePassword"  style="text-decoration: none;">Change Password</a></button>
-                     </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
