@@ -36,11 +36,11 @@
         left: 0%;
     }
 </style>
-<body>
+@*<body>*@
 @*    <div class="banner"></div>*@
     <div class="propertyHeader">
         <div class="container-property-header">
-            <img class="propertyImage" src="/lib/img/propertyImage.png">
+            <img class="propertyImage" src="/lib/img/propertyImageYellow.png">
             <h1 class="centered">Find a place you can call Home</h1>
         </div>
     </div>
@@ -58,9 +58,9 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group1" style="display:flex;align-items: flex-end; ">
-                <input type="text" class="form-control" name="SearchString" value="@ViewData["CurrentFilter"]" />
-                <button type="submit" style="padding:10px; margin-left:10px;"><i class="fa fa-search"></i></button>
+            <div class="form-group" style="display:flex;align-items: flex-end; ">
+        <input type="text" id="form3Example4cg" class="form-control form-control-lg" name="SearchString" value="@ViewData["CurrentFilter"]" />
+                <button class="search-button" type="submit" style="padding:10px; margin-left:10px;"><i class="fa fa-search"></i></button>
             </div>
         </form>
    
@@ -78,9 +78,10 @@
                                     </figure>
                                     </div>
                                     <div class="article-body">
-                                        <h2>@Html.DisplayFor(modelItem => item.Name)</h2>
+                                        <h3>@Html.DisplayFor(modelItem => item.Name)</h3>
                                         <p>
                                             Address: @Html.DisplayFor(modelItem => item.Address)
+
                                         </p>
                                         <p>
                                         @{
@@ -148,4 +149,4 @@
             </div>
         </div>
 </div>
-</body>
+@*</body>*@
