@@ -61,7 +61,6 @@
                         <table class="table table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    <th>Role ID</th>
                                     <th>Name</th>
                                     <th>Action</th>
                                 </tr>
@@ -70,9 +69,6 @@
                                 @foreach (var role in Model)
                                 {
                                     <tr>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => role.Id)
-                                        </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => role.Name)
                                         </td>

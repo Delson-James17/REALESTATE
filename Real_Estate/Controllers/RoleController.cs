@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Real_Estate.ViewModels;
+using System.Data;
 
 namespace Real_Estate.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class RoleController : Controller
     {
         public RoleManager<IdentityRole> _roleManager { get; }

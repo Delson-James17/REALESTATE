@@ -123,7 +123,6 @@ namespace Real_Estate.Controllers
             }
 
         }
-
         [HttpGet]
         public IActionResult Login()
         {
@@ -134,43 +133,18 @@ namespace Real_Estate.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Validate user's credentials and retrieve their full name
-                var fullName = await ValidateAndGetFullNameAsync(userViewModel.Email, userViewModel.Password);
-
-                // Authenticate user with provided credentials
+                // login activity -> cookie [Roles and Claims]
                 var result = await _signInManager.PasswordSignInAsync(userViewModel.Email, userViewModel.Password, userViewModel.RememberMe, false);
-
+                //login cookie and transfter to the client 
                 if (result.Succeeded)
                 {
-                    // Redirect to the "Properties" action method of the "Properties" controller
                     return RedirectToAction("Properties", "Properties");
                 }
-
-                // Authentication failed, add error message to ModelState
-                ModelState.AddModelError(string.Empty, "Invalid login credentials");
-
-                // Create a new ClaimsIdentity object with the authentication type and the full name claim
-                var identity = new ClaimsIdentity(
-                    new[]
-                    {
-                new Claim(ClaimTypes.Name, fullName),
-                new Claim(ClaimTypes.Role, "user")
-                    },
-                    CookieAuthenticationDefaults.AuthenticationScheme);
-
-                // Sign in the user with the new identity
-                await HttpContext.SignInAsync(
-                    CookieAuthenticationDefaults.AuthenticationScheme,
-                    new ClaimsPrincipal(identity),
-                    new AuthenticationProperties
-                    {
-                        IsPersistent = userViewModel.RememberMe
-                    });
+                ModelState.AddModelError(string.Empty, "invalid login credentials");
             }
-
-            // Model state is invalid or authentication failed, return the LoginUserViewModel object to the view
             return View(userViewModel);
         }
+
         private async Task<string> ValidateAndGetFullNameAsync(string email, string password)
         {
             var user = await _context.Users.SingleOrDefaultAsync(u => u.Email == email);

@@ -73,7 +73,7 @@
                             @if (User.Identity.IsAuthenticated)
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link" style="color: #F4A424;" asp-area="" asp-controller="Account" asp-action="Profile">@user.FindFirst(ClaimTypes.Name)?.Value</a>
+                                    <a class="nav-link" style="color: #F4A424;" asp-area="" asp-controller="Account" asp-action="Profile">My Profile</a>
                                 </li>
                             }
                           

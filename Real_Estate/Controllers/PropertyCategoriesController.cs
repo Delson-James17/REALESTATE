@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +12,7 @@ using Real_Estate.Models;
 
 namespace Real_Estate.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class PropertyCategoriesController : Controller
     {
         private readonly RealEDbContext _context;
@@ -26,7 +29,7 @@ namespace Real_Estate.Controllers
                         View(await _context.PropertyCategories.ToListAsync()) :
                         Problem("Entity set 'RealEDbContext.PropertyCategories'  is null.");
         }
-
+        [Authorize(Roles = "Admin")]
         // GET: PropertyCategories/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -44,7 +47,7 @@ namespace Real_Estate.Controllers
 
             return View(propertyCategory);
         }
-
+        [Authorize(Roles = "Admin")]
         // GET: PropertyCategories/Create
         public IActionResult Create()
         {
@@ -66,7 +69,7 @@ namespace Real_Estate.Controllers
             }
             return View(propertyCategory);
         }
-
+        [Authorize(Roles = "Admin")]
         // GET: PropertyCategories/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -117,7 +120,7 @@ namespace Real_Estate.Controllers
             }
             return View(propertyCategory);
         }
-
+        [Authorize(Roles = "Admin")]
         // GET: PropertyCategories/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {

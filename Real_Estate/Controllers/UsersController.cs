@@ -1,13 +1,16 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Real_Estate.Data;
 using Real_Estate.Models;
 using Real_Estate.ViewModels;
+using System.Data;
 using System.Security.Claims;
 
 namespace Real_Estate.Controllers
 {
+    
     public class UsersController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -23,7 +26,7 @@ namespace Real_Estate.Controllers
         {
             return View();
         }
-
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAllUsers()
         {
             var users = await _userManager.Users.ToListAsync();

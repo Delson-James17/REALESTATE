@@ -50,6 +50,7 @@
                                 <th>Client Name</th>
                                 <th>Property Name</th>
                                 <th>Schedule</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -65,10 +66,14 @@
                                     <td>
                                         @Html.DisplayFor(modelItem => item.OwnerSchedules.startTime)
                                         @Html.DisplayFor(modelItem => item.OwnerSchedules.endTime)
+
                                     </td>
-                                    <a class="btn btn-danger" asp-controller="Appointment" title="DeleteSchedule" asp-action="Delete" asp-route-Id="@item.Id">
-                                        <i class="fas fa-user-times"></i>
-                                    </a>
+                                    <td>
+                                        <a class="btn btn-danger" asp-controller="Appointment" title="DeleteSchedule" asp-action="Delete" asp-route-Id="@item.Id">
+                                            <i class="fas fa-user-times"></i>
+                                        </a>
+
+                                    </td>
                                 </tr>
                             }
                         </tbody>

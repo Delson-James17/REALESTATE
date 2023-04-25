@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -22,6 +23,10 @@ namespace Real_Estate.Controllers
             _userManager = userManager;
             _context = context;
         }
+        public IActionResult DeleteConfirmation()
+        {
+            return View();
+        }
 
         public async Task<IActionResult> Index()
         {
@@ -39,7 +44,7 @@ namespace Real_Estate.Controllers
             {
                 appointmentQuery = appointmentQuery.Where(u => u.OwnerId == client.Id);
             }
-            else
+           else 
             {
                 appointmentQuery = appointmentQuery.Where(u => u.ClientId == client.Id);
             }
@@ -93,21 +98,6 @@ namespace Real_Estate.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateAppointment(CreateAppointmentViewModel appointment)
         {
-            //if (ModelState.IsValid)
-            //{
-            //    _context.Appointments.Add(appointment);
-            //    _context.SaveChanges();
-            //    return RedirectToAction(nameof(Index));
-            //}
-            //// Retrieve data for dropdown lists
-            //var clients = _userManager.GetUsersInRoleAsync("Client").Result.Select(u => new { u.Id, u.UserName });
-            //var owners = _userManager.GetUsersInRoleAsync("Owner").Result.Select(u => new { u.Id, u.UserName });
-            //ViewBag.ClientId = new SelectList(clients, "Id", "UserName", appointment.ClientId);
-            //ViewBag.OwnerId = new SelectList(owners, "Id", "UserName", appointment.OwnerId);
-            //ViewBag.OwnerScheduleId = new SelectList(_context.OwnerSchedules, "Id", "Name", appointment.OwnerScheduleId);
-            //ViewBag.PropertyId = new SelectList(_context.EstateProperties, "Id", "Name", appointment.PropertyId);
-
-            //return View(appointment);
 
             if (!ModelState.IsValid)
             {
@@ -133,7 +123,7 @@ namespace Real_Estate.Controllers
 
             await this._context.SaveChangesAsync();
 
-            return RedirectToAction("AppointmentComplete");
+            return RedirectToAction("Index");
         }
 
 
@@ -210,5 +200,42 @@ namespace Real_Estate.Controllers
             }
             return View(appointment);
         }
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            Appointment appointment = _context.Appointments.Find(id);
+
+            if (appointment == null)
+            {
+                return NotFound();
+            }
+
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (appointment.ClientId != userId && appointment.OwnerId != userId)
+            {
+                return Forbid();
+            }
+
+            return View(appointment);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            Appointment appointment = await _context.Appointments.FindAsync(id);
+
+            if (appointment == null)
+            {
+                return NotFound();
+            }
+
+            _context.Appointments.Remove(appointment);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index");
+        }
+
+
     }
 }

@@ -24,6 +24,7 @@ namespace Real_Estate.Controllers
             var model = new RowCountViewModel
             {
                 PropertyCount = _context.EstateProperties.Count(),
+                AppointmentCount = _context.Appointments.Count(),
                 UserCount = _context.ApplicationUsers.Count()
             };
             List<EstateProperty> properties = await _context.EstateProperties.ToListAsync();
