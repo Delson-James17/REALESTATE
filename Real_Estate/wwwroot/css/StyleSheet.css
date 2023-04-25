@@ -2,7 +2,9 @@
     position: relative;
     min-height: 100%;
 }
-
+body {
+    background-color: #363642;
+}
 .container-property-header {
     position: relative;
     text-align: center;
