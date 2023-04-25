@@ -252,6 +252,7 @@ namespace Real_Estate.Controllers
         }
         [Authorize(Roles = "Admin, Owner")]
         // GET: Properties/Edit/5
+        [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.EstateProperties == null)
@@ -314,6 +315,8 @@ namespace Real_Estate.Controllers
                 estateProperty.SaleOrRentModelId = property.SaleOrRentModelId;
                 estateProperty.OwnerName = property.OwnerName;
                 estateProperty.PropertyCategoryId = property.PropertyCategoryId;
+
+                _context.EstateProperties.Update(estateProperty);
                 // Save the changes to the database
                 await _context.SaveChangesAsync();
 
