@@ -23,6 +23,7 @@ builder.Services.AddScoped<IAccountRepository, AccountDbRepository>();
 builder.Services.AddScoped<IAppointmentRepository ,AppointmentDbRepository>();
 builder.Services.AddScoped<IPropertyRepository, PropertyDBRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IPropertyCategoryRepository, PropertyCategoryDbRepository>();
 builder.Services.AddHttpContextAccessor();
 // configure the token decoding logic verify the token 
 // algorithm to decode the token
