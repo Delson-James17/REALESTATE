@@ -41,6 +41,7 @@ namespace RealEstate.API.Data
         public DbSet<EstateProperty> EstateProperties { get; set; }
         public DbSet<OwnerSchedule> OwnerSchedules { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
+        public DbSet<PropertyCategory> PropertyCategories { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
     }
 

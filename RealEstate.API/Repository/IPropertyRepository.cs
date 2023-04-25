@@ -4,6 +4,7 @@ namespace RealEstate.API.Repository
 {
     public interface IPropertyRepository
     {
+
         Task<List<EstateProperty>> GetAllProperty();
 
         Task<EstateProperty?> GetPropertyById(int Id);
