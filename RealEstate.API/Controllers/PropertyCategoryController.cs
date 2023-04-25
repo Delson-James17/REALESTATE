@@ -64,7 +64,7 @@ namespace RealEstate.API.Controllers
                 return NotFound();
             }
 
-            await _propertyCategoryRepository.GetPropertyCategoryById(property.Id);
+            await _propertyCategoryRepository.DeletePropertyCategory(property.Id);
 
             return Ok(property);
         }

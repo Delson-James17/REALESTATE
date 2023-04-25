@@ -32,16 +32,48 @@ namespace RealEstate.API.Controllers
             _signInManager = signInManager;
             _roleManager = roleManager;
         }
-        [HttpPost("signup")]
-
-        public async Task<IActionResult> Register(RegisterUserDto registerUserDto)
+        [HttpPost("Register")]
+        public async Task<IActionResult> Register([FromBody] RegisterUserDto registerUserDTO)
         {
-            var user = _mapper.Map<ApplicationUser>(registerUserDto);
+            if (ModelState.IsValid)
+            {
+                ApplicationUser user = new ApplicationUser
+                {
+                    Name = registerUserDTO.Name,
+                    Address = registerUserDTO.Address,
+                    Age = registerUserDTO.Age,
+                    UserName = registerUserDTO.Email,
+                    PhoneNumber= registerUserDTO.PhoneNumber,
+                    DOB = registerUserDTO.DOB,
+                    UrlImages = registerUserDTO.UrlImages,
+                    Email = registerUserDTO.Email,
+                    
+                };
 
-            var val = await _repo.SignUpUserAsync(user, registerUserDto.Password);
-            return Ok();
+                var registerResult = await this._userManager.CreateAsync(user, registerUserDTO.Password);
+
+                if (registerResult.Succeeded)
+                {
+                    bool roleExist = await this._roleManager.RoleExistsAsync(UserRole.Owner);
+
+                    if (!roleExist)
+                    {
+                        await this._roleManager.CreateAsync(new IdentityRole(UserRole.Owner));
+                    }
+
+                    var roleResult = await this._userManager.AddToRoleAsync(user, UserRole.Owner);
+
+                    if (!roleResult.Succeeded)
+                    {
+                        ModelState.AddModelError(String.Empty, "User Role cannot be assigned.");
+                    }
+
+                    return Ok("User successfully registered");
+                }
+            }
+
+            return BadRequest(ModelState);
         }
-
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginUserDto loginUserDTO)
         {

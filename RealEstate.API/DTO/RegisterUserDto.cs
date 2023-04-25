@@ -32,5 +32,7 @@ namespace RealEstate.API.DTO
         [Display(Name = "Confirm Password")]
         [Compare("Password", ErrorMessage = "Password and confirm password doesnt match")]
         public string ConfirmPassword { get; set; }
+        public Guid RoleViewModelID { get; set; }
+       
     }
 }

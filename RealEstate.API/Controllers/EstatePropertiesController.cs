@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using RealEstate.API.DTO;
 using RealEstate.API.Models;
@@ -20,6 +21,7 @@ namespace RealEstate.API.Controllers
         
 
         [HttpGet]
+        [Authorize ]
         public async Task<IActionResult> GetAllEstateProperties()
         {
            return Ok(await _propertyRepository.GetAllProperty());
@@ -81,7 +83,7 @@ namespace RealEstate.API.Controllers
             return Ok(property);
         }
 
-        [HttpPost("{id}")]
+        /*[HttpPost("{id}")]
         public IActionResult EditEstateProperty(int id, EstatePropertyDto dto)
         {
             var property =  _propertyRepository.GetPropertyById(id);
@@ -111,7 +113,7 @@ namespace RealEstate.API.Controllers
             var propertyToReturn = _propertyRepository.UpdateProperty(id, updatedProperty);
 
             return Ok(propertyToReturn);
-        }
+        }*/
 
     }
 }
