@@ -38,7 +38,7 @@ namespace RealEstate.API.Controllers
             }
             return Ok(appointment);
         }
-        [HttpPost]
+       /* [HttpPost]
         public IActionResult CreateAppointment(AppointmentDto dto)
         {
             if (!ModelState.IsValid)
@@ -57,7 +57,7 @@ namespace RealEstate.API.Controllers
             };
             var appointment = _appointmentRepository.AddAppointment(newAppointment);
             return Ok(appointment);
-        }
+        }*/
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteProperty(int id)
         {
@@ -68,12 +68,12 @@ namespace RealEstate.API.Controllers
                 return NotFound();
             }
 
-            await _appointmentRepository.GetAppointmentById(appointment.Id);
+            await _appointmentRepository.DeleteAppointment(appointment.Id);
 
             return Ok(appointment);
         }
 
-        [HttpPost("{id}")]
+      /*  [HttpPost("{id}")]
         public IActionResult EditEstateProperty(int id, AppointmentDto dto)
         {
             var appointment = _appointmentRepository.GetAppointmentById(id);
@@ -98,7 +98,7 @@ namespace RealEstate.API.Controllers
             var appointmentToReturn = _appointmentRepository.AddAppointment(newAppointment);
             return Ok(appointmentToReturn);
 
-        }
+        }*/
     }
 
 }
