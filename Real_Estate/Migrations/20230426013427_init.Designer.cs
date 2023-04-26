@@ -12,7 +12,7 @@ using Real_Estate.Data;
 namespace Real_Estate.Migrations
 {
     [DbContext(typeof(RealEDbContext))]
-    [Migration("20230424064620_init")]
+    [Migration("20230426013427_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -69,21 +69,21 @@ namespace Real_Estate.Migrations
                         new
                         {
                             Id = "fb63abec-98f5-448e-8f56-302fafd16df4",
-                            ConcurrencyStamp = "337a6f8c-4aa4-413a-b8a7-7ea2bf180a01",
+                            ConcurrencyStamp = "b203fd09-f457-45f2-ac72-cb75c30548f8",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "5c965850-234a-4d90-9c24-024ebfac6f20",
-                            ConcurrencyStamp = "dd2e4960-b8de-442f-8d86-fe56c53062a0",
+                            ConcurrencyStamp = "0f202727-4eb2-44cb-8eeb-2d88b86dadc8",
                             Name = "Client",
                             NormalizedName = "CLIENT"
                         },
                         new
                         {
                             Id = "51d0771e-de96-4882-a01e-8f0b9949e90c",
-                            ConcurrencyStamp = "3ece8711-c74c-4609-b868-6bcd4bff56ee",
+                            ConcurrencyStamp = "edf2f904-3381-4aef-944a-cde28fa37bec",
                             Name = "Owner",
                             NormalizedName = "OWNER"
                         });
@@ -194,6 +194,11 @@ namespace Real_Estate.Migrations
                         new
                         {
                             UserId = "62550723-3df6-4886-80c0-5ff90804ec07",
+                            RoleId = "51d0771e-de96-4882-a01e-8f0b9949e90c"
+                        },
+                        new
+                        {
+                            UserId = "72550723-3df6-4886-80c0-5ff90804ec07",
                             RoleId = "51d0771e-de96-4882-a01e-8f0b9949e90c"
                         });
                 });
@@ -324,17 +329,17 @@ namespace Real_Estate.Migrations
                             AccessFailedCount = 0,
                             Address = "Laguna",
                             Age = 23,
-                            ConcurrencyStamp = "89a2a415-bafc-4244-be05-df79570fb8d4",
-                            DOB = new DateTime(2023, 4, 24, 14, 46, 20, 471, DateTimeKind.Local).AddTicks(6653),
+                            ConcurrencyStamp = "0b5f8696-ebb5-4e7a-8bfd-2ac590b73dd2",
+                            DOB = new DateTime(2023, 4, 26, 9, 34, 27, 327, DateTimeKind.Local).AddTicks(3779),
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             Name = "Admin",
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEB5sD3zxFx2DbTLeB9QLcgxJKv5VFJHt1EiTX8S1xZduJVvCOIDFKLnTKj1RsH4/3g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKNRE5Rb5YwVzXVDpME2OPgmj9LXkkpdFeAgIjRTFRRakqTgHeLK6Mwgx4b7ggNANQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ecfb9ec7-74cc-467f-98d0-c582852e3bba",
+                            SecurityStamp = "29fe31f6-3dda-46ed-8e22-3436329bc98f",
                             TwoFactorEnabled = false,
                             UrlImages = "https://live.staticflickr.com/65535/52837724066_4d882431b9_w.jpg",
                             UserName = "admin@gmail.com"
@@ -345,17 +350,17 @@ namespace Real_Estate.Migrations
                             AccessFailedCount = 0,
                             Address = "Laguna",
                             Age = 23,
-                            ConcurrencyStamp = "02d1f533-357d-43a4-88ea-b4ac75996d7d",
-                            DOB = new DateTime(2023, 4, 24, 14, 46, 20, 472, DateTimeKind.Local).AddTicks(8890),
+                            ConcurrencyStamp = "0a0e570d-8a6d-48ee-a028-32fe5596764a",
+                            DOB = new DateTime(2023, 4, 26, 9, 34, 27, 329, DateTimeKind.Local).AddTicks(3860),
                             Email = "client1@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             Name = "Client One",
                             NormalizedEmail = "CLIENT1@GMAIL.COM",
                             NormalizedUserName = "CLIENT1@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJ2N3jTtudUAGv61x2FydETigCz3aV3CGUtJygzAbgGUcHyy5UL0VhGg/bwQWbs6rQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEE5THkDj0uzR4nhZVkde234vXitRfbgIOcc/B0Q0WAjYo996syB+ReHV72kv9oNjDg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "747e9152-6f8b-4399-9261-834e7d9c5938",
+                            SecurityStamp = "ab6a0114-0ab5-451d-9cdb-aa62d71361fe",
                             TwoFactorEnabled = false,
                             UrlImages = "https://live.staticflickr.com/65535/52837907994_47a8b89ac4_n.jpg",
                             UserName = "client1@gmail.com"
@@ -366,17 +371,17 @@ namespace Real_Estate.Migrations
                             AccessFailedCount = 0,
                             Address = "Laguna",
                             Age = 23,
-                            ConcurrencyStamp = "1c6b7e5b-c76e-4e4c-b22f-d12898c55c0b",
-                            DOB = new DateTime(2023, 4, 24, 14, 46, 20, 474, DateTimeKind.Local).AddTicks(836),
+                            ConcurrencyStamp = "503a2dea-5954-4930-922c-69f2de23251e",
+                            DOB = new DateTime(2023, 4, 26, 9, 34, 27, 331, DateTimeKind.Local).AddTicks(3377),
                             Email = "client2@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             Name = "Client Two",
                             NormalizedEmail = "CLIENT2@GMAIL.COM",
                             NormalizedUserName = "CLIENT2@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMqKgJ/PcaVBPxw5ce0qtiY35wH4r2DCW3fCyIZkn0+z8yWGp3GJxqfEcvbLJTogfw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGxPYnpYzX8u95GHRT6WpQ6XsUv8eFy0j3QThqOwMX3Hpz81zQMt/8b0vz02XSVpyA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1d62b15e-5fe1-4ed0-a40a-cf282b26b625",
+                            SecurityStamp = "d5bed309-79c2-45de-9af2-1c5c18a4113f",
                             TwoFactorEnabled = false,
                             UrlImages = "https://live.staticflickr.com/65535/52837908254_3c81ba99c7_n.jpg",
                             UserName = "client2@gmail.com"
@@ -387,21 +392,43 @@ namespace Real_Estate.Migrations
                             AccessFailedCount = 0,
                             Address = "Laguna",
                             Age = 23,
-                            ConcurrencyStamp = "cc09212a-80b4-4eef-832e-e372a42cd09f",
-                            DOB = new DateTime(2023, 4, 24, 14, 46, 20, 475, DateTimeKind.Local).AddTicks(2742),
-                            Email = "owner@gmail.com",
+                            ConcurrencyStamp = "f3553ae8-7e8a-4096-82c0-dbb395f1eee7",
+                            DOB = new DateTime(2023, 4, 26, 9, 34, 27, 333, DateTimeKind.Local).AddTicks(2734),
+                            Email = "owne1r@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            Name = "Owner",
-                            NormalizedEmail = "OWNER@GMAIL.COM",
-                            NormalizedUserName = "OWNER@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAECsOF13P61ACh7mSQ6JjPhjOOmRTeuQYUHKV5+OPkiEdl2VPJkS6VKeAZdG7RCxwOA==",
+                            Name = "Owner one",
+                            NormalizedEmail = "OWNER1@GMAIL.COM",
+                            NormalizedUserName = "OWNER1@GMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMW5NoSw80PQgNyZNIoGpPtDoNmOGSPWQtf0c3/Cg/OW6dUxHfOzQw4qZoImrQPdPw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5e37edd3-9844-4aee-b196-10b21ff9da77",
+                            SecurityStamp = "01a24a4a-d262-4918-bb2a-04ffceb88ed6",
                             TwoFactorEnabled = false,
                             UrlImages = "https://live.staticflickr.com/65535/52837723986_d9afeb97e0_w.jpg",
-                            UserName = "owner@gmail.com",
+                            UserName = "owner1@gmail.com",
                             Zoomlink = "https://us05web.zoom.us/j/82148537267?pwd=NjlYUWQzeFF6K1AxZEZRaklxbnF6QT09"
+                        },
+                        new
+                        {
+                            Id = "72550723-3df6-4886-80c0-5ff90804ec07",
+                            AccessFailedCount = 0,
+                            Address = "Laguna",
+                            Age = 23,
+                            ConcurrencyStamp = "a8ccb6ef-cba5-4bf8-965c-193c487165d0",
+                            DOB = new DateTime(2023, 4, 26, 9, 34, 27, 335, DateTimeKind.Local).AddTicks(2381),
+                            Email = "owner2@gmail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            Name = "Owner two",
+                            NormalizedEmail = "OWNER2@GMAIL.COM",
+                            NormalizedUserName = "OWNER2@GMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAENAVBkd8H5SQY0qcls3cKBj7mSxzfIRU49jKC16Aomthvn2sIRRx2nnJNWk2h65pDQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "8186badd-a826-4d94-8929-305775a915cb",
+                            TwoFactorEnabled = false,
+                            UrlImages = "https://live.staticflickr.com/65535/52837723986_d9afeb97e0_w.jpg",
+                            UserName = "owner2@gmail.com",
+                            Zoomlink = "https://live.staticflickr.com/65535/52837152367_3f166e4330_n.jpg"
                         });
                 });
 
@@ -507,7 +534,7 @@ namespace Real_Estate.Migrations
                             ApplicationUserId = "62550723-3df6-4886-80c0-5ff90804ec07",
                             Description = "Gregoria Model (2-Storey Single Attached)\r\n\r\nUnit Price: Php 3,173,851.00\r\n\r\nNo. of Bedroom: 3\r\n\r\nNo. of Bathroom: 2\r\n\r\nLot Area: 110 sqm\r\n\r\nFloor Area: 72 sqm\r\n\r\n\r\n\r\nHEROES' LANE\r\n\r\nA mix-used horizontal development with a total of 668 units which is eyed to be the 1st EDGE Certified Green Project in Cagayan Valley and North Luzon.\r\n\r\n\r\n\r\nAmenities\r\n\r\nCommunity Function Hall\r\nReligious Chapel\r\nSolar Powered Units and Facilities\r\nBasketball and Tennis Courts\r\nHeroes Park\r\nChildren's Playground\r\nCommercial Lane\r\nGardens and Open Spaces\r\n\r\n\r\nLocation\r\n\r\nGamu - Roxas Highway, District 2, Gamu, Isabela, PH\r\n\r\n\r\n\r\nHLURB LTS No. CR # 021 / LTS # 038 / 039 / 040\r\n\r\nYear Built: 2022\r\n\r\nTurnover Date: 2024 - 2025\r\n\r\nTotal No. of Model Units: 7",
                             Name = "GREGORIA",
-                            OwnerName = "Owner",
+                            OwnerName = "Owner One",
                             Price = 3173851.0,
                             PropertyCategoryId = 1,
                             SaleOrRentModelId = 1,
@@ -520,11 +547,63 @@ namespace Real_Estate.Migrations
                             ApplicationUserId = "62550723-3df6-4886-80c0-5ff90804ec07",
                             Description = "Mantawi Residences proudly calls Ouano Avenue, Mandaue City, Cebu its home, a prime spot where everything you need is within reach. With a multitude of infrastructure and development plans in the pipeline, this location is set to transform into a progressive district where you can reap the benefits of living at the center of everything. Take charge of your future with Mantawi Residences’ units equipped with upgraded smart home devices* so you can easily manage your home life without worry.\r\n\r\n",
                             Name = "Mantawi Residences ",
-                            OwnerName = "Owner",
+                            OwnerName = "Owner One",
                             Price = 37200000.0,
                             PropertyCategoryId = 2,
                             SaleOrRentModelId = 2,
-                            UrlImages = "https://live.staticflickr.com/65535/52837908104_bac2f52f97_z.jpg"
+                            UrlImages = "https://live.staticflickr.com/65535/52846569259_000336d9bd.jpg"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Address = "OUANO AVE. COR. F.E. ZUELLIG AVE. SUBANGDAKU, MANDAUE",
+                            ApplicationUserId = "62550723-3df6-4886-80c0-5ff90804ec07",
+                            Description = "Mantawi Residences proudly calls Ouano Avenue, Mandaue City, Cebu its home, a prime spot where everything you need is within reach. With a multitude of infrastructure and development plans in the pipeline, this location is set to transform into a progressive district where you can reap the benefits of living at the center of everything. Take charge of your future with Mantawi Residences’ units equipped with upgraded smart home devices* so you can easily manage your home life without worry.\r\n\r\n",
+                            Name = "Lynville ",
+                            OwnerName = "Owner One",
+                            Price = 37200000.0,
+                            PropertyCategoryId = 1,
+                            SaleOrRentModelId = 2,
+                            UrlImages = "https://live.staticflickr.com/65535/52838168903_0504483e6e.jpg"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Address = "ADDRESS SAMPLE",
+                            ApplicationUserId = "72550723-3df6-4886-80c0-5ff90804ec07",
+                            Description = "COMMERCIAL DESCRIPTION",
+                            Name = "COMMERCIAL",
+                            OwnerName = "Owner Two",
+                            Price = 2000.0,
+                            PropertyCategoryId = 3,
+                            SaleOrRentModelId = 2,
+                            UrlImages = "https://live.staticflickr.com/65535/52838125720_0def4691c2.jpg"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Address = "OUANO AVE. COR. F.E. ZUELLIG AVE. SUBANGDAKU, MANDAUE",
+                            ApplicationUserId = "72550723-3df6-4886-80c0-5ff90804ec07",
+                            Description = "Pioneer Woodlands Condo",
+                            Name = "Pioneer Woodlands ",
+                            OwnerName = "Owner Two",
+                            Price = 37200000.0,
+                            PropertyCategoryId = 1,
+                            SaleOrRentModelId = 2,
+                            UrlImages = "https://live.staticflickr.com/65535/52838168918_e35af8184f_w.jpg"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Address = "OUANO AVE. COR. F.E. ZUELLIG AVE. SUBANGDAKU, MANDAUE",
+                            ApplicationUserId = "72550723-3df6-4886-80c0-5ff90804ec07",
+                            Description = "THIS IS COMMERCIAL 2",
+                            Name = "COMMERCIAL 2",
+                            OwnerName = "Owner Two",
+                            Price = 37200000.0,
+                            PropertyCategoryId = 3,
+                            SaleOrRentModelId = 1,
+                            UrlImages = "https://live.staticflickr.com/65535/52838125630_a96d82c343_w.jpg"
                         });
                 });
 
@@ -586,6 +665,12 @@ namespace Real_Estate.Migrations
                             Id = 2,
                             Description = "A Condominium.",
                             Name = "Condominium"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "A Commercial.",
+                            Name = "Commercial"
                         });
                 });
 

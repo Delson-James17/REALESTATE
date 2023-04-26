@@ -132,7 +132,7 @@
                  <h5 class="card-title">Total Properties</h5>
                 <div class="mb-3 d-flex justify-content-center">
                     <i class="fa fa-building me-2" id="icons"></i>
-                    <input type="text" class="form-control" id="propCount" name="propCount" value="@Model.RowCount.PropertyCount" readonly>
+                        <a asp-controller="Properties" asp-action="Index"><input type="text" class="form-control" id="propCount" name="propCount" value="@Model.RowCount.PropertyCount" readonly></a>
                 </div>
             </div>
         </div>
@@ -142,7 +142,7 @@
               <h5 class="card-title">Total Appointments</h5>
                 <div class="mb-3 d-flex justify-content-center">
                     <i class="fas fa-clipboard-list" id="icons"></i>
-                    <input type="text" class="form-control" id="apptCount" name="apptCount" value="@Model.RowCount.AppointmentCount" readonly>
+                        <input type="text" class="form-control" id="apptCount" name="apptCount" value="@Model.RowCount.AppointmentCount" readonly>
                 </div>
         </div>
     </div>
@@ -204,10 +204,10 @@
 
                                         @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                                         {
-                                                            <td>
-                                                                      <button><a asp-action="Edit" asp-route-id="@item.Id" class="black-text-button Edit"><i class="fas fa-edit"></i></a></button>
-                                                     <button><a asp-action="Details" asp-route-id="@item.Id" class="black-text-button Details"><i class="far fa-file-alt"></i></a></button>
-                                                        <button><a asp-action="Delete" asp-route-id="@item.Id" class="black-text-button Delete"><i class="fas fa-trash-alt"></i></a></button>
+                                                          <td>
+                                                      <button><a asp-controller="Properties" asp-action="EditAdmin" asp-route-id="@item.Id" class="black-text-button Edit"><i class="fas fa-edit"></i></a></button>
+                                                <button><a asp-controller="Properties"  asp-action="Details" asp-route-id="@item.Id" class="black-text-button Details"><i class="far fa-file-alt"></i></a></button>
+                                                <button><a asp-controller="Properties" asp-action="Delete" asp-route-id="@item.Id" class="black-text-button Delete"><i class="fas fa-trash-alt"></i></a></button>
                                                             </td>
                                         }
                                             </tr>

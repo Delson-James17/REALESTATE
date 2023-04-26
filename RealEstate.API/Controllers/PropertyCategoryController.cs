@@ -70,27 +70,22 @@ namespace RealEstate.API.Controllers
         }
 
         [HttpPost("{id}")]
-        public IActionResult EditEstateProperty(int id, PropertyCategoryDto dto)
+        public async Task<IActionResult> EditEstateProperty(int id, PropertyCategoryDto dto)
         {
-            var property = _propertyCategoryRepository.GetPropertyCategoryById(id);
-
+            var property = await _propertyCategoryRepository.GetPropertyCategoryById(id);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             if (property == null)
             {
                 return NotFound();
             }
 
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            property.Name = dto.Name;
+            property.Description = dto.Description;
 
-            var updatedProperty = new PropertyCategory
-            {
-                Name = dto.Name,
-                Description = dto.Description,
-            };
-
-            var propertyToReturn = _propertyCategoryRepository.UpdatePropertyCategory(id, updatedProperty);
+            var propertyToReturn = _propertyCategoryRepository.UpdatePropertyCategory(id, property);
 
             return Ok(propertyToReturn);
         }

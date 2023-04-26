@@ -31,7 +31,7 @@
                 <hr>
                 <li><a class="nav-link" style="color: #F4A424;" asp-area="" asp-controller="Properties" asp-action="Properties">Home</a></li>
                 @if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin")){
-                    <li><a class="nav-link" style="color: #F4A424;" asp-area="" asp-controller="Admin" asp-action="AdminPannel">Admin ControlPannel</a></li>
+                    <li><a class="nav-link" style="color: #F4A424;" asp-area="" asp-controller="Admin" asp-action="AdminPannel">Admin Control Panel</a></li>
                 }
                
 
@@ -181,7 +181,6 @@
             @RenderBody()
         </main>
     </div>
-
 @*    <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2023 - Real_Estate - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>

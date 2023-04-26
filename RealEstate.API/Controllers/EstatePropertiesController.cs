@@ -83,37 +83,35 @@ namespace RealEstate.API.Controllers
             return Ok(property);
         }
 
-        /*[HttpPost("{id}")]
-        public IActionResult EditEstateProperty(int id, EstatePropertyDto dto)
+        [HttpPost("{id}")]
+        public async Task<IActionResult> EditEstateProperty(int id, EstatePropertyDto dto)
         {
-            var property =  _propertyRepository.GetPropertyById(id);
+            var property = await _propertyRepository.GetPropertyById(id);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
             if (property == null)
             {
                 return NotFound();
             }
 
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
 
-            var updatedProperty = new EstateProperty
-            {
-                Name = dto.Name,
-                Description = dto.Description,
-                Address = dto.Address,
-                UrlImages = dto.UrlImages,
-                Price = dto.Price,
-                OwnerName = dto.OwnerName,
-                SaleOrRentModelId = dto.SaleOrRentModelId,
-                PropertyCategoryId = dto.PropertyCategoryId
-            };
+            property.Name = dto.Name;
+            property.Description = dto.Description;
+            property.Address = dto.Address;
+            property.UrlImages = dto.UrlImages;
+            property.Price = dto.Price;
+            property.OwnerName = dto.OwnerName;
+            property.SaleOrRentModelId = dto.SaleOrRentModelId;
+            property.PropertyCategoryId = dto.PropertyCategoryId;
 
-            var propertyToReturn = _propertyRepository.UpdateProperty(id, updatedProperty);
+
+            var propertyToReturn = _propertyRepository.UpdateProperty(id, property);
 
             return Ok(propertyToReturn);
-        }*/
+        }
 
     }
 }

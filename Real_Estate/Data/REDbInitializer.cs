@@ -46,6 +46,12 @@ namespace Real_Estate.Data
                     Id = 2,
                     Name = "Condominium",
                     Description = "A Condominium.",
+                },
+                new PropertyCategory
+                {
+                    Id = 3,
+                    Name = "Commercial",
+                    Description = "A Commercial.",
                 }
             );
         }
@@ -118,18 +124,33 @@ namespace Real_Estate.Data
                 new ApplicationUser
                 {
                     Id = "62550723-3df6-4886-80c0-5ff90804ec07",
-                    Name = "Owner",
+                    Name = "Owner one",
                     Age = 23,
                     Address = "Laguna",
                     DOB = DateTime.Now,
                     UrlImages = "https://live.staticflickr.com/65535/52837723986_d9afeb97e0_w.jpg",
-                    UserName = "owner@gmail.com",
+                    UserName = "owner1@gmail.com",
                     Zoomlink = "https://us05web.zoom.us/j/82148537267?pwd=NjlYUWQzeFF6K1AxZEZRaklxbnF6QT09",
-                    NormalizedUserName = "owner@gmail.com".ToUpper(),
-                    NormalizedEmail = "owner@gmail.com".ToUpper(),
-                    Email = "owner@gmail.com",
+                    NormalizedUserName = "owner1@gmail.com".ToUpper(),
+                    NormalizedEmail = "owner1@gmail.com".ToUpper(),
+                    Email = "owne1r@gmail.com",
                     PasswordHash = passwordHasher.HashPassword(null, defaultPassword)
-                }
+                },
+                 new ApplicationUser
+                 {
+                     Id = "72550723-3df6-4886-80c0-5ff90804ec07",
+                     Name = "Owner two",
+                     Age = 23,
+                     Address = "Laguna",
+                     DOB = DateTime.Now,
+                     UrlImages = "https://live.staticflickr.com/65535/52837723986_d9afeb97e0_w.jpg",
+                     UserName = "owner2@gmail.com",
+                     Zoomlink = "https://live.staticflickr.com/65535/52837152367_3f166e4330_n.jpg",
+                     NormalizedUserName = "owner2@gmail.com".ToUpper(),
+                     NormalizedEmail = "owner2@gmail.com".ToUpper(),
+                     Email = "owner2@gmail.com",
+                     PasswordHash = passwordHasher.HashPassword(null, defaultPassword)
+                 }
            );
         }
 
@@ -147,7 +168,7 @@ namespace Real_Estate.Data
                     SaleOrRentModelId = 1,
                     PropertyCategoryId = 1,
                     ApplicationUserId = "62550723-3df6-4886-80c0-5ff90804ec07",
-                    OwnerName = "Owner"
+                    OwnerName = "Owner One"
                 },
                 new EstateProperty
                 {
@@ -155,13 +176,66 @@ namespace Real_Estate.Data
                     Name = "Mantawi Residences ",
                     Description = "Mantawi Residences proudly calls Ouano Avenue, Mandaue City, Cebu its home, a prime spot where everything you need is within reach. With a multitude of infrastructure and development plans in the pipeline, this location is set to transform into a progressive district where you can reap the benefits of living at the center of everything. Take charge of your future with Mantawi Residences’ units equipped with upgraded smart home devices* so you can easily manage your home life without worry.\r\n\r\n",
                     Address = "OUANO AVE. COR. F.E. ZUELLIG AVE. SUBANGDAKU, MANDAUE",
-                    UrlImages = "https://live.staticflickr.com/65535/52837908104_bac2f52f97_z.jpg",
+                    UrlImages = "https://live.staticflickr.com/65535/52846569259_000336d9bd.jpg",
                     Price = 37200000,
                     SaleOrRentModelId = 2,
                     PropertyCategoryId = 2,
                     ApplicationUserId = "62550723-3df6-4886-80c0-5ff90804ec07",
-                    OwnerName = "Owner"
-                }
+                    OwnerName = "Owner One"
+                },
+                 new EstateProperty
+                 {
+                     Id = 3,
+                     Name = "Lynville ",
+                     Description = "Mantawi Residences proudly calls Ouano Avenue, Mandaue City, Cebu its home, a prime spot where everything you need is within reach. With a multitude of infrastructure and development plans in the pipeline, this location is set to transform into a progressive district where you can reap the benefits of living at the center of everything. Take charge of your future with Mantawi Residences’ units equipped with upgraded smart home devices* so you can easily manage your home life without worry.\r\n\r\n",
+                     Address = "OUANO AVE. COR. F.E. ZUELLIG AVE. SUBANGDAKU, MANDAUE",
+                     UrlImages = "https://live.staticflickr.com/65535/52838168903_0504483e6e.jpg",
+                     Price = 37200000,
+                     SaleOrRentModelId = 2,
+                     PropertyCategoryId = 1,
+                     ApplicationUserId = "62550723-3df6-4886-80c0-5ff90804ec07",
+                     OwnerName = "Owner One"
+                 },
+                  new EstateProperty
+                  {
+                      Id = 4,
+                      Name = "COMMERCIAL",
+                      Description = "COMMERCIAL DESCRIPTION",
+                      Address = "ADDRESS SAMPLE",
+                      UrlImages = "https://live.staticflickr.com/65535/52838125720_0def4691c2.jpg",
+                      Price = 2000.00,
+                      SaleOrRentModelId = 2,
+                      PropertyCategoryId = 3,
+                      ApplicationUserId = "72550723-3df6-4886-80c0-5ff90804ec07",
+                      OwnerName = "Owner Two"
+                  },
+                new EstateProperty
+                {
+                    Id = 5,
+                    Name = "Pioneer Woodlands ",
+                    Description = "Pioneer Woodlands Condo",
+                    Address = "OUANO AVE. COR. F.E. ZUELLIG AVE. SUBANGDAKU, MANDAUE",
+                    UrlImages = "https://live.staticflickr.com/65535/52838168918_e35af8184f_w.jpg",
+                    Price = 37200000,
+                    SaleOrRentModelId = 2,
+                    PropertyCategoryId = 1,
+                    ApplicationUserId = "72550723-3df6-4886-80c0-5ff90804ec07",
+                    OwnerName = "Owner Two"
+                },
+                 new EstateProperty
+                 {
+                     Id = 6,
+                     Name = "COMMERCIAL 2",
+                     Description = "THIS IS COMMERCIAL 2",
+                     Address = "OUANO AVE. COR. F.E. ZUELLIG AVE. SUBANGDAKU, MANDAUE",
+                     UrlImages = "https://live.staticflickr.com/65535/52838125630_a96d82c343_w.jpg",
+                     Price = 37200000,
+                     SaleOrRentModelId = 1,
+                     PropertyCategoryId = 3,
+                     ApplicationUserId = "72550723-3df6-4886-80c0-5ff90804ec07",
+                     OwnerName = "Owner Two"
+                 }
+
             );
         }
 
@@ -187,7 +261,12 @@ namespace Real_Estate.Data
                 {
                     RoleId = "51d0771e-de96-4882-a01e-8f0b9949e90c",
                     UserId = "62550723-3df6-4886-80c0-5ff90804ec07"
-                }
+                },
+                 new IdentityUserRole<string>
+                 {
+                     RoleId = "51d0771e-de96-4882-a01e-8f0b9949e90c",
+                     UserId = "72550723-3df6-4886-80c0-5ff90804ec07"
+                 }
             );
         }
     }

@@ -37,7 +37,7 @@ namespace Real_Estate.Controllers
 
 
         // GET: Properties
-        [Authorize(Roles = "Admin, Owner")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index(string SearchString)
         {
             var properties = await this._context.PropertyCategories.Select(p => new PropertyCategory
@@ -263,8 +263,8 @@ namespace Real_Estate.Controllers
             ViewData["PropertyCategoryId"] = new SelectList(_context.PropertyCategories, "Id", "Name", property.PropertyCategoryId);
             return View(property);
         }
-        [Authorize(Roles = "Admin, Owner")]
-        // GET: Properties/Edit/5
+        [Authorize(Roles = "Owner")]
+        [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.EstateProperties == null)
@@ -300,7 +300,7 @@ namespace Real_Estate.Controllers
         // POST: Properties/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin, Owner")]
+        [Authorize(Roles = "Owner")]
         public async Task<IActionResult> Edit(int id, EditPropertyViewModel property)
         {
             if (id != property.Id || _context.EstateProperties == null)
@@ -328,6 +328,7 @@ namespace Real_Estate.Controllers
                 estateProperty.OwnerName = property.OwnerName;
                 estateProperty.PropertyCategoryId = property.PropertyCategoryId;
                 // Save the changes to the database
+                _context.EstateProperties.Update(estateProperty);
                 await _context.SaveChangesAsync();
 
                 //return RedirectToAction(nameof(Index));
@@ -338,7 +339,82 @@ namespace Real_Estate.Controllers
             ViewData["PropertyCategoryId"] = new SelectList(_context.PropertyCategories, "Id", "Name", property.PropertyCategoryId);
             return View(property);
         }
+        [Authorize(Roles = "Admin")]
+        // GET: Properties/Edit/5
+        public async Task<IActionResult> EditAdmin(int? id)
+        {
+            if (id == null || _context.EstateProperties == null)
+            {
+                return NotFound();
+            }
 
+            var @property = await _context.EstateProperties
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (@property == null)
+            {
+                return NotFound();
+            }
+
+            // Map from model to view model
+            var propertyViewModel = new EditPropertyViewModel()
+            {
+                Name = @property.Name,
+                Description = @property.Description,
+                Address = @property.Address,
+                UrlImages = @property.UrlImages,
+                Price = @property.Price,
+                SaleOrRentModelId = @property.SaleOrRentModelId,
+                OwnerName = @property.OwnerName,
+                PropertyCategoryId = @property.PropertyCategoryId
+            };
+            ViewData["SaleOrRentModelId"] = new SelectList(_context.SaleorRentModel, "Id", "Name", property.SaleOrRentModelId);
+            ViewData["PropertyCategoryId"] = new SelectList(_context.PropertyCategories, "Id", "Name", property.PropertyCategoryId);
+
+            return View(propertyViewModel);
+        }
+
+        // POST: Properties/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> EditAdmin(int id, EditPropertyViewModel property)
+        {
+            if (id != property.Id || _context.EstateProperties == null)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                // Find the property in the database
+                var estateProperty = await _context.EstateProperties.FindAsync(id);
+
+                if (estateProperty == null)
+                {
+                    return NotFound();
+                }
+
+                // Update the property with the values from the view model
+                estateProperty.Name = property.Name;
+                estateProperty.Description = property.Description;
+                estateProperty.Address = property.Address;
+                estateProperty.UrlImages = property.UrlImages;
+                estateProperty.Price = property.Price;
+                estateProperty.SaleOrRentModelId = property.SaleOrRentModelId;
+                estateProperty.OwnerName = property.OwnerName;
+                estateProperty.PropertyCategoryId = property.PropertyCategoryId;
+                // Save the changes to the database
+                _context.EstateProperties.Update(estateProperty);
+                await _context.SaveChangesAsync();
+
+                //return RedirectToAction(nameof(Index));
+                //return RedirectToAction("UpdatedSuccessfully", "Properties");
+                return RedirectToAction("Index", "Properties");
+            }
+            ViewData["SaleOrRentModelId"] = new SelectList(_context.SaleorRentModel, "Id", "Name", property.SaleOrRentModelId);
+            ViewData["PropertyCategoryId"] = new SelectList(_context.PropertyCategories, "Id", "Name", property.PropertyCategoryId);
+            return View(property);
+        }
 
         [Authorize(Roles = "Admin, Owner")]
         // GET: Properties/Delete/5

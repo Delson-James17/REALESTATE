@@ -67,29 +67,32 @@ namespace RealEstate.API.Controllers
             return Ok(property);
         }
 
-/*        [HttpPost("{id}")]
-        public IActionResult EditSaleorRent([FromRoute] int id, [FromBody] SaleorRentDto dto)
+        [HttpPost("{id}")]
+        public async Task<IActionResult> EditSaleorRent([FromRoute] int id, [FromBody] SaleorRentDto dto)
         {
-            var property = _saleorRentDBRepository.GetSaleorRentCategoryById(id);
-
-            if (property == null)
-            {
-                return NotFound();
-            }
+            var property = await _saleorRentDBRepository.GetSaleorRentCategoryById(id);//
 
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var updatedProperty = new SaleorRentModel
+            if (property == null)
             {
-                Name = dto.Name,
-            };
+                return NotFound();
+            }
 
-            var propertyToReturn = _saleorRentDBRepository.UpdateSaleorRentCategory(id, updatedProperty);
+            //var updatedProperty = new SaleorRentModel//
+            //{
+            //    Name = dto.Name,
+            //};
+
+
+            property.Name = dto.Name;
+
+            var propertyToReturn = _saleorRentDBRepository.UpdateSaleorRentCategory(id, property);
 
             return Ok(propertyToReturn);
-        }*/
+        }
     }
 }
