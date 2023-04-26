@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Routing.Constraints;
 using Microsoft.EntityFrameworkCore;
 using Real_Estate.Models;
-using System.Xml.Linq;
 
 namespace Real_Estate.Data
 {
